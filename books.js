@@ -69,7 +69,7 @@ const generatesearchResults = books => {
 
 const collectBookNames = books => {
   const bookNames = [];
-  for (let { title } of searchResults) {
+  for (let { title } of books) {
     bookNames.push(title);
   }
   return bookNames;
@@ -91,7 +91,7 @@ const displayBooks = books => {
 };
 
 const displayOptions = () => {
-  const bookNames = collectBookNames();
+  const bookNames = collectBookNames(searchResults);
   const options = [
     `Choose one of the following options: \n`,
     `  1 - Add '${bookNames[0]}' to the book list`,
@@ -115,7 +115,7 @@ const initiateOptionsPrompt = books => {
     name: "input",
     type: "string",
     description: "Please select an option:",
-    message: "Please select an option",
+    message: "Please select a valid option",
     required: true
   };
 
@@ -140,7 +140,10 @@ const handleOptionSelection = (err, selection) => {
       addBookToList(4);
       break;
     case "list":
+      console.log("\nThe current book list is as follows: ");
       displayBooks(bookList);
+      displayListOptions();
+      initiateListOptionsPrompt();
       break;
     case "search":
       initiateSearchPrompt();
@@ -159,6 +162,60 @@ const addBookToList = index => {
   console.log(`Added ${bookList[bookList.length - 1].title} to the book list.`);
   displayOptions();
   initiateOptionsPrompt();
+};
+
+const displayListOptions = () => {
+  const bookNames = collectBookNames(bookList);
+  const removeBookList = [];
+  for (const [index, book] of bookNames.entries()) {
+    removeBookList.push(`  ${index + 1} - Remove ${book} from the book list`);
+  }
+  const options = [
+    `Choose one of the following options: \n`,
+    ...removeBookList,
+    `  search - Search for a new book`,
+    `  exit - Exit the program`,
+    `\n`
+  ];
+
+  for (const option of options) {
+    console.log(option);
+  }
+};
+
+const initiateListOptionsPrompt = books => {
+  const properties = {
+    name: "input",
+    type: "string",
+    description: "Please select an option:",
+    message: "Please select a valid option",
+    required: true
+  };
+
+  prompt.get([properties], handleListOptionSelection);
+};
+
+const handleListOptionSelection = (err, selection) => {
+  switch (selection.input) {
+    case "search":
+      initiateSearchPrompt();
+      break;
+    case "exit":
+      console.log("Goodbye");
+      break;
+    default:
+      const index = parseInt(selection.input);
+      if (bookList[index - 1]) {
+        bookList.splice(index - 1, 1);
+        console.log("\nThe current book list is as follows: ");
+        displayBooks(bookList);
+        displayListOptions();
+        initiateListOptionsPrompt();
+      } else {
+        initiateListOptionsPrompt();
+      }
+      break;
+  }
 };
 
 initialize();
