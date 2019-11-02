@@ -7,14 +7,16 @@
 //
 // CLI Prompts:
 //   https://github.com/flatiron/prompt
-var prompt = require("prompt");
+const prompt = require("prompt");
+const fetch = require("node-fetch");
+
 prompt.start();
 prompt.message = "";
 prompt.colors = false;
 prompt.delimiter = "";
 
 const initialPrompt = () => {
-  let properties = {
+  const properties = {
     name: "query",
     type: "string",
     description: "Please enter a search query:",
@@ -25,12 +27,41 @@ const initialPrompt = () => {
   prompt.get([properties], initiateSearch);
 };
 
-let initiateSearch = (err, query) => {
-  //do search here
+const initiateSearch = (err, user_input) => {
+  const baseURL = "https://www.googleapis.com/books/v1/volumes?";
+  const maxResults = "maxResults=5&";
+  const queryStructure = "q=";
+  const query = encodeURI(user_input.query);
+  const bookNames = [];
 
-  //displayBooks()
-  displayOptions();
-  //optionsPrompt()
+  fetch(baseURL + maxResults + queryStructure + query)
+    .then(resp => resp.json())
+    .then(json => {
+      console.log(`\nDisplaying results for ${query}: \n`);
+      displayBooks(json.items);
+      for (let {
+        volumeInfo: { title }
+      } of json.items) {
+        bookNames.push(title);
+      }
+      displayOptions(bookNames);
+    });
+
+  //optionsPrompt();
+};
+
+const displayBooks = books => {
+  const tab = "\t";
+  for (let [
+    index,
+    {
+      volumeInfo: { title, authors, publisher = "unknown" }
+    }
+  ] of books.entries()) {
+    console.log(`${index + 1}. ${title}`);
+    console.log(`${tab}Author(s): ${authors.join(", ")}`);
+    console.log(`${tab}Publisher: ${publisher}\n`);
+  }
 };
 
 const displayOptions = bookNames => {
@@ -50,14 +81,14 @@ const displayOptions = bookNames => {
   }
 };
 
-let logPrompt = (err, query) => {
+const logPrompt = (err, query) => {
   console.log(query);
 };
 
 initialPrompt();
 
 const otherPrompt = () => {
-  let properties = {
+  const properties = {
     name: "selection",
     type: "integer",
     description: "Select a book number to add to your book list.",
