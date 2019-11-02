@@ -47,7 +47,8 @@ const initiateSearch = (err, user_input) => {
   fetch(baseURL + maxResults + queryStructure + query)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nDisplaying results for ${user_input}: \n`);
+      console.log(json.items);
+      console.log(`\nDisplaying results for ${user_input.query}: \n`);
       generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
@@ -63,11 +64,12 @@ const initiateSearch = (err, user_input) => {
 const generateSearchResults = books => {
   searchResults = [];
   for (let {
-    volumeInfo: { title, authors, publisher = "unknown" }
+    volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
   } of books) {
+    authors = Array.isArray(authors) ? authors.join() : authors;
     searchResults.push({
       title: title,
-      authors: authors.join(" "),
+      authors: authors,
       publisher: publisher
     });
   }
