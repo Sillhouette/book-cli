@@ -9,13 +9,22 @@
 //   https://github.com/flatiron/prompt
 const prompt = require("prompt");
 const fetch = require("node-fetch");
+let searchResults = [];
+let bookList = [];
 
-prompt.start();
-prompt.message = "";
-prompt.colors = false;
-prompt.delimiter = "";
+const initialize = () => {
+  setupPrompt();
+  initiateSearchPrompt();
+};
 
-const initialPrompt = () => {
+const setupPrompt = () => {
+  prompt.start();
+  prompt.message = "";
+  prompt.colors = false;
+  prompt.delimiter = "";
+};
+
+const initiateSearchPrompt = () => {
   const properties = {
     name: "query",
     type: "string",
@@ -38,42 +47,62 @@ const initiateSearch = (err, user_input) => {
     .then(resp => resp.json())
     .then(json => {
       console.log(`\nDisplaying results for ${query}: \n`);
-      displayBooks(json.items);
-      for (let {
-        volumeInfo: { title }
-      } of json.items) {
-        bookNames.push(title);
-      }
-      displayOptions(bookNames);
+      generatesearchResults(json.items);
+      displayBooks(searchResults);
+      displayOptions();
+      initiateOptionsPrompt();
     });
-
-  //optionsPrompt();
 };
 
-const displayBooks = books => {
-  const tab = "\t";
-  for (let [
-    index,
-    {
-      volumeInfo: { title, authors, publisher = "unknown" }
-    }
-  ] of books.entries()) {
-    console.log(`${index + 1}. ${title}`);
-    console.log(`${tab}Author(s): ${authors.join(", ")}`);
-    console.log(`${tab}Publisher: ${publisher}\n`);
+const generatesearchResults = books => {
+  searchResults = [];
+  for (let {
+    volumeInfo: { title, authors, publisher = "unknown" }
+  } of books) {
+    searchResults.push({
+      title: title,
+      authors: authors.join(" "),
+      publisher: publisher
+    });
   }
 };
 
-const displayOptions = bookNames => {
+const collectBookNames = books => {
+  const bookNames = [];
+  for (let { title } of searchResults) {
+    bookNames.push(title);
+  }
+  return bookNames;
+};
+
+const displayBooks = books => {
+  if (books.length === 0) {
+    console.log("There are no books in the list yet.");
+  }
+  const spacing = "   ";
+  for (let [
+    index,
+    { title, authors, publisher = "unknown" }
+  ] of books.entries()) {
+    console.log(`${index + 1}. ${title}`);
+    console.log(`${spacing}Author(s): ${authors}`);
+    console.log(`${spacing}Publisher: ${publisher}\n`);
+  }
+};
+
+const displayOptions = () => {
+  const bookNames = collectBookNames();
   const options = [
-    `1 - Add ${bookNames[0]} to your list`,
-    `2 - Add ${bookNames[1]} to your list`,
-    `3 - Add ${bookNames[2]} to your list`,
-    `4 - Add ${bookNames[3]} to your list`,
-    `5 - Add ${bookNames[4]} to your list`,
-    "list - View current book list",
-    "search - Search for a new book",
-    "exit - Exit the program"
+    `Choose one of the following options: \n`,
+    `  1 - Add '${bookNames[0]}' to the book list`,
+    `  2 - Add '${bookNames[1]}' to the book list`,
+    `  3 - Add '${bookNames[2]}' to the book list`,
+    `  4 - Add '${bookNames[3]}' to the book list`,
+    `  5 - Add '${bookNames[4]}' to the book list`,
+    `  list - View current book list`,
+    `  search - Search for a new book`,
+    `  exit - Exit the program`,
+    `\n`
   ];
 
   for (const option of options) {
@@ -81,22 +110,55 @@ const displayOptions = bookNames => {
   }
 };
 
-const logPrompt = (err, query) => {
-  console.log(query);
-};
-
-initialPrompt();
-
-const otherPrompt = () => {
+const initiateOptionsPrompt = books => {
   const properties = {
-    name: "selection",
-    type: "integer",
-    description: "Select a book number to add to your book list.",
-    message: "Please enter a number 1-5.",
+    name: "input",
+    type: "string",
+    description: "Please select an option:",
+    message: "Please select an option",
     required: true
   };
 
-  prompt.get([properties], logPrompt);
+  prompt.get([properties], handleOptionSelection);
 };
 
-const runCLI = () => {};
+const handleOptionSelection = (err, selection) => {
+  switch (selection.input) {
+    case "1":
+      addBookToList(0);
+      break;
+    case "2":
+      addBookToList(1);
+      break;
+    case "3":
+      addBookToList(2);
+      break;
+    case "4":
+      addBookToList(3);
+      break;
+    case "5":
+      addBookToList(4);
+      break;
+    case "list":
+      displayBooks(bookList);
+      break;
+    case "search":
+      initiateSearchPrompt();
+      break;
+    case "exit":
+      console.log("Goodbye");
+      break;
+    default:
+      initiateOptionsPrompt();
+      break;
+  }
+};
+
+const addBookToList = index => {
+  bookList.push(searchResults[index]);
+  console.log(`Added ${bookList[bookList.length - 1].title} to the book list.`);
+  displayOptions();
+  initiateOptionsPrompt();
+};
+
+initialize();
