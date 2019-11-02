@@ -46,7 +46,7 @@ const initiateSearch = (err, user_input) => {
   fetch(baseURL + maxResults + queryStructure + query)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nDisplaying results for ${user_input.query}: \n`);
+      console.log(`\nFetching results for ${user_input.query}: \n`);
       generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
