@@ -42,7 +42,6 @@ const initiateSearch = (err, user_input) => {
   const maxResults = "maxResults=5&";
   const queryStructure = "q=";
   const query = encodeURI(user_input.query);
-  const bookNames = [];
 
   fetch(baseURL + maxResults + queryStructure + query)
     .then(resp => resp.json())
@@ -155,12 +154,23 @@ const handleOptionSelection = (err, selection) => {
 };
 
 const addBookToList = index => {
-  bookList.push(searchResults[index]);
-  console.log(
-    `Added ${bookList[bookList.length - 1].title} to the reading list.`
-  );
-  displayOptions();
-  initiateOptionsPrompt();
+  const present = bookList.some(book => {
+    return (
+      book.title === searchResults[index].title &&
+      book.authors === searchResults[index].authors
+    );
+  });
+  if (!present) {
+    bookList.push(searchResults[index]);
+    console.log(
+      `Added ${bookList[bookList.length - 1].title} to the reading list.`
+    );
+    displayOptions();
+    initiateOptionsPrompt();
+  } else {
+    console.log("That book is already in the book list.");
+    initiateOptionsPrompt();
+  }
 };
 
 const displayListOptions = () => {
