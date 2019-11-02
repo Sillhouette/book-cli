@@ -47,14 +47,18 @@ const initiateSearch = (err, user_input) => {
     .then(resp => resp.json())
     .then(json => {
       console.log(`\nDisplaying results for ${query}: \n`);
-      generatesearchResults(json.items);
+      generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
       initiateOptionsPrompt();
+    })
+    .catch(error => {
+      console.log("There was a fatal error, please try again.");
+      initiateSearchPrompt();
     });
 };
 
-const generatesearchResults = books => {
+const generateSearchResults = books => {
   searchResults = [];
   for (let {
     volumeInfo: { title, authors, publisher = "unknown" }
@@ -77,7 +81,7 @@ const collectBookNames = books => {
 
 const displayBooks = books => {
   if (books.length === 0) {
-    console.log("There are no books in the list yet.");
+    console.log("There are no books in the reading list yet.");
   }
   const spacing = "   ";
   for (let [
@@ -92,14 +96,14 @@ const displayBooks = books => {
 
 const displayOptions = () => {
   const bookNames = collectBookNames(searchResults);
+  const addBookList = [];
+  for (const [index, book] of bookNames.entries()) {
+    addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
+  }
   const options = [
     `Choose one of the following options: \n`,
-    `  1 - Add '${bookNames[0]}' to the book list`,
-    `  2 - Add '${bookNames[1]}' to the book list`,
-    `  3 - Add '${bookNames[2]}' to the book list`,
-    `  4 - Add '${bookNames[3]}' to the book list`,
-    `  5 - Add '${bookNames[4]}' to the book list`,
-    `  list - View current book list`,
+    ...addBookList,
+    `  list - View current reading list`,
     `  search - Search for a new book`,
     `  exit - Exit the program`,
     `\n`
@@ -124,23 +128,8 @@ const initiateOptionsPrompt = books => {
 
 const handleOptionSelection = (err, selection) => {
   switch (selection.input) {
-    case "1":
-      addBookToList(0);
-      break;
-    case "2":
-      addBookToList(1);
-      break;
-    case "3":
-      addBookToList(2);
-      break;
-    case "4":
-      addBookToList(3);
-      break;
-    case "5":
-      addBookToList(4);
-      break;
     case "list":
-      console.log("\nThe current book list is as follows: ");
+      console.log("\nThe current reading list is as follows: ");
       displayBooks(bookList);
       displayListOptions();
       initiateListOptionsPrompt();
@@ -152,14 +141,21 @@ const handleOptionSelection = (err, selection) => {
       console.log("Goodbye");
       break;
     default:
-      initiateOptionsPrompt();
+      const index = parseInt(selection.input);
+      if (searchResults[index - 1]) {
+        addBookToList(index - 1);
+      } else {
+        initiateListOptionsPrompt();
+      }
       break;
   }
 };
 
 const addBookToList = index => {
   bookList.push(searchResults[index]);
-  console.log(`Added ${bookList[bookList.length - 1].title} to the book list.`);
+  console.log(
+    `Added ${bookList[bookList.length - 1].title} to the reading list.`
+  );
   displayOptions();
   initiateOptionsPrompt();
 };
@@ -168,7 +164,9 @@ const displayListOptions = () => {
   const bookNames = collectBookNames(bookList);
   const removeBookList = [];
   for (const [index, book] of bookNames.entries()) {
-    removeBookList.push(`  ${index + 1} - Remove ${book} from the book list`);
+    removeBookList.push(
+      `  ${index + 1} - Remove ${book} from the reading list`
+    );
   }
   const options = [
     `Choose one of the following options: \n`,
@@ -206,16 +204,20 @@ const handleListOptionSelection = (err, selection) => {
     default:
       const index = parseInt(selection.input);
       if (bookList[index - 1]) {
-        bookList.splice(index - 1, 1);
-        console.log("\nThe current book list is as follows: ");
-        displayBooks(bookList);
-        displayListOptions();
-        initiateListOptionsPrompt();
+        removeBookFromList(index - 1);
       } else {
         initiateListOptionsPrompt();
       }
       break;
   }
+};
+
+const removeBookFromList = index => {
+  bookList.splice(index, 1);
+  console.log("\nThe current reading list is as follows: ");
+  displayBooks(bookList);
+  displayListOptions();
+  initiateListOptionsPrompt();
 };
 
 initialize();
