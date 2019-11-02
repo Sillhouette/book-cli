@@ -53,7 +53,6 @@ const initiateSearch = (err, user_input) => {
       initiateOptionsPrompt();
     })
     .catch(error => {
-      console.log(error);
       console.log("There was a fatal error, please try again.");
       initiateSearchPrompt();
     });
