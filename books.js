@@ -9,6 +9,7 @@
 //   https://github.com/flatiron/prompt
 const prompt = require("prompt");
 const fetch = require("node-fetch");
+
 let searchResults = [];
 let bookList = [];
 
@@ -46,13 +47,14 @@ const initiateSearch = (err, user_input) => {
   fetch(baseURL + maxResults + queryStructure + query)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nDisplaying results for ${query}: \n`);
+      console.log(`\nDisplaying results for ${user_input}: \n`);
       generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
       initiateOptionsPrompt();
     })
     .catch(error => {
+      console.log(error);
       console.log("There was a fatal error, please try again.");
       initiateSearchPrompt();
     });
@@ -145,7 +147,7 @@ const handleOptionSelection = (err, selection) => {
       if (searchResults[index - 1]) {
         addBookToList(index - 1);
       } else {
-        initiateListOptionsPrompt();
+        initiateOptionsPrompt();
       }
       break;
   }
