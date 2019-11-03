@@ -174,6 +174,40 @@ class CLI {
       console.log(option);
     }
   }
+
+  //Set properties for post reading list prompt and initialize it
+  initiateListOptionsPrompt() {
+    const properties = {
+      name: "input",
+      type: "string",
+      description: "Please select an option:",
+      message: "Please select a valid option",
+      required: true
+    };
+
+    const cb = this.handleListOptionSelection.bind(this);
+    prompt.get([properties], cb);
+  }
+
+  //Read user post reading list menu selection and handle response
+  handleListOptionSelection(err, { input }) {
+    switch (input) {
+      case "search":
+        this.initiateSearchPrompt();
+        break;
+      case "exit":
+        console.log("Goodbye");
+        break;
+      default:
+        const index = parseInt(input);
+        if (readingList[index - 1]) {
+          this.removeBookFromList(index - 1);
+        } else {
+          this.initiateListOptionsPrompt();
+        }
+        break;
+    }
+  }
 }
 
 let cli = new CLI();
