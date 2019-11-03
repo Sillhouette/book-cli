@@ -3,7 +3,9 @@ const prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
 const fetch = require("node-fetch");
 
-const { Book, searchResults, readingList } = require("./book");
+const Book = require("./book").Book;
+let searchResults = [];
+let readingList = [];
 
 class CLI {
   constructor(numResults = 5) {
@@ -40,7 +42,7 @@ class CLI {
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
-        Book.generateSearchResults(json.items);
+        searchResults = Book.generateSearchResults(json.items);
         //displayBooks(searchResults);
         //displayOptions();
         //initiateOptionsPrompt();

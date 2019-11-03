@@ -1,6 +1,3 @@
-let searchResults = [];
-let readingList = [];
-
 class Book {
   constructor({ title, authors, publisher }) {
     this.authors = authors;
@@ -9,8 +6,7 @@ class Book {
   }
 
   static generateSearchResults(bookData) {
-    searchResults = Book.generateBooks(bookData);
-    console.log(searchResults);
+    return Book.generateBooks(bookData);
   }
 
   static generateBooks(bookData) {
@@ -34,7 +30,5 @@ class Book {
 }
 
 module.exports = {
-  Book: Book,
-  searchResults: searchResults,
-  readingList: readingList
+  Book: Book
 };
