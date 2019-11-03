@@ -27,6 +27,15 @@ class Book {
     }
     return books;
   }
+
+  //Displays a book to the user
+  display(number) {
+    const spacing = "   ";
+
+    console.log(`${number}. ${this.title}`);
+    console.log(`${spacing}Author(s): ${this.authors}`);
+    console.log(`${spacing}Publisher: ${this.publisher}\n`);
+  }
 }
 
 module.exports = {

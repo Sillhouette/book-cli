@@ -43,7 +43,9 @@ class CLI {
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
         searchResults = Book.generateSearchResults(json.items);
-        //displayBooks(searchResults);
+        for (const [index, book] of searchResults.entries()) {
+          book.display(index + 1);
+        }
         //displayOptions();
         //initiateOptionsPrompt();
       })
