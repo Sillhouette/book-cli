@@ -28,6 +28,14 @@ class Book {
     return books;
   }
 
+  static collectBookTitles(books) {
+    const bookTitles = [];
+    for (let { title } of books) {
+      bookTitles.push(title);
+    }
+    return bookTitles;
+  }
+
   //Displays a book to the user
   display(number) {
     const spacing = "   ";
@@ -36,6 +44,8 @@ class Book {
     console.log(`${spacing}Author(s): ${this.authors}`);
     console.log(`${spacing}Publisher: ${this.publisher}\n`);
   }
+
+  addToList() {}
 }
 
 module.exports = {

@@ -118,7 +118,7 @@ const displayOptions = () => {
 };
 
 //Set the properties for post-search prompt and initiate it
-const initiateOptionsPrompt = books => {
+const initiateOptionsPrompt = () => {
   const properties = {
     name: "input",
     type: "string",
