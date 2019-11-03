@@ -1,23 +1,19 @@
-// Google API CLI App
-//
-// Google API URL:
-//   baseURL = 'https://www.googleapis.com/books/v1/volumes?maxResults=5&'
-//   queryStructure = 'q='
-//   query = encodeURI(user_input)
-//
-// CLI Prompts:
-//   https://github.com/flatiron/prompt
+//Import command line prompt created by flatiron: https://github.com/flatiron/prompt
 const prompt = require("prompt");
+//Import node-fetch library for querying the Google Books API
 const fetch = require("node-fetch");
 
+//Declare arrays to store search results and reading list
 let searchResults = [];
 let bookList = [];
 
+//Configure the prompt and prompt for the initial search
 const initialize = () => {
   setupPrompt();
   initiateSearchPrompt();
 };
 
+//Set the global configuration settings for the prompt
 const setupPrompt = () => {
   prompt.start();
   prompt.message = "";
@@ -25,6 +21,7 @@ const setupPrompt = () => {
   prompt.delimiter = "";
 };
 
+//Set the properties for the search prompt and initiate it
 const initiateSearchPrompt = () => {
   const properties = {
     name: "query",
@@ -37,16 +34,17 @@ const initiateSearchPrompt = () => {
   prompt.get([properties], initiateSearch);
 };
 
-const initiateSearch = (err, user_input) => {
+//Receives userInput from the search prompt and fetches 5 books from Google's API
+const initiateSearch = (err, userInput) => {
   const baseURL = "https://www.googleapis.com/books/v1/volumes?";
   const maxResults = "maxResults=5&";
   const queryStructure = "q=";
-  const query = encodeURI(user_input.query);
+  const query = encodeURI(userInput.query);
 
   fetch(baseURL + maxResults + queryStructure + query)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nFetching results for ${user_input.query}: \n`);
+      console.log(`\nFetching results for ${userInput.query}: \n`);
       generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
@@ -58,6 +56,7 @@ const initiateSearch = (err, user_input) => {
     });
 };
 
+//Generates the basic objects using the relevant attributes for each book
 const generateSearchResults = books => {
   searchResults = [];
   for (let {
@@ -72,6 +71,7 @@ const generateSearchResults = books => {
   }
 };
 
+//Collects the titles of the books into an array for ease of listing
 const collectBookNames = books => {
   const bookNames = [];
   for (let { title } of books) {
@@ -80,6 +80,7 @@ const collectBookNames = books => {
   return bookNames;
 };
 
+//Displays an array of books to the user
 const displayBooks = books => {
   if (books.length === 0) {
     console.log("There are no books in the reading list yet.");
@@ -95,6 +96,7 @@ const displayBooks = books => {
   }
 };
 
+//Generates the post-search menu
 const displayOptions = () => {
   const bookNames = collectBookNames(searchResults);
   const addBookList = [];
@@ -115,6 +117,7 @@ const displayOptions = () => {
   }
 };
 
+//Set the properties for post-search prompt and initiate it
 const initiateOptionsPrompt = books => {
   const properties = {
     name: "input",
@@ -127,31 +130,38 @@ const initiateOptionsPrompt = books => {
   prompt.get([properties], handleOptionSelection);
 };
 
+//Read user menu selection and handle the response
 const handleOptionSelection = (err, selection) => {
   switch (selection.input) {
+    //Display the current reading list
     case "list":
       console.log("\nThe current reading list is as follows: ");
       displayBooks(bookList);
       displayListOptions();
       initiateListOptionsPrompt();
       break;
+    //Search for a new book
     case "search":
       initiateSearchPrompt();
       break;
+    //Exit the program
     case "exit":
       console.log("Goodbye");
       break;
     default:
       const index = parseInt(selection.input);
+      //Handle case where user wants to add book to reading list
       if (searchResults[index - 1]) {
         addBookToList(index - 1);
       } else {
+        //If invalid input re-prompt for valid input
         initiateOptionsPrompt();
       }
       break;
   }
 };
 
+//Add a book to the reading list if it's not already there
 const addBookToList = index => {
   const present = bookList.some(book => {
     return (
@@ -172,6 +182,7 @@ const addBookToList = index => {
   }
 };
 
+//Display menu while user is looking at reading list
 const displayListOptions = () => {
   const bookNames = collectBookNames(bookList);
   const removeBookList = [];
@@ -193,6 +204,7 @@ const displayListOptions = () => {
   }
 };
 
+//Set properties for post reading list prompt and initialize it
 const initiateListOptionsPrompt = books => {
   const properties = {
     name: "input",
@@ -205,6 +217,7 @@ const initiateListOptionsPrompt = books => {
   prompt.get([properties], handleListOptionSelection);
 };
 
+//Read user post reading list menu selection and handle response
 const handleListOptionSelection = (err, selection) => {
   switch (selection.input) {
     case "search":
@@ -224,6 +237,7 @@ const handleListOptionSelection = (err, selection) => {
   }
 };
 
+//Remove a book from the reading list then re-prompt
 const removeBookFromList = index => {
   bookList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
