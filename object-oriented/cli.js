@@ -3,11 +3,15 @@ const prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
 const fetch = require("node-fetch");
 
+//Import Book class
 const Book = require("./book").Book;
+
+//Declare arrays to store search results and reading list
 let searchResults = [];
 let readingList = [];
 
 class CLI {
+  //Construct the CLI object and set initial attributes
   constructor(numResults = 5) {
     this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
     this.maxResults = `maxResults=${numResults}&`;
@@ -18,10 +22,12 @@ class CLI {
     prompt.delimiter = "";
   }
 
+  //Initialize the CLI
   initialize() {
     this.initiateSearchPrompt();
   }
 
+  //Set the properties for the search prompt and initiate it
   initiateSearchPrompt() {
     const properties = {
       name: "query",
@@ -58,6 +64,7 @@ class CLI {
       });
   }
 
+  //Takes array of books and displays them
   displayBooks(books) {
     for (const [index, book] of books.entries()) {
       book.display(index + 1);
@@ -153,7 +160,7 @@ class CLI {
     }
   }
 
-  //Display menu while user is looking at reading list
+  //Display menu for reading list
   displayListOptions() {
     const bookTitles = Book.collectBookTitles(readingList);
     const removeBookList = [];
@@ -207,6 +214,15 @@ class CLI {
         }
         break;
     }
+  }
+
+  //Remove a book from the reading list then re-prompt
+  removeBookFromList(index) {
+    readingList.splice(index, 1);
+    console.log("\nThe new reading list is as follows: ");
+    this.displayBooks(readingList);
+    this.displayListOptions();
+    this.initiateListOptionsPrompt();
   }
 }
 

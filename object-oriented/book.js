@@ -44,8 +44,6 @@ class Book {
     console.log(`${spacing}Author(s): ${this.authors}`);
     console.log(`${spacing}Publisher: ${this.publisher}\n`);
   }
-
-  addToList() {}
 }
 
 module.exports = {
