@@ -35,16 +35,16 @@ const initiateSearchPrompt = () => {
 };
 
 //Receives userInput from the search prompt and fetches 5 books from Google's API
-const initiateSearch = (err, userInput) => {
+const initiateSearch = (err, { query }) => {
   const baseURL = "https://www.googleapis.com/books/v1/volumes?";
   const maxResults = "maxResults=5&";
   const queryStructure = "q=";
-  const query = encodeURI(userInput.query);
+  const encodedQuery = encodeURI(query);
 
-  fetch(baseURL + maxResults + queryStructure + query)
+  fetch(baseURL + maxResults + queryStructure + encodedQuery)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nFetching results for ${userInput.query}: \n`);
+      console.log(`\nFetching results for ${query}: \n`);
       generateSearchResults(json.items);
       displayBooks(searchResults);
       displayOptions();
