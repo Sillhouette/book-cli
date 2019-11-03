@@ -3,6 +3,8 @@ const prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
 const fetch = require("node-fetch");
 
+const { Book, searchResults, readingList } = require("./book");
+
 class CLI {
   constructor(numResults = 5) {
     this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
@@ -33,18 +35,20 @@ class CLI {
   //Receives userInput from the search prompt and fetches 5 books from Google's API
   initiateSearch(err, { query }) {
     const encodedQuery = encodeURI(query);
+    const searchPrompt = this.initiateSearchPrompt.bind(this);
     fetch(this.baseURL + this.maxResults + this.queryStructure + encodedQuery)
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
-        //generateSearchResults(json.items);
+        Book.generateSearchResults(json.items);
         //displayBooks(searchResults);
         //displayOptions();
         //initiateOptionsPrompt();
       })
       .catch(error => {
+        console.log(error);
         console.log("There was a fatal error, please try again.");
-        initiateSearchPrompt();
+        searchPrompt();
       });
   }
 }
