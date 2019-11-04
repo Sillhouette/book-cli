@@ -110,7 +110,7 @@ describe("books.js", function() {
       spy.restore();
     });
 
-    it("should display bookList when passed 'search'", function() {
+    it("should initiate a new search when passed 'search'", function() {
       let spy = sinon.spy(window, "initiateSearchPrompt");
       window.bookList = eragonObjects;
       window.prompt = prompt;
@@ -131,6 +131,59 @@ describe("books.js", function() {
 
       assert(spy.calledWith(0));
       expect(window.bookList).to.eql(eragonObjects);
+      spy.restore();
+    });
+
+    it("should call initiateOptionsPrompt when passed invalid selections", function() {
+      let spy = sinon.spy(window, "initiateOptionsPrompt");
+
+      window.prompt = prompt;
+
+      handleOptionSelection("", { input: "gibberish" });
+
+      assert(spy.calledOnce);
+      spy.restore();
+    });
+
+    it("should exit the program when passed 'exit'", () => {
+      let spy = sinon.spy(console, "log");
+
+      handleOptionSelection("", { input: "exit" });
+
+      assert(spy.calledWith("Goodbye"));
+      spy.restore();
+    });
+  });
+
+  describe("#handleListOptionSelection(err, selectionObj)", function() {
+    it("should initiate a new search when passed 'search'", function() {
+      let spy = sinon.spy(window, "initiateSearchPrompt");
+      window.bookList = eragonObjects;
+      window.prompt = prompt;
+
+      handleListOptionSelection("", { input: "search" });
+
+      assert(spy.calledOnce);
+      spy.restore();
+    });
+
+    it("should call initiateListOptionsPrompt when passed invalid selections", function() {
+      let spy = sinon.spy(window, "initiateListOptionsPrompt");
+
+      window.prompt = prompt;
+
+      handleListOptionSelection("", { input: "gibberish" });
+
+      assert(spy.calledOnce);
+      spy.restore();
+    });
+
+    it("should exit the program when passed 'exit'", () => {
+      let spy = sinon.spy(console, "log");
+
+      handleListOptionSelection("", { input: "exit" });
+
+      assert(spy.calledWith("Goodbye"));
       spy.restore();
       process.stdin.destroy();
     });
