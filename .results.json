@@ -1,26 +1,54 @@
 {
   "stats": {
-    "suites": 11,
-    "tests": 16,
-    "passes": 16,
+    "suites": 20,
+    "tests": 28,
+    "passes": 28,
     "pending": 0,
     "failures": 0,
-    "start": "2019-11-04T19:09:52.602Z",
-    "end": "2019-11-04T19:09:53.058Z",
-    "duration": 456
+    "start": "2019-11-04T20:41:50.555Z",
+    "end": "2019-11-04T20:41:51.038Z",
+    "duration": 483
   },
   "tests": [
     {
+      "title": "should create a new Book with proper settings",
+      "fullTitle": "book.js Book constructor should create a new Book with proper settings",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should properly display a book",
+      "fullTitle": "book.js Book #display(number) should properly display a book",
+      "duration": 3,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should generate an array of books",
+      "fullTitle": "book.js Book .generateBooks should generate an array of books",
+      "duration": 3,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should generate an array of books",
+      "fullTitle": "book.js Book .collectBookTitles should generate an array of books",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 26,
+      "duration": 22,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "Generates object with correct book information",
       "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -34,7 +62,7 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -48,14 +76,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 4,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -76,7 +104,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -97,13 +125,13 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should create a new CLI proper default settings",
-      "fullTitle": "cli.js CLI constructor should create a new CLI proper default settings",
+      "title": "should create a new CLI with proper default settings",
+      "fullTitle": "cli.js CLI constructor should create a new CLI with proper default settings",
       "duration": 0,
       "currentRetry": 0,
       "err": {}
@@ -118,6 +146,62 @@
     {
       "title": "should initiate a new search when initialized",
       "fullTitle": "cli.js CLI #initialize should initiate a new search when initialized",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "cli.js CLI #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "cli.js #displayBooks(books) should log the correct values to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "cli.js #displayOptions() should log the correct value to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateOptionsPrompt when passed invalid selections",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call initiateOptionsPrompt when passed invalid selections",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
       "duration": 0,
       "currentRetry": 0,
       "err": {}
@@ -127,16 +211,44 @@
   "failures": [],
   "passes": [
     {
+      "title": "should create a new Book with proper settings",
+      "fullTitle": "book.js Book constructor should create a new Book with proper settings",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should properly display a book",
+      "fullTitle": "book.js Book #display(number) should properly display a book",
+      "duration": 3,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should generate an array of books",
+      "fullTitle": "book.js Book .generateBooks should generate an array of books",
+      "duration": 3,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should generate an array of books",
+      "fullTitle": "book.js Book .collectBookTitles should generate an array of books",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 26,
+      "duration": 22,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "Generates object with correct book information",
       "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -150,7 +262,7 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -164,14 +276,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 4,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -192,7 +304,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -213,13 +325,13 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should create a new CLI proper default settings",
-      "fullTitle": "cli.js CLI constructor should create a new CLI proper default settings",
+      "title": "should create a new CLI with proper default settings",
+      "fullTitle": "cli.js CLI constructor should create a new CLI with proper default settings",
       "duration": 0,
       "currentRetry": 0,
       "err": {}
@@ -234,6 +346,62 @@
     {
       "title": "should initiate a new search when initialized",
       "fullTitle": "cli.js CLI #initialize should initiate a new search when initialized",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "cli.js CLI #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "cli.js #displayBooks(books) should log the correct values to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "cli.js #displayOptions() should log the correct value to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateOptionsPrompt when passed invalid selections",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call initiateOptionsPrompt when passed invalid selections",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
       "duration": 0,
       "currentRetry": 0,
       "err": {}

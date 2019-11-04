@@ -5,10 +5,6 @@ class Book {
     this.publisher = publisher;
   }
 
-  static generateSearchResults(bookData) {
-    return Book.generateBooks(bookData);
-  }
-
   static generateBooks(bookData) {
     let bookConfigs = [];
     let books = [];

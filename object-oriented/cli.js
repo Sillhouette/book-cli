@@ -7,12 +7,14 @@ const fetch = require("node-fetch");
 const Book = require("./book").Book;
 
 //Declare arrays to store search results and reading list
-let searchResults = [];
-let readingList = [];
+// let searchResults = [];
+// let readingList = [];
 
 class Cli {
   //Construct the CLI object and set initial attributes
   constructor(numResults = 5) {
+    this.searchResults = [];
+    this.readingList = [];
     this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
     this.maxResults = `maxResults=${numResults}&`;
     this.queryStructure = "q=";
@@ -52,8 +54,8 @@ class Cli {
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
-        searchResults = Book.generateSearchResults(json.items);
-        displayBooks(searchResults);
+        this.searchResults = Book.generateBooks(json.items);
+        displayBooks(this.searchResults);
         displayOptions();
         optionsPrompt();
       })
@@ -73,7 +75,7 @@ class Cli {
 
   //Generates the post-search menu
   displayOptions() {
-    const bookTitles = Book.collectBookTitles(searchResults);
+    const bookTitles = Book.collectBookTitles(this.searchResults);
     const addBookList = [];
     for (const [index, book] of bookTitles.entries()) {
       addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
@@ -112,7 +114,7 @@ class Cli {
       //Display the current reading list
       case "list":
         console.log("\nThe current reading list is as follows: ");
-        this.displayBooks(readingList);
+        this.displayBooks(this.readingList);
         this.displayListOptions();
         this.initiateListOptionsPrompt();
         break;
@@ -127,7 +129,7 @@ class Cli {
       default:
         const index = parseInt(input);
         //Handle case where user wants to add book to reading list
-        if (searchResults[index - 1]) {
+        if (this.searchResults[index - 1]) {
           this.addBookToList(index - 1);
         } else {
           //If invalid input re-prompt for valid input
@@ -139,17 +141,17 @@ class Cli {
 
   //Add a book to the reading list if it's not already there
   addBookToList(index) {
-    const present = readingList.some(book => {
+    const present = this.readingList.some(book => {
       return (
-        book.title === searchResults[index].title &&
-        book.authors === searchResults[index].authors
+        book.title === this.searchResults[index].title &&
+        book.authors === this.searchResults[index].authors
       );
     });
     if (!present) {
-      readingList.push(searchResults[index]);
+      this.readingList.push(this.searchResults[index]);
       console.log(
         `Added ${
-          readingList[readingList.length - 1].title
+          this.readingList[this.readingList.length - 1].title
         } to the reading list.`
       );
       this.displayOptions();
@@ -162,7 +164,7 @@ class Cli {
 
   //Display menu for reading list
   displayListOptions() {
-    const bookTitles = Book.collectBookTitles(readingList);
+    const bookTitles = Book.collectBookTitles(this.readingList);
     const removeBookList = [];
     for (const [index, book] of bookTitles.entries()) {
       removeBookList.push(
@@ -207,7 +209,7 @@ class Cli {
         break;
       default:
         const index = parseInt(input);
-        if (readingList[index - 1]) {
+        if (this.readingList[index - 1]) {
           //this.removeBookFromList(index - 1); //Took this out as the instructions asked us to not add additional features
         } else {
           this.initiateListOptionsPrompt();
@@ -218,9 +220,9 @@ class Cli {
 
   //Remove a book from the reading list then re-prompt
   removeBookFromList(index) {
-    readingList.splice(index, 1);
+    this.readingList.splice(index, 1);
     console.log("\nThe new reading list is as follows: ");
-    this.displayBooks(readingList);
+    this.displayBooks(this.readingList);
     this.displayListOptions();
     this.initiateListOptionsPrompt();
   }
