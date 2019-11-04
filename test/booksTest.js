@@ -3,6 +3,7 @@ const helpers = require("./helpers");
 const chai = require("chai");
 const spies = require("chai-spies");
 const assert = require("assert");
+const prompt = require("prompt");
 
 chai.use(spies);
 
@@ -88,6 +89,50 @@ describe("books.js", function() {
       assert(spy.calledWith("  exit - Exit the program"));
       assert(spy.calledWith("\n"));
       spy.restore();
+    });
+  });
+
+  describe("#handleOptionSelection(err, selectionObj)", function() {
+    it("should display bookList and options when passed 'list'", function() {
+      let spy = sinon.spy(console, "log");
+      window.bookList = eragonObjects;
+      window.prompt = prompt;
+
+      handleOptionSelection("", { input: "list" });
+      assert(spy.calledWith("\nThe current reading list is as follows: "));
+      assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
+      assert(spy.calledWith("   Author(s): Christopher Paolini"));
+      assert(spy.calledWith("   Publisher: Random House\n"));
+      assert(spy.calledWith("Choose one of the following options: \n"));
+      assert(spy.calledWith("  search - Search for a new book"));
+      assert(spy.calledWith("  exit - Exit the program"));
+
+      spy.restore();
+    });
+
+    it("should display bookList when passed 'search'", function() {
+      let spy = sinon.spy(window, "initiateSearchPrompt");
+      window.bookList = eragonObjects;
+      window.prompt = prompt;
+
+      handleOptionSelection("", { input: "search" });
+
+      assert(spy.calledOnce);
+      spy.restore();
+    });
+
+    it("should call addBookToList(book) when passed an integer", function() {
+      let spy = sinon.spy(window, "addBookToList");
+      window.bookList = [];
+      window.searchResults = eragonObjects;
+      window.prompt = prompt;
+
+      handleOptionSelection("", { input: "1" });
+
+      assert(spy.calledWith(0));
+      expect(window.bookList).to.eql(eragonObjects);
+      spy.restore();
+      process.stdin.destroy();
     });
   });
 });

@@ -133,8 +133,8 @@ function initiateOptionsPrompt() {
 }
 
 //Read user menu selection and handle the response
-function handleOptionSelection(err, selection) {
-  switch (selection.input) {
+function handleOptionSelection(err, { input }) {
+  switch (input) {
     //Display the current reading list
     case "list":
       console.log("\nThe current reading list is as follows: ");
@@ -151,7 +151,7 @@ function handleOptionSelection(err, selection) {
       console.log("Goodbye");
       break;
     default:
-      const index = parseInt(selection.input);
+      const index = parseInt(input);
       //Handle case where user wants to add book to reading list
       if (searchResults[index - 1]) {
         addBookToList(index - 1);

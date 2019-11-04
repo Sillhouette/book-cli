@@ -1,26 +1,26 @@
 {
   "stats": {
-    "suites": 6,
-    "tests": 5,
-    "passes": 5,
+    "suites": 7,
+    "tests": 8,
+    "passes": 8,
     "pending": 0,
     "failures": 0,
-    "start": "2019-11-04T06:05:09.380Z",
-    "end": "2019-11-04T06:05:09.820Z",
-    "duration": 440
+    "start": "2019-11-04T07:06:00.529Z",
+    "end": "2019-11-04T07:06:00.972Z",
+    "duration": 443
   },
   "tests": [
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 23,
+      "duration": 22,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "Generates object with correct book information",
       "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -34,14 +34,35 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 2,
+      "duration": 3,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should log the correct value to console",
       "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 5,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList when passed 'search'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList when passed 'search'",
       "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     }
@@ -52,14 +73,14 @@
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 23,
+      "duration": 22,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "Generates object with correct book information",
       "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -73,14 +94,35 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 2,
+      "duration": 3,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should log the correct value to console",
       "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 5,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList when passed 'search'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList when passed 'search'",
       "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     }
