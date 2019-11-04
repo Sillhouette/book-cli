@@ -171,7 +171,7 @@ class CLI {
     }
     const options = [
       `Choose one of the following options: \n`,
-      ...removeBookList,
+      //...removeBookList, //Removed as the instructions asked us to not add additional features
       `  search - Search for a new book`,
       `  exit - Exit the program`,
       `\n`
@@ -208,7 +208,7 @@ class CLI {
       default:
         const index = parseInt(input);
         if (readingList[index - 1]) {
-          this.removeBookFromList(index - 1);
+          //this.removeBookFromList(index - 1); //Took this out as the instructions asked us to not add additional features
         } else {
           this.initiateListOptionsPrompt();
         }

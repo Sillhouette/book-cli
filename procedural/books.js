@@ -193,7 +193,7 @@ const displayListOptions = () => {
   }
   const options = [
     `Choose one of the following options: \n`,
-    ...removeBookList,
+    //...removeBookList,
     `  search - Search for a new book`,
     `  exit - Exit the program`,
     `\n`
@@ -229,7 +229,7 @@ const handleListOptionSelection = (err, selection) => {
     default:
       const index = parseInt(selection.input);
       if (bookList[index - 1]) {
-        removeBookFromList(index - 1);
+        //removeBookFromList(index - 1); //Removed as the instructions asked us to not include additional features in the applicaton
       } else {
         initiateListOptionsPrompt();
       }
