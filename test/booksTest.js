@@ -30,7 +30,6 @@ const eragonTitles = ["Eragon and Eldest Omnibus"];
 describe("books.js", function() {
   describe("#initiateSearch(err, queryObj)", function() {
     beforeEach(() => {
-      //window.document.body.innerHTML = "<main></main>";
       window.fetch = require("node-fetch");
     });
 

@@ -10,7 +10,7 @@ const Book = require("./book").Book;
 let searchResults = [];
 let readingList = [];
 
-class CLI {
+class Cli {
   //Construct the CLI object and set initial attributes
   constructor(numResults = 5) {
     this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
@@ -226,5 +226,9 @@ class CLI {
   }
 }
 
-let cli = new CLI();
+let cli = new Cli();
 cli.initialize();
+
+module.exports = {
+  Cli: Cli
+};
