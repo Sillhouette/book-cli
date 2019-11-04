@@ -1,0 +1,88 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2019-11-04T06:05:09.380Z",
+    "end": "2019-11-04T06:05:09.820Z",
+    "duration": 440
+  },
+  "tests": [
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 23,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates object with correct book information",
+      "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates array with correct book titles",
+      "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 23,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates object with correct book information",
+      "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates array with correct book titles",
+      "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}

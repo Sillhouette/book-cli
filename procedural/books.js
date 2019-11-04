@@ -8,21 +8,21 @@ let searchResults = [];
 let bookList = [];
 
 //Configure the prompt and prompt for the initial search
-const initialize = () => {
+function initialize() {
   setupPrompt();
   initiateSearchPrompt();
-};
+}
 
 //Set the global configuration settings for the prompt
-const setupPrompt = () => {
+function setupPrompt() {
   prompt.start();
   prompt.message = "";
   prompt.colors = false;
   prompt.delimiter = "";
-};
+}
 
 //Set the properties for the search prompt and initiate it
-const initiateSearchPrompt = () => {
+function initiateSearchPrompt() {
   const properties = {
     name: "query",
     type: "string",
@@ -32,10 +32,10 @@ const initiateSearchPrompt = () => {
   };
 
   prompt.get([properties], initiateSearch);
-};
+}
 
 //Receives userInput from the search prompt and fetches 5 books from Google's API
-const initiateSearch = (err, { query }) => {
+function initiateSearch(err, { query }) {
   const baseURL = "https://www.googleapis.com/books/v1/volumes?";
   const maxResults = "maxResults=5&";
   const queryStructure = "q=";
@@ -53,11 +53,12 @@ const initiateSearch = (err, { query }) => {
     .catch(error => {
       console.log("There was a fatal error, please try again.");
       initiateSearchPrompt();
-    });
-};
+    })
+    .catch(error => error);
+}
 
 //Generates the basic objects using the relevant attributes for each book
-const generateSearchResults = books => {
+function generateSearchResults(books) {
   searchResults = [];
   for (let {
     volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
@@ -69,19 +70,20 @@ const generateSearchResults = books => {
       publisher: publisher
     });
   }
-};
+  return searchResults;
+}
 
 //Collects the titles of the books into an array for ease of listing
-const collectBookNames = books => {
-  const bookNames = [];
+function collectBookTitles(books) {
+  const bookTitles = [];
   for (let { title } of books) {
-    bookNames.push(title);
+    bookTitles.push(title);
   }
-  return bookNames;
-};
+  return bookTitles;
+}
 
 //Displays an array of books to the user
-const displayBooks = books => {
+function displayBooks(books) {
   if (books.length === 0) {
     console.log("There are no books in the reading list yet.");
   }
@@ -94,13 +96,13 @@ const displayBooks = books => {
     console.log(`${spacing}Author(s): ${authors}`);
     console.log(`${spacing}Publisher: ${publisher}\n`);
   }
-};
+}
 
 //Generates the post-search menu
-const displayOptions = () => {
-  const bookNames = collectBookNames(searchResults);
+function displayOptions() {
+  const bookTitles = collectBookTitles(searchResults);
   const addBookList = [];
-  for (const [index, book] of bookNames.entries()) {
+  for (const [index, book] of bookTitles.entries()) {
     addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
   }
   const options = [
@@ -115,10 +117,10 @@ const displayOptions = () => {
   for (const option of options) {
     console.log(option);
   }
-};
+}
 
 //Set the properties for post-search prompt and initiate it
-const initiateOptionsPrompt = () => {
+function initiateOptionsPrompt() {
   const properties = {
     name: "input",
     type: "string",
@@ -128,10 +130,10 @@ const initiateOptionsPrompt = () => {
   };
 
   prompt.get([properties], handleOptionSelection);
-};
+}
 
 //Read user menu selection and handle the response
-const handleOptionSelection = (err, selection) => {
+function handleOptionSelection(err, selection) {
   switch (selection.input) {
     //Display the current reading list
     case "list":
@@ -159,10 +161,10 @@ const handleOptionSelection = (err, selection) => {
       }
       break;
   }
-};
+}
 
 //Add a book to the reading list if it's not already there
-const addBookToList = index => {
+function addBookToList(index) {
   const present = bookList.some(book => {
     return (
       book.title === searchResults[index].title &&
@@ -180,13 +182,13 @@ const addBookToList = index => {
     console.log("That book is already in the book list.");
     initiateOptionsPrompt();
   }
-};
+}
 
 //Display menu while user is looking at reading list
-const displayListOptions = () => {
-  const bookNames = collectBookNames(bookList);
+function displayListOptions() {
+  const bookTitles = collectBookTitles(bookList);
   const removeBookList = [];
-  for (const [index, book] of bookNames.entries()) {
+  for (const [index, book] of bookTitles.entries()) {
     removeBookList.push(
       `  ${index + 1} - Remove ${book} from the reading list`
     );
@@ -202,10 +204,10 @@ const displayListOptions = () => {
   for (const option of options) {
     console.log(option);
   }
-};
+}
 
 //Set properties for post reading list prompt and initialize it
-const initiateListOptionsPrompt = books => {
+function initiateListOptionsPrompt(books) {
   const properties = {
     name: "input",
     type: "string",
@@ -215,10 +217,10 @@ const initiateListOptionsPrompt = books => {
   };
 
   prompt.get([properties], handleListOptionSelection);
-};
+}
 
 //Read user post reading list menu selection and handle response
-const handleListOptionSelection = (err, selection) => {
+function handleListOptionSelection(err, selection) {
   switch (selection.input) {
     case "search":
       initiateSearchPrompt();
@@ -235,15 +237,15 @@ const handleListOptionSelection = (err, selection) => {
       }
       break;
   }
-};
+}
 
 //Remove a book from the reading list then re-prompt
-const removeBookFromList = index => {
+function removeBookFromList(index) {
   bookList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
   displayBooks(bookList);
   displayListOptions();
   initiateListOptionsPrompt();
-};
+}
 
 initialize();
