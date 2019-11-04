@@ -1,0 +1,200 @@
+{
+  "stats": {
+    "suites": 8,
+    "tests": 13,
+    "passes": 13,
+    "pending": 0,
+    "failures": 0,
+    "start": "2019-11-04T07:26:32.965Z",
+    "end": "2019-11-04T07:26:33.449Z",
+    "duration": 484
+  },
+  "tests": [
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 26,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates object with correct book information",
+      "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates array with correct book titles",
+      "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 9,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateOptionsPrompt when passed invalid selections",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call initiateOptionsPrompt when passed invalid selections",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateListOptionsPrompt when passed invalid selections",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should call initiateListOptionsPrompt when passed invalid selections",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
+      "duration": 26,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates object with correct book information",
+      "fullTitle": "books.js #generateSearchResults(booksData) Generates object with correct book information",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Generates array with correct book titles",
+      "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct values to console",
+      "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
+      "duration": 4,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should log the correct value to console",
+      "fullTitle": "books.js #displayOptions() should log the correct value to console",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should display bookList and options when passed 'list'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
+      "duration": 9,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call addBookToList(book) when passed an integer",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateOptionsPrompt when passed invalid selections",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should call initiateOptionsPrompt when passed invalid selections",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when passed 'search'",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should call initiateListOptionsPrompt when passed invalid selections",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should call initiateListOptionsPrompt when passed invalid selections",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should exit the program when passed 'exit'",
+      "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}
