@@ -1,19 +1,19 @@
 {
   "stats": {
-    "suites": 10,
-    "tests": 15,
-    "passes": 15,
+    "suites": 11,
+    "tests": 16,
+    "passes": 16,
     "pending": 0,
     "failures": 0,
-    "start": "2019-11-04T16:54:32.396Z",
-    "end": "2019-11-04T16:54:32.823Z",
-    "duration": 427
+    "start": "2019-11-04T19:09:52.602Z",
+    "end": "2019-11-04T19:09:53.058Z",
+    "duration": 456
   },
   "tests": [
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 21,
+      "duration": 26,
       "currentRetry": 0,
       "err": {}
     },
@@ -34,7 +34,7 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 3,
+      "duration": 2,
       "currentRetry": 0,
       "err": {}
     },
@@ -48,14 +48,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 2,
+      "duration": 4,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -83,7 +83,7 @@
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -97,7 +97,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -111,7 +111,14 @@
     {
       "title": "should create a new CLI proper settings",
       "fullTitle": "cli.js CLI constructor should create a new CLI proper settings",
-      "duration": 1,
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when initialized",
+      "fullTitle": "cli.js CLI #initialize should initiate a new search when initialized",
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     }
@@ -122,7 +129,7 @@
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 21,
+      "duration": 26,
       "currentRetry": 0,
       "err": {}
     },
@@ -143,7 +150,7 @@
     {
       "title": "should log the correct values to console",
       "fullTitle": "books.js #displayBooks(books) should log the correct values to console",
-      "duration": 3,
+      "duration": 2,
       "currentRetry": 0,
       "err": {}
     },
@@ -157,14 +164,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 2,
+      "duration": 4,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -192,7 +199,7 @@
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -206,7 +213,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -220,7 +227,14 @@
     {
       "title": "should create a new CLI proper settings",
       "fullTitle": "cli.js CLI constructor should create a new CLI proper settings",
-      "duration": 1,
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should initiate a new search when initialized",
+      "fullTitle": "cli.js CLI #initialize should initiate a new search when initialized",
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     }

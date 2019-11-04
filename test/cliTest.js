@@ -30,4 +30,18 @@ describe("cli.js", function() {
       expect(cli.queryStructure).to.equal("q=");
     });
   });
+
+  describe("CLI #initialize", function() {
+    let cli;
+    before(() => {
+      cli = new Cli();
+    });
+    it("should initiate a new search when initialized", function() {
+      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
+      cli.initialize();
+
+      assert(stub.called);
+      stub.restore();
+    });
+  });
 });

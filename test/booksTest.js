@@ -3,7 +3,6 @@ const helpers = require("./helpers");
 const chai = require("chai");
 const spies = require("chai-spies");
 const assert = require("assert");
-const prompt = require("prompt");
 
 chai.use(spies);
 
@@ -29,11 +28,18 @@ const eragonTitles = ["Eragon and Eldest Omnibus"];
 
 describe("books.js", function() {
   describe("#initiateSearch(err, queryObj)", function() {
-    beforeEach(() => {
+    beforeEach(function() {
       window.fetch = require("node-fetch");
     });
-
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
+      let stub = sinon
+        .stub(window, "initiateSearchPrompt")
+        .callsFake(() => true);
+
+      let stub2 = sinon
+        .stub(window, "initiateOptionsPrompt")
+        .callsFake(() => true);
+
       chai.spy.on(window, "fetch");
       const encoded_eragon = encodeURI("eragon");
       await initiateSearch("", { query: encoded_eragon });
@@ -43,6 +49,8 @@ describe("books.js", function() {
       ).to.have.been.called.with(
         "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon"
       );
+      stub.restore();
+      stub2.restore();
     });
   });
 
@@ -93,9 +101,12 @@ describe("books.js", function() {
 
   describe("#handleOptionSelection(err, selectionObj)", function() {
     it("should display bookList and options when passed 'list'", function() {
+      let stub3 = sinon
+        .stub(window, "initiateListOptionsPrompt")
+        .callsFake(() => true);
+
       let spy = sinon.spy(console, "log");
       window.bookList = eragonObjects;
-      window.prompt = prompt;
 
       handleOptionSelection("", { input: "list" });
       assert(spy.calledWith("\nThe current reading list is as follows: "));
@@ -107,41 +118,49 @@ describe("books.js", function() {
       assert(spy.calledWith("  exit - Exit the program"));
 
       spy.restore();
+      stub3.restore();
     });
 
     it("should initiate a new search when passed 'search'", function() {
-      let spy = sinon.spy(window, "initiateSearchPrompt");
+      //let spy = sinon.spy(window, "initiateSearchPrompt");
+      let stub = sinon
+        .stub(window, "initiateSearchPrompt")
+        .callsFake(() => true);
+
       window.bookList = eragonObjects;
-      window.prompt = prompt;
 
       handleOptionSelection("", { input: "search" });
 
-      assert(spy.calledOnce);
-      spy.restore();
+      assert(stub.called);
+      stub.restore();
     });
 
     it("should call addBookToList(book) when passed an integer", function() {
+      let stub2 = sinon
+        .stub(window, "initiateOptionsPrompt")
+        .callsFake(() => true);
+
       let spy = sinon.spy(window, "addBookToList");
       window.bookList = [];
       window.searchResults = eragonObjects;
-      window.prompt = prompt;
 
       handleOptionSelection("", { input: "1" });
 
       assert(spy.calledWith(0));
       expect(window.bookList).to.eql(eragonObjects);
       spy.restore();
+      stub2.restore();
     });
 
     it("should call initiateOptionsPrompt when passed invalid selections", function() {
-      let spy = sinon.spy(window, "initiateOptionsPrompt");
-
-      window.prompt = prompt;
+      let stub2 = sinon
+        .stub(window, "initiateOptionsPrompt")
+        .callsFake(() => true);
 
       handleOptionSelection("", { input: "gibberish" });
 
-      assert(spy.calledOnce);
-      spy.restore();
+      assert(stub2.called);
+      stub2.restore();
     });
 
     it("should exit the program when passed 'exit'", () => {
@@ -156,25 +175,23 @@ describe("books.js", function() {
 
   describe("#handleListOptionSelection(err, selectionObj)", function() {
     it("should initiate a new search when passed 'search'", function() {
-      let spy = sinon.spy(window, "initiateSearchPrompt");
-      window.bookList = eragonObjects;
-      window.prompt = prompt;
+      let stub = sinon
+        .stub(window, "initiateSearchPrompt")
+        .callsFake(() => true);
 
       handleListOptionSelection("", { input: "search" });
-
-      assert(spy.calledOnce);
-      spy.restore();
+      assert(stub.called);
+      stub.restore();
     });
 
     it("should call initiateListOptionsPrompt when passed invalid selections", function() {
-      let spy = sinon.spy(window, "initiateListOptionsPrompt");
-
-      window.prompt = prompt;
-
+      let stub3 = sinon
+        .stub(window, "initiateListOptionsPrompt")
+        .callsFake(() => true);
       handleListOptionSelection("", { input: "gibberish" });
 
-      assert(spy.calledOnce);
-      spy.restore();
+      assert(stub3.called);
+      stub3.restore();
     });
 
     it("should exit the program when passed 'exit'", () => {
