@@ -36,4 +36,5 @@
 ehthumbs.db
 Thumbs.db
 .results.json
+package-lock.json
 node_modules
