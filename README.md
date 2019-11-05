@@ -2,7 +2,7 @@
 
 This is the repo that contains my code submission for the technical assessment at 8th light. It contains two main directories, the first is a procedural directory that contains a procedural approach and the second folder contains an object oriented approach, both of which are attempts at achieving the goals set out by 8th light.
 
-### A note to the reviewer(s)
+#### A note to the reviewer(s)
 
 While I believe that the procedural approach was the best, most logical approach to this particular challenge, I provided an object oriented solution as well because I know how valuable programming from an object oriented standpoint is, and I wanted to demonstrate my capabilities from both perspectives.
 
