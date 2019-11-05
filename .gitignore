@@ -35,5 +35,5 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
+.results.json
 node_modules
