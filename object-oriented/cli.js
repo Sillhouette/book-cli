@@ -26,6 +26,8 @@ class Cli {
 
   //Initialize the CLI
   initialize() {
+    console.log("\nWelcome to the object oriented version of book cli");
+    console.log("\nPlease enter the name of the book you would like to find:");
     this.initiateSearchPrompt();
   }
 
@@ -228,8 +230,8 @@ class Cli {
   }
 }
 
-let cli = new Cli();
-cli.initialize();
+// let cli = new Cli();
+// cli.initialize();
 
 module.exports = {
   Cli: Cli

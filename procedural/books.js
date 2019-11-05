@@ -9,6 +9,8 @@ let readingList = [];
 
 //Configure the prompt and prompt for the initial search
 function initialize() {
+  console.log("\nWelcome to the procedural version of book cli");
+  console.log("\nPlease enter the name of the book you would like to find:");
   setupPrompt();
   initiateSearchPrompt();
 }
@@ -248,4 +250,4 @@ function removeBookFromList(index) {
   initiateListOptionsPrompt();
 }
 
-initialize();
+module.exports = { initialize: initialize };
