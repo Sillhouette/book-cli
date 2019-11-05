@@ -49,4 +49,4 @@ const initialize = () => {
   initialPrompt();
 };
 
-initialize();
+module.exports = { initialize: initialize };

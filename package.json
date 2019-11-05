@@ -1,8 +1,15 @@
 {
-  "name": "book-cli",
+  "name": "@sillhouette/book-cli",
   "version": "1.0.0",
   "description": "This is a CLI project that utilizes google's books API",
-  "main": "books.js",
+  "main": "index.js",
+  "bin": {
+    "@sillhouette/book-cli": "bin/book-cli",
+    "book-cli": "bin/book-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "node-fetch": "^2.6.0",
     "prompt": "^1.0.0"
@@ -35,6 +42,7 @@
   },
   "keywords": [
     "google",
+    "book-cli",
     "books",
     "cli"
   ],
@@ -43,5 +51,18 @@
   "bugs": {
     "url": "https://github.com/Sillhouette/book-cli/issues"
   },
-  "homepage": "https://github.com/Sillhouette/book-cli#readme"
+  "homepage": "https://github.com/Sillhouette/book-cli#readme",
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "bin/",
+    "object-oriented/",
+    "procedural/",
+    "test/",
+    "index.js",
+    "LICENCE.md",
+    "package.json",
+    "README.md"
+  ]
 }
