@@ -10,19 +10,28 @@ While I believe that the procedural approach was the best, most logical approach
 
 Follow these easy steps to install and start the app:
 
-### Set up the application
+### Npm
 
-First, fork and clone this repository.
+#### Install:
 
-Then, change directories into the folder for the repo and run `npm install`
+Run `npm install @sillhouette/book-cli`
 
-### Start the application
+#### Execute:
 
-To start the application with the version selector run `node index.js` (recommended)
+Run `book-cli` or `@sillhouette/book-cli` from bash
 
-To start the procedural version directly run `node ./procedural/bookCli.js`
+### Github
 
-To start the object oriented version directly run `node ./object-oriented/cli.js`
+#### Install:
+
+Clone this repository, change directories into the folder for the repo and run `npm install`
+
+####Execute:
+Start the application with the version selector: Run `node index.js` (recommended)
+
+Start the procedural version directly: Run `node ./procedural/bookCli.js`
+
+Start the object oriented version directly: Run `node ./object-oriented/cli.js`
 
 ### Testing the application
 
