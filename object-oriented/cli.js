@@ -210,7 +210,7 @@ class Cli {
       default:
         const index = parseInt(input);
         if (this.readingList[index - 1]) {
-          //this.removeBookFromList(index - 1); //Took this out as the instructions asked us to not add additional features
+          //this.removeBookFromList(index - 1); //Removed as the instructions asked us to not add additional features
         } else {
           this.initiateListOptionsPrompt();
         }

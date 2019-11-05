@@ -195,7 +195,7 @@ function displayListOptions() {
   }
   const options = [
     `Choose one of the following options: \n`,
-    //...removeBookList,
+    //...removeBookList, // Removed as the instructions asked us to not include additional features
     `  search - Search for a new book`,
     `  exit - Exit the program`,
     `\n`
