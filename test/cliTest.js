@@ -1,33 +1,8 @@
 const sinon = require("sinon");
-const helpers = require("./helpers");
 const chai = require("chai");
-const spies = require("chai-spies");
 const assert = require("assert");
-const prompt = require("prompt");
 const Cli = require("../object-oriented/cli").Cli;
 const Book = require("../object-oriented/book").Book;
-
-chai.use(spies);
-
-const eragonFetchResult = [
-  {
-    volumeInfo: {
-      title: "Eragon and Eldest Omnibus",
-      authors: "Christopher Paolini",
-      publisher: "Random House"
-    }
-  }
-];
-
-const eragonObjects = [
-  {
-    title: "Eragon and Eldest Omnibus",
-    authors: "Christopher Paolini",
-    publisher: "Random House"
-  }
-];
-
-const eragonTitles = ["Eragon and Eldest Omnibus"];
 
 describe("cli.js", function() {
   describe("CLI constructor", function() {

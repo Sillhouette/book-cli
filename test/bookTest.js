@@ -1,13 +1,7 @@
 const sinon = require("sinon");
-const helpers = require("./helpers");
-const chai = require("chai");
-const spies = require("chai-spies");
 const assert = require("assert");
-const prompt = require("prompt");
 const Cli = require("../object-oriented/cli").Cli;
 const Book = require("../object-oriented/book").Book;
-
-chai.use(spies);
 
 describe("book.js", function() {
   describe("Book constructor", function() {

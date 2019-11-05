@@ -5,15 +5,15 @@
     "passes": 28,
     "pending": 0,
     "failures": 0,
-    "start": "2019-11-04T20:41:50.555Z",
-    "end": "2019-11-04T20:41:51.038Z",
-    "duration": 483
+    "start": "2019-11-05T01:56:27.891Z",
+    "end": "2019-11-05T01:56:28.338Z",
+    "duration": 447
   },
   "tests": [
     {
       "title": "should create a new Book with proper settings",
       "fullTitle": "book.js Book constructor should create a new Book with proper settings",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -27,21 +27,21 @@
     {
       "title": "should generate an array of books",
       "fullTitle": "book.js Book .generateBooks should generate an array of books",
-      "duration": 3,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should generate an array of books",
       "fullTitle": "book.js Book .collectBookTitles should generate an array of books",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 22,
+      "duration": 21,
       "currentRetry": 0,
       "err": {}
     },
@@ -55,7 +55,7 @@
     {
       "title": "Generates array with correct book titles",
       "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -76,14 +76,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -104,7 +104,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -125,7 +125,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -174,7 +174,7 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -188,7 +188,7 @@
     {
       "title": "should call addBookToList(book) when passed an integer",
       "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -213,7 +213,7 @@
     {
       "title": "should create a new Book with proper settings",
       "fullTitle": "book.js Book constructor should create a new Book with proper settings",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -227,21 +227,21 @@
     {
       "title": "should generate an array of books",
       "fullTitle": "book.js Book .generateBooks should generate an array of books",
-      "duration": 3,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should generate an array of books",
       "fullTitle": "book.js Book .collectBookTitles should generate an array of books",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
       "fullTitle": "books.js #initiateSearch(err, queryObj) sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'",
-      "duration": 22,
+      "duration": 21,
       "currentRetry": 0,
       "err": {}
     },
@@ -255,7 +255,7 @@
     {
       "title": "Generates array with correct book titles",
       "fullTitle": "books.js #collectBookTitles(books) Generates array with correct book titles",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -276,14 +276,14 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "should initiate a new search when passed 'search'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should initiate a new search when passed 'search'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -304,7 +304,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -325,7 +325,7 @@
     {
       "title": "should exit the program when passed 'exit'",
       "fullTitle": "books.js #handleListOptionSelection(err, selectionObj) should exit the program when passed 'exit'",
-      "duration": 1,
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
@@ -374,7 +374,7 @@
     {
       "title": "should display bookList and options when passed 'list'",
       "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should display bookList and options when passed 'list'",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
@@ -388,7 +388,7 @@
     {
       "title": "should call addBookToList(book) when passed an integer",
       "fullTitle": "cli.js CLI #handleOptionSelection(err, selectionObj) should call addBookToList(book) when passed an integer",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "err": {}
     },
