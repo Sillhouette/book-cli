@@ -18,6 +18,12 @@ To start the application using the procedural approach run `node ./procedural/bo
 
 To start the application using the object oriented approach run `node ./object-oriented/cli.js`
 
+### Testing the application
+
+To run the tests use the command `npm test`
+There are three test files, booksTests.js tests the procedural version of the code and the other two test their respective classes.
+Note: The output from the running of the cli still gets printed to the console so you likely have to scroll up to see the results of the tests once they have been run
+
 Thank you!
 
 Austin Melchior
