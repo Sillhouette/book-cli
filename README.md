@@ -26,7 +26,8 @@ Run `book-cli` or `@sillhouette/book-cli` from bash
 
 Clone this repository, change directories into the folder for the repo and run `npm install`
 
-####Execute:
+#### Execute:
+
 Start the application with the version selector: Run `node index.js` (recommended)
 
 Start the procedural version directly: Run `node ./procedural/bookCli.js`
