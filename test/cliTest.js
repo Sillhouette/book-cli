@@ -127,7 +127,7 @@ describe("cli.js", function() {
         publisher: "Random House"
       });
     });
-    it("should display bookList and options when passed 'list'", function() {
+    it("should display reading list and options when passed 'list'", function() {
       let stub3 = sinon
         .stub(cli, "initiateListOptionsPrompt")
         .callsFake(() => true);

@@ -99,13 +99,13 @@ describe("books.js", function() {
   });
 
   describe("#handleOptionSelection(err, selectionObj)", function() {
-    it("should display bookList and options when passed 'list'", function() {
+    it("should display readingList and options when passed 'list'", function() {
       let stub3 = sinon
         .stub(window, "initiateListOptionsPrompt")
         .callsFake(() => true);
 
       let spy = sinon.spy(console, "log");
-      window.bookList = eragonObjects;
+      window.readingList = eragonObjects;
 
       handleOptionSelection("", { input: "list" });
       assert(spy.calledWith("\nThe current reading list is as follows: "));
@@ -126,7 +126,7 @@ describe("books.js", function() {
         .stub(window, "initiateSearchPrompt")
         .callsFake(() => true);
 
-      window.bookList = eragonObjects;
+      window.readingList = eragonObjects;
 
       handleOptionSelection("", { input: "search" });
 
@@ -140,13 +140,13 @@ describe("books.js", function() {
         .callsFake(() => true);
 
       let spy = sinon.spy(window, "addBookToList");
-      window.bookList = [];
+      window.readingList = [];
       window.searchResults = eragonObjects;
 
       handleOptionSelection("", { input: "1" });
 
       assert(spy.calledWith(0));
-      expect(window.bookList).to.eql(eragonObjects);
+      expect(window.readingList).to.eql(eragonObjects);
       spy.restore();
       stub2.restore();
     });

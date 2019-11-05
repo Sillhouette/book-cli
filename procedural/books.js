@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 
 //Declare arrays to store search results and reading list
 let searchResults = [];
-let bookList = [];
+let readingList = [];
 
 //Configure the prompt and prompt for the initial search
 function initialize() {
@@ -138,7 +138,7 @@ function handleOptionSelection(err, { input }) {
     //Display the current reading list
     case "list":
       console.log("\nThe current reading list is as follows: ");
-      displayBooks(bookList);
+      displayBooks(readingList);
       displayListOptions();
       initiateListOptionsPrompt();
       break;
@@ -165,16 +165,16 @@ function handleOptionSelection(err, { input }) {
 
 //Add a book to the reading list if it's not already there
 function addBookToList(index) {
-  const present = bookList.some(book => {
+  const present = readingList.some(book => {
     return (
       book.title === searchResults[index].title &&
       book.authors === searchResults[index].authors
     );
   });
   if (!present) {
-    bookList.push(searchResults[index]);
+    readingList.push(searchResults[index]);
     console.log(
-      `Added ${bookList[bookList.length - 1].title} to the reading list.`
+      `Added ${readingList[readingList.length - 1].title} to the reading list.`
     );
     displayOptions();
     initiateOptionsPrompt();
@@ -186,7 +186,7 @@ function addBookToList(index) {
 
 //Display menu while user is looking at reading list
 function displayListOptions() {
-  const bookTitles = collectBookTitles(bookList);
+  const bookTitles = collectBookTitles(readingList);
   const removeBookList = [];
   for (const [index, book] of bookTitles.entries()) {
     removeBookList.push(
@@ -230,7 +230,7 @@ function handleListOptionSelection(err, selection) {
       break;
     default:
       const index = parseInt(selection.input);
-      if (bookList[index - 1]) {
+      if (readingList[index - 1]) {
         //removeBookFromList(index - 1); //Removed as the instructions asked us to not include additional features in the applicaton
       } else {
         initiateListOptionsPrompt();
@@ -241,9 +241,9 @@ function handleListOptionSelection(err, selection) {
 
 //Remove a book from the reading list then re-prompt
 function removeBookFromList(index) {
-  bookList.splice(index, 1);
+  readingList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
-  displayBooks(bookList);
+  displayBooks(readingList);
   displayListOptions();
   initiateListOptionsPrompt();
 }
