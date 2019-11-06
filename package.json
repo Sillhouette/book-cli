@@ -1,6 +1,6 @@
 {
   "name": "@sillhouette/book-cli",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "This is a CLI project that utilizes google's books API",
   "main": "index.js",
   "bin": {
