@@ -28,7 +28,7 @@ Clone this repository, change directories into the folder for the repo and run `
 
 #### Execute:
 
-Start the application with the version selector: Run `node index.js` **(recommended)**
+Start the application with the version selector: Run `node index.js` then choose which version of the app you want to run
 
 #### Test
 
