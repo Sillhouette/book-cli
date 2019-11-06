@@ -44,24 +44,25 @@ class Cli {
   initiateSearch(err, { query }) {
     const encodedQuery = encodeURI(query);
     const searchPrompt = this.initiateSearchPrompt.bind(this);
-    const displayOptions = this.displayOptions.bind(this);
-    const displayBooks = this.displayBooks.bind(this);
-    const optionsPrompt = this.initiateOptionsPrompt.bind(this);
+    const displayResults = this.displaySearchResults.bind(this);
 
     fetch(this.baseURL + this.maxResults + this.queryStructure + encodedQuery)
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
         this.searchResults = Book.generateBooks(json.items);
-        displayBooks(this.searchResults);
-        displayOptions();
-        optionsPrompt();
+        displayResults();
       })
       .catch(error => {
-        console.log(error);
         console.log("There was a fatal error, please try again.");
         searchPrompt();
       });
+  }
+
+  displaySearchResults() {
+    this.displayBooks(this.searchResults);
+    this.displayOptions();
+    this.initiateOptionsPrompt();
   }
 
   //Takes array of books and displays them
@@ -172,6 +173,7 @@ class Cli {
     const options = [
       `Choose one of the following options: \n`,
       //...removeBookList, //Removed as the instructions asked us to not add additional features
+      `  back - Return to previous search`,
       `  search - Search for a new book`,
       `  exit - Exit the program`,
       `\n`
@@ -199,6 +201,9 @@ class Cli {
   //Read user post reading list menu selection and handle response
   handleListOptionSelection(err, { input }) {
     switch (input) {
+      case "back":
+        this.displaySearchResults();
+        break;
       case "search":
         this.initiateSearchPrompt();
         break;
