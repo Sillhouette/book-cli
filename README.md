@@ -30,10 +30,6 @@ Clone this repository, change directories into the folder for the repo and run `
 
 Start the application with the version selector: Run `node index.js` **(recommended)**
 
-Start the procedural version directly: Run `node ./procedural/bookCli.js`
-
-Start the object oriented version directly: Run `node ./object-oriented/cli.js`
-
 #### Test
 
 Run the test suite using the command `npm test`
