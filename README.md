@@ -28,7 +28,11 @@ Clone this repository, change directories into the folder for the repo and run `
 
 #### Execute:
 
-Start the application with the version selector: Run `node index.js` then choose which version of the app you want to run
+Start the application with the version selector: Run `node index.js` then choose which version of the app you want to run **(recommended)**
+
+Start the procedural version directly: Run `node ./procedural/bookCli.js`
+
+Start the object-oriented version directly: Open up `cli.js` and uncomment the instantiation of the cli object. Run `node ./object-oriented/cli.js` **note** This breaks the version selector so when you're done re-comment the lines if you want to use the selector
 
 #### Test
 
