@@ -5,6 +5,7 @@ class Book {
     this.publisher = publisher;
   }
 
+  // Generate array of books from a set of book data from the API
   static generateBooks(bookData) {
     let bookConfigs = [];
     let books = [];
@@ -24,6 +25,7 @@ class Book {
     return books;
   }
 
+  //Collect the book titles from an array of book objects
   static collectBookTitles(books) {
     const bookTitles = [];
     for (let { title } of books) {
@@ -42,6 +44,7 @@ class Book {
   }
 }
 
+//Export the class for Cli and tests to use
 module.exports = {
   Book: Book
 };

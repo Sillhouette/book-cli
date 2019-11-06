@@ -6,10 +6,6 @@ const fetch = require("node-fetch");
 //Import Book class
 const Book = require("./book").Book;
 
-//Declare arrays to store search results and reading list
-// let searchResults = [];
-// let readingList = [];
-
 class Cli {
   //Construct the CLI object and set initial attributes
   constructor(numResults = 5) {
@@ -186,7 +182,7 @@ class Cli {
     }
   }
 
-  //Set properties for post reading list prompt and initialize it
+  //Set properties for post-reading list prompt and initialize it
   initiateListOptionsPrompt() {
     const properties = {
       name: "input",
@@ -230,9 +226,12 @@ class Cli {
   }
 }
 
+// Uncomment these lines if you want to use `node ./object-oriented/cli.js` to run this version
+// Don't forget to re-comment them if you want the version selector to run properly
 // let cli = new Cli();
 // cli.initialize();
 
+//Export the class for tests and version selector to use
 module.exports = {
   Cli: Cli
 };

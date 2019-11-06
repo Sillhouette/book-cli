@@ -250,4 +250,5 @@ function removeBookFromList(index) {
   initiateListOptionsPrompt();
 }
 
+// Export the initialize method for the version selector to use
 module.exports = { initialize: initialize };
