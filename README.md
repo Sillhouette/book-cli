@@ -14,7 +14,7 @@ Follow these easy steps to install and start the app:
 
 #### Install:
 
-Run `npm install @sillhouette/book-cli`
+Run `npm install -g @sillhouette/book-cli`
 
 #### Execute:
 
