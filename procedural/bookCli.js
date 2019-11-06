@@ -48,15 +48,19 @@ function initiateSearch(err, { query }) {
     .then(json => {
       console.log(`\nFetching results for ${query}: \n`);
       generateSearchResults(json.items);
-      displayBooks(searchResults);
-      displayOptions();
-      initiateOptionsPrompt();
+      displaySearchResults();
     })
     .catch(error => {
       console.log("There was a fatal error, please try again.");
       initiateSearchPrompt();
     })
     .catch(error => error);
+}
+
+function displaySearchResults() {
+  displayBooks(searchResults);
+  displayOptions();
+  initiateOptionsPrompt();
 }
 
 //Generates the basic objects using the relevant attributes for each book
@@ -198,6 +202,7 @@ function displayListOptions() {
   const options = [
     `Choose one of the following options: \n`,
     //...removeBookList, // Removed as the instructions asked us to not include additional features
+    `  back - Return to previous search`,
     `  search - Search for a new book`,
     `  exit - Exit the program`,
     `\n`
@@ -224,6 +229,9 @@ function initiateListOptionsPrompt(books) {
 //Read user post reading list menu selection and handle response
 function handleListOptionSelection(err, selection) {
   switch (selection.input) {
+    case "back":
+      displaySearchResults();
+      break;
     case "search":
       initiateSearchPrompt();
       break;
