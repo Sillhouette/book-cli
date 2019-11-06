@@ -230,8 +230,8 @@ class Cli {
   }
 }
 
-// let cli = new Cli();
-// cli.initialize();
+let cli = new Cli();
+cli.initialize();
 
 module.exports = {
   Cli: Cli
