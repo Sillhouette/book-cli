@@ -6,7 +6,7 @@ const path = require("path");
 const babel = require("babel-core");
 
 const babelResultBooks = babel.transformFileSync(
-  path.resolve(__dirname, "../procedural", "books.js"),
+  path.resolve(__dirname, "../procedural", "bookCli.js"),
   {
     presets: ["env"]
   }

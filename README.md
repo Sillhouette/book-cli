@@ -30,9 +30,9 @@ Clone this repository, change directories into the folder for the repo and run `
 
 Start the application with the version selector: Run `node index.js` then choose which version of the app you want to run **(recommended)**
 
-Start the procedural version directly: Run `node ./procedural/bookCli.js`
+Start the procedural version directly: Open up `booCli.js` and uncomment the call to `initialize()`. Run `node ./procedural/bookCli.js`
 
-Start the object-oriented version directly: Open up `cli.js` and uncomment the instantiation of the cli object. Run `node ./object-oriented/cli.js` **note** This breaks the version selector so when you're done re-comment the lines if you want to use the selector
+Start the object-oriented version directly: Open up `cli.js` and uncomment the instantiation of the cli object and the call to `initialize()`. Run `node ./object-oriented/cli.js` **note** This breaks the version selector so when you're done re-comment the lines if you want to use the selector
 
 #### Test
 

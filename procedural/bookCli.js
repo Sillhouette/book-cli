@@ -250,5 +250,9 @@ function removeBookFromList(index) {
   initiateListOptionsPrompt();
 }
 
+// Uncomment this line if you want to use `node ./procedural/bookCli.js` to run this version
+// Don't forget to re-comment it if you want the version selector to run properly
+//initialize();
+
 // Export the initialize method for the version selector to use
 module.exports = { initialize: initialize };
