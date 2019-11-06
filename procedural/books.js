@@ -232,11 +232,11 @@ function handleListOptionSelection(err, selection) {
       break;
     default:
       const index = parseInt(selection.input);
-      if (readingList[index - 1]) {
-        //removeBookFromList(index - 1); //Removed as the instructions asked us to not include additional features in the applicaton
-      } else {
-        initiateListOptionsPrompt();
-      }
+      // if (readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
+      //   removeBookFromList(index - 1);
+      // } else {
+      initiateListOptionsPrompt();
+      // }
       break;
   }
 }

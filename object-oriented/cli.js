@@ -211,11 +211,11 @@ class Cli {
         break;
       default:
         const index = parseInt(input);
-        if (this.readingList[index - 1]) {
-          //this.removeBookFromList(index - 1); //Removed as the instructions asked us to not add additional features
-        } else {
-          this.initiateListOptionsPrompt();
-        }
+        // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not add additional features
+        // } else {
+        //   this.removeBookFromList(index - 1);
+        this.initiateListOptionsPrompt();
+        // }
         break;
     }
   }
