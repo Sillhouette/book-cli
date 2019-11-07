@@ -140,7 +140,7 @@ function initiateOptionsPrompt() {
 
 //Read user menu selection and handle the response
 function handleOptionSelection(err, { input }) {
-  switch (input) {
+  switch (input.toLowerCase()) {
     //Display the current reading list
     case "list":
       console.log("\nThe current reading list is as follows: ");
@@ -163,6 +163,7 @@ function handleOptionSelection(err, { input }) {
         addBookToList(index - 1);
       } else {
         //If invalid input re-prompt for valid input
+        console.log("That input was invalid, please try again");
         initiateOptionsPrompt();
       }
       break;
@@ -227,8 +228,8 @@ function initiateListOptionsPrompt(books) {
 }
 
 //Read user post reading list menu selection and handle response
-function handleListOptionSelection(err, selection) {
-  switch (selection.input) {
+function handleListOptionSelection(err, { input }) {
+  switch (input.toLowerCase()) {
     case "back":
       displaySearchResults();
       break;
@@ -239,10 +240,11 @@ function handleListOptionSelection(err, selection) {
       console.log("Goodbye");
       break;
     default:
-      const index = parseInt(selection.input);
+      const index = parseInt(input.toLowerCase);
       // if (readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
       //   removeBookFromList(index - 1);
       // } else {
+      console.log("That input was invalid, please try again");
       initiateListOptionsPrompt();
       // }
       break;

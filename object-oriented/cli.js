@@ -109,7 +109,7 @@ class Cli {
 
   //Read user menu selection and handle the response
   handleOptionSelection(err, { input }) {
-    switch (input) {
+    switch (input.toLowerCase()) {
       //Display the current reading list
       case "list":
         console.log("\nThe current reading list is as follows: ");
@@ -132,6 +132,7 @@ class Cli {
           this.addBookToList(index - 1);
         } else {
           //If invalid input re-prompt for valid input
+          console.log("That command was invalid, please try again");
           this.initiateOptionsPrompt();
         }
         break;
@@ -200,7 +201,7 @@ class Cli {
 
   //Read user post reading list menu selection and handle response
   handleListOptionSelection(err, { input }) {
-    switch (input) {
+    switch (input.toLowerCase()) {
       case "back":
         this.displaySearchResults();
         break;
@@ -211,10 +212,11 @@ class Cli {
         console.log("Goodbye");
         break;
       default:
-        const index = parseInt(input);
+        // const index = parseInt(input);
         // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not add additional features
         // } else {
         //   this.removeBookFromList(index - 1);
+        console.log("That command was invalid, please try again");
         this.initiateListOptionsPrompt();
         // }
         break;
