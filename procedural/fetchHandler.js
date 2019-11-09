@@ -21,8 +21,11 @@ exports.initiateSearch = (err, { query }) => {
       this.cli.displaySearchResults();
     })
     .catch(error => {
-      console.log("There was a fatal error, please try again.");
+      // \u2717 is the unicode for the ✗
+      console.log("\u2717 There was an error, please try again.");
       this.inputHandler.initiateSearchPrompt();
     })
-    .catch(error => error);
+    .catch(error => {
+      console.log(`\u2717 There was a fatal error, please restart the app.`);
+    });
 };

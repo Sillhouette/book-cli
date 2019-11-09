@@ -7,6 +7,9 @@ exports.fetchHandler = require("./fetchHandler");
 //Import the listHandler module for managing the book lists
 exports.listHandler = require("./listHandler");
 
+// \u2717 is the unicode for ✗
+const errorSym = "\u2717";
+
 //Set the global configuration settings for the prompt
 exports.setupPrompt = () => {
   this.prompt.start();
@@ -21,7 +24,7 @@ exports.initiateSearchPrompt = () => {
     name: "query",
     type: "string",
     description: "Please enter a search query:",
-    message: "Please enter a search term",
+    message: `${errorSym} Please enter a search term`,
     required: true
   };
 
@@ -34,7 +37,7 @@ exports.initiateOptionsPrompt = () => {
     name: "input",
     type: "string",
     description: "Please select an option:",
-    message: "Please select a valid option",
+    message: `${errorSym} Please select a valid option`,
     required: true
   };
 
@@ -47,7 +50,7 @@ exports.initiateListOptionsPrompt = books => {
     name: "input",
     type: "string",
     description: "Please select an option:",
-    message: "Please select a valid option",
+    message: `${errorSym} Please select a valid option`,
     required: true
   };
 
@@ -71,14 +74,13 @@ exports.handleOptionSelection = (err, { input }) => {
       this.cli.exit();
       break;
     default:
-      console.clear();
       const index = parseInt(input);
       //Handle case where user wants to add book to reading list
       if (global.searchResults[index - 1]) {
         this.listHandler.addBookToList(index - 1);
       } else {
         //If invalid input re-prompt for valid input
-        console.log("That input was invalid, please try again");
+        console.log(`${errorSym} That input was invalid, please try again`);
         this.initiateOptionsPrompt();
       }
       break;
@@ -104,7 +106,8 @@ exports.handleListOptionSelection = (err, { input }) => {
       // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
       //   removeBookFromList(index - 1);
       // } else {
-      console.log("That input was invalid, please try again");
+      //If invalid input re-prompt for valid input
+      console.log(`${errorSym}  That input was invalid, please try again`);
       this.initiateListOptionsPrompt();
       // }
       break;

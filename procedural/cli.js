@@ -10,6 +10,7 @@ exports.initialize = () => {
   this.inputHandler.initiateSearchPrompt();
 };
 
+// Displays the search results array to the user
 exports.displaySearchResults = (message = null) => {
   console.clear();
   console.log("The current search results are: \n");
@@ -22,7 +23,7 @@ exports.displaySearchResults = (message = null) => {
 //Displays an array of books to the user
 exports.displayBooks = books => {
   if (books.length === 0) {
-    console.log("There are no books in the reading list yet.");
+    console.log("There are no books in this list yet.\n");
   }
   const spacing = "   ";
   for (let [
@@ -64,6 +65,7 @@ exports.displayOptions = () => {
   }
 };
 
+// Display the reading list to the user
 exports.displayList = (message = null) => {
   console.clear();
   console.log("The current reading list is: \n");
@@ -96,6 +98,7 @@ exports.displayListOptions = () => {
   }
 };
 
+// Exit the program
 exports.exit = () => {
   console.clear();
   console.log("Thanks for using Book CLI \n");
