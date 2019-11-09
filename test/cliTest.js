@@ -175,10 +175,10 @@ describe("cli.js", function() {
 
     it("should call initiateOptionsPrompt when passed invalid selections", function() {
       let stub2 = sinon
-        .stub(window, "initiateOptionsPrompt")
+        .stub(cli, "initiateOptionsPrompt")
         .callsFake(() => true);
 
-      handleOptionSelection("", { input: "gibberish" });
+      cli.handleOptionSelection("", { input: "gibberish" });
 
       assert(stub2.called);
       stub2.restore();
@@ -187,7 +187,7 @@ describe("cli.js", function() {
     it("should exit the program when passed 'exit'", () => {
       let spy = sinon.spy(console, "log");
 
-      handleOptionSelection("", { input: "exit" });
+      cli.handleOptionSelection("", { input: "exit" });
 
       assert(spy.calledWith("Goodbye"));
       spy.restore();

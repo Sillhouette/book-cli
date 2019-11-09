@@ -81,7 +81,8 @@ describe("books.js", function() {
   describe("#displayOptions()", function() {
     it("should log the correct value to console", () => {
       let spy = sinon.spy(console, "log");
-      let searchResults = eragonObjects;
+      window.searchResults = eragonObjects;
+      window.readingList = [];
       displayOptions();
 
       assert(spy.calledWith("Choose one of the following options: \n"));
@@ -108,7 +109,7 @@ describe("books.js", function() {
       window.readingList = eragonObjects;
 
       handleOptionSelection("", { input: "list" });
-      assert(spy.calledWith("\nThe current reading list is as follows: "));
+      assert(spy.calledWith("The current reading list is: \n"));
       assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
       assert(spy.calledWith("   Author(s): Christopher Paolini"));
       assert(spy.calledWith("   Publisher: Random House\n"));
@@ -167,7 +168,7 @@ describe("books.js", function() {
 
       handleOptionSelection("", { input: "exit" });
 
-      assert(spy.calledWith("Goodbye"));
+      assert(spy.calledWith("Thanks for using Book CLI \n"));
       spy.restore();
     });
   });
@@ -198,7 +199,7 @@ describe("books.js", function() {
 
       handleListOptionSelection("", { input: "exit" });
 
-      assert(spy.calledWith("Goodbye"));
+      assert(spy.calledWith("Thanks for using Book CLI \n"));
       spy.restore();
       process.stdin.destroy();
     });

@@ -9,7 +9,8 @@ let readingList = [];
 
 //Configure the prompt and prompt for the initial search
 function initialize() {
-  console.log("\nWelcome to the procedural version of book cli");
+  console.clear();
+  console.log("Welcome to the procedural version of book cli");
   console.log("\nPlease enter the name of the book you would like to find:");
   setupPrompt();
   initiateSearchPrompt();
@@ -46,7 +47,6 @@ function initiateSearch(err, { query }) {
   fetch(baseURL + maxResults + queryStructure + encodedQuery)
     .then(resp => resp.json())
     .then(json => {
-      console.log(`\nFetching results for ${query}: \n`);
       generateSearchResults(json.items);
       displaySearchResults();
     })
@@ -57,9 +57,12 @@ function initiateSearch(err, { query }) {
     .catch(error => error);
 }
 
-function displaySearchResults() {
+function displaySearchResults(message = null) {
+  console.clear();
+  console.log("The current search results are: \n");
   displayBooks(searchResults);
   displayOptions();
+  message ? console.log(message) : null;
   initiateOptionsPrompt();
 }
 
@@ -104,12 +107,26 @@ function displayBooks(books) {
   }
 }
 
+function readingListContains(book, index) {
+  return readingList.some(book => {
+    return (
+      book.title === searchResults[index].title &&
+      book.authors === searchResults[index].authors
+    );
+  });
+}
+
 //Generates the post-search menu
 function displayOptions() {
   const bookTitles = collectBookTitles(searchResults);
   const addBookList = [];
+  const check = `\u2713`;
   for (const [index, book] of bookTitles.entries()) {
-    addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
+    const added = readingListContains(searchResults[index], index);
+
+    addBookList.push(
+      `  ${added ? check : index + 1} - Add ${book} to the reading list`
+    );
   }
   const options = [
     `Choose one of the following options: \n`,
@@ -143,20 +160,19 @@ function handleOptionSelection(err, { input }) {
   switch (input.toLowerCase()) {
     //Display the current reading list
     case "list":
-      console.log("\nThe current reading list is as follows: ");
-      displayBooks(readingList);
-      displayListOptions();
-      initiateListOptionsPrompt();
+      displayList();
       break;
     //Search for a new book
     case "search":
+      console.clear();
       initiateSearchPrompt();
       break;
     //Exit the program
     case "exit":
-      console.log("Goodbye");
+      exit();
       break;
     default:
+      console.clear();
       const index = parseInt(input);
       //Handle case where user wants to add book to reading list
       if (searchResults[index - 1]) {
@@ -172,23 +188,29 @@ function handleOptionSelection(err, { input }) {
 
 //Add a book to the reading list if it's not already there
 function addBookToList(index) {
-  const present = readingList.some(book => {
-    return (
-      book.title === searchResults[index].title &&
-      book.authors === searchResults[index].authors
-    );
-  });
+  const present = readingListContains(searchResults[index], index);
+
   if (!present) {
     readingList.push(searchResults[index]);
-    console.log(
-      `Added ${readingList[readingList.length - 1].title} to the reading list.`
+    displaySearchResults(
+      `Added ${
+        readingList[readingList.length - 1].title
+      } to the reading list.\n`
     );
-    displayOptions();
-    initiateOptionsPrompt();
   } else {
-    console.log("That book is already in the book list.");
-    initiateOptionsPrompt();
+    displaySearchResults(
+      `${searchResults[index].title} is already in the reading list.\n`
+    );
   }
+}
+
+function displayList(message = null) {
+  console.clear();
+  console.log("The current reading list is: \n");
+  displayBooks(readingList);
+  displayListOptions();
+  message ? console.log(message) : null;
+  initiateListOptionsPrompt();
 }
 
 //Display menu while user is looking at reading list
@@ -231,13 +253,15 @@ function initiateListOptionsPrompt(books) {
 function handleListOptionSelection(err, { input }) {
   switch (input.toLowerCase()) {
     case "back":
+      console.log("The previous search results were: \n");
       displaySearchResults();
       break;
     case "search":
+      console.clear();
       initiateSearchPrompt();
       break;
     case "exit":
-      console.log("Goodbye");
+      exit();
       break;
     default:
       const index = parseInt(input.toLowerCase);
@@ -258,6 +282,11 @@ function removeBookFromList(index) {
   displayBooks(readingList);
   displayListOptions();
   initiateListOptionsPrompt();
+}
+
+function exit() {
+  console.clear();
+  console.log("Thanks for using Book CLI \n");
 }
 
 // Uncomment this line if you want to use `node ./procedural/bookCli.js` to run this version

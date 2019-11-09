@@ -40,7 +40,8 @@ const chooseVersion = (err, { query }) => {
 
 //Initialize the app with prompt and version selection menu
 const initialize = () => {
-  console.log("\nWelcome to book CLI");
+  console.clear();
+  console.log("Welcome to book CLI");
   console.log("Which version of the program do you want to run?\n");
   console.log("1 - Procedural version");
   console.log("2 - Object Oriented version");
