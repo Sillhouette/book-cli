@@ -2,10 +2,11 @@
 exports.prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
 exports.fetch = require("node-fetch");
+exports.inputHandler = require("./inputHandler");
 
 //Declare arrays to store search results and reading list
-exports.searchResults = [];
-exports.readingList = [];
+global.searchResults = [];
+global.readingList = [];
 
 //Configure the prompt and prompt for the initial search
 exports.initialize = () => {
@@ -60,7 +61,7 @@ exports.initiateSearch = (err, { query }) => {
 exports.displaySearchResults = (message = null) => {
   console.clear();
   console.log("The current search results are: \n");
-  this.displayBooks(this.searchResults);
+  this.displayBooks(global.searchResults);
   this.displayOptions();
   message ? console.log(message) : null;
   this.initiateOptionsPrompt();
@@ -68,18 +69,18 @@ exports.displaySearchResults = (message = null) => {
 
 //Generates the basic objects using the relevant attributes for each book
 exports.generateSearchResults = books => {
-  this.searchResults = [];
+  global.searchResults = [];
   for (let {
     volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
   } of books) {
     authors = Array.isArray(authors) ? authors.join() : authors;
-    this.searchResults.push({
+    global.searchResults.push({
       title: title,
       authors: authors,
       publisher: publisher
     });
   }
-  return this.searchResults;
+  return global.searchResults;
 };
 
 //Collects the titles of the books into an array for ease of listing
@@ -108,21 +109,21 @@ exports.displayBooks = books => {
 };
 
 exports.readingListContains = (book, index) => {
-  return this.readingList.some(book => {
+  return global.readingList.some(book => {
     return (
-      book.title === this.searchResults[index].title &&
-      book.authors === this.searchResults[index].authors
+      book.title === global.searchResults[index].title &&
+      book.authors === global.searchResults[index].authors
     );
   });
 };
 
 //Generates the post-search menu
 exports.displayOptions = () => {
-  const bookTitles = this.collectBookTitles(this.searchResults);
+  const bookTitles = this.collectBookTitles(global.searchResults);
   const addBookList = [];
   const check = `\u2713`;
   for (const [index, book] of bookTitles.entries()) {
-    const added = this.readingListContains(this.searchResults[index], index);
+    const added = this.readingListContains(global.searchResults[index], index);
 
     addBookList.push(
       `  ${added ? check : index + 1} - Add ${book} to the reading list`
@@ -152,54 +153,23 @@ exports.initiateOptionsPrompt = () => {
     required: true
   };
 
-  this.prompt.get([properties], this.handleOptionSelection);
-};
-
-//Read user menu selection and handle the response
-exports.handleOptionSelection = (err, { input }) => {
-  switch (input.toLowerCase()) {
-    //Display the current reading list
-    case "list":
-      this.displayList();
-      break;
-    //Search for a new book
-    case "search":
-      console.clear();
-      this.initiateSearchPrompt();
-      break;
-    //Exit the program
-    case "exit":
-      this.exit();
-      break;
-    default:
-      console.clear();
-      const index = parseInt(input);
-      //Handle case where user wants to add book to reading list
-      if (this.searchResults[index - 1]) {
-        this.addBookToList(index - 1);
-      } else {
-        //If invalid input re-prompt for valid input
-        console.log("That input was invalid, please try again");
-        this.initiateOptionsPrompt();
-      }
-      break;
-  }
+  this.prompt.get([properties], this.inputHandler.handleOptionSelection);
 };
 
 //Add a book to the reading list if it's not already there
 exports.addBookToList = index => {
-  const present = this.readingListContains(this.searchResults[index], index);
+  const present = this.readingListContains(global.searchResults[index], index);
 
   if (!present) {
-    this.readingList.push(this.searchResults[index]);
+    global.readingList.push(global.searchResults[index]);
     this.displaySearchResults(
       `Added ${
-        this.readingList[this.readingList.length - 1].title
+        global.readingList[global.readingList.length - 1].title
       } to the reading list.\n`
     );
   } else {
     this.displaySearchResults(
-      `${this.searchResults[index].title} is already in the reading list.\n`
+      `${global.searchResults[index].title} is already in the reading list.\n`
     );
   }
 };
@@ -207,7 +177,7 @@ exports.addBookToList = index => {
 exports.displayList = (message = null) => {
   console.clear();
   console.log("The current reading list is: \n");
-  this.displayBooks(this.readingList);
+  this.displayBooks(global.readingList);
   this.displayListOptions();
   message ? console.log(message) : null;
   this.initiateListOptionsPrompt();
@@ -215,7 +185,7 @@ exports.displayList = (message = null) => {
 
 //Display menu while user is looking at reading list
 exports.displayListOptions = () => {
-  const bookTitles = this.collectBookTitles(this.readingList);
+  const bookTitles = this.collectBookTitles(global.readingList);
   const removeBookList = [];
   for (const [index, book] of bookTitles.entries()) {
     removeBookList.push(
@@ -246,40 +216,14 @@ exports.initiateListOptionsPrompt = books => {
     required: true
   };
 
-  this.prompt.get([properties], this.handleListOptionSelection);
-};
-
-//Read user post reading list menu selection and handle response
-exports.handleListOptionSelection = (err, { input }) => {
-  switch (input.toLowerCase()) {
-    case "back":
-      console.log("The previous search results were: \n");
-      this.displaySearchResults();
-      break;
-    case "search":
-      console.clear();
-      this.initiateSearchPrompt();
-      break;
-    case "exit":
-      this.exit();
-      break;
-    default:
-      const index = parseInt(input.toLowerCase);
-      // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
-      //   removeBookFromList(index - 1);
-      // } else {
-      console.log("That input was invalid, please try again");
-      this.initiateListOptionsPrompt();
-      // }
-      break;
-  }
+  this.prompt.get([properties], this.inputHandler.handleListOptionSelection);
 };
 
 //Remove a book from the reading list then re-prompt
 exports.removeBookFromList = index => {
-  this.readingList.splice(index, 1);
+  global.readingList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
-  this.displayBooks(this.readingList);
+  this.displayBooks(global.readingList);
   this.displayListOptions();
   this.initiateListOptionsPrompt();
 };
@@ -292,5 +236,3 @@ exports.exit = () => {
 // Uncomment this line if you want to use `node ./procedural/bookCli.js` to run this version
 // Don't forget to re-comment it if you want the version selector to run properly
 //initialize();
-
-// Export the initialize method for the version selector to use
