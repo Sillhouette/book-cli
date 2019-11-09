@@ -1,19 +1,7 @@
-const chai = require("chai");
+global.sinon = require("sinon");
+global.chai = require("chai");
 global.expect = chai.expect;
-const fs = require("file-system");
-const jsdom = require("mocha-jsdom");
-const path = require("path");
-const babel = require("babel-core");
+global.spies = require("chai-spies");
+global.assert = require("assert");
 
-const babelResultBooks = babel.transformFileSync(
-  path.resolve(__dirname, "../procedural", "bookCli.js"),
-  {
-    presets: ["env"]
-  }
-);
-
-const src = babelResultBooks.code;
-
-jsdom({
-  src
-});
+chai.use(spies);

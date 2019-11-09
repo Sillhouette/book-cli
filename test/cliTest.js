@@ -1,6 +1,3 @@
-const sinon = require("sinon");
-const chai = require("chai");
-const assert = require("assert");
 const Cli = require("../object-oriented/cli").Cli;
 const Book = require("../object-oriented/book").Book;
 
@@ -42,13 +39,11 @@ describe("cli.js", function() {
   });
 
   describe("CLI #initiateSearch(err, queryObj)", function() {
-    before(() => {
-      cli = new Cli();
-    });
-    beforeEach(function() {
-      cli.fetch = require("node-fetch");
-    });
+    // before(() => {
+    //   cli = new Cli();
+    // });
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
+      cli = new Cli();
       let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
 
       let stub2 = sinon
@@ -59,7 +54,7 @@ describe("cli.js", function() {
       const encoded_eragon = encodeURI("eragon");
       await cli.initiateSearch("", { query: encoded_eragon });
       expect(
-        window.fetch,
+        cli.fetch,
         "A fetch to the API was not found"
       ).to.have.been.called.with(
         "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon"

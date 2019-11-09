@@ -1,7 +1,6 @@
 //Import command line prompt created by flatiron: https://github.com/flatiron/prompt
 const prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
-const fetch = require("node-fetch");
 
 //Import Book class
 const Book = require("./book").Book;
@@ -11,6 +10,7 @@ class Cli {
   constructor(numResults = 5) {
     this.searchResults = [];
     this.readingList = [];
+    this.fetch = require("node-fetch");
     this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
     this.maxResults = `maxResults=${numResults}&`;
     this.queryStructure = "q=";
@@ -46,7 +46,9 @@ class Cli {
     const searchPrompt = this.initiateSearchPrompt.bind(this);
     const displayResults = this.displaySearchResults.bind(this);
 
-    fetch(this.baseURL + this.maxResults + this.queryStructure + encodedQuery)
+    this.fetch(
+      this.baseURL + this.maxResults + this.queryStructure + encodedQuery
+    )
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);

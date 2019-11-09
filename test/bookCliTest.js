@@ -1,9 +1,4 @@
-const sinon = require("sinon");
-const chai = require("chai");
-const spies = require("chai-spies");
-const assert = require("assert");
-
-chai.use(spies);
+const cli = require("../procedural/bookCli");
 
 const eragonFetchResult = [
   {
@@ -27,23 +22,18 @@ const eragonTitles = ["Eragon and Eldest Omnibus"];
 
 describe("books.js", function() {
   describe("#initiateSearch(err, queryObj)", function() {
-    beforeEach(function() {
-      window.fetch = require("node-fetch");
-    });
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
-      let stub = sinon
-        .stub(window, "initiateSearchPrompt")
-        .callsFake(() => true);
+      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
 
       let stub2 = sinon
-        .stub(window, "initiateOptionsPrompt")
+        .stub(cli, "initiateOptionsPrompt")
         .callsFake(() => true);
 
-      chai.spy.on(window, "fetch");
+      chai.spy.on(cli, "fetch");
       const encoded_eragon = encodeURI("eragon");
-      await initiateSearch("", { query: encoded_eragon });
+      await cli.initiateSearch("", { query: encoded_eragon });
       expect(
-        window.fetch,
+        cli.fetch,
         "A fetch to the API was not found"
       ).to.have.been.called.with(
         "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon"
@@ -55,13 +45,15 @@ describe("books.js", function() {
 
   describe("#generateSearchResults(booksData)", function() {
     it("Generates object with correct book information", () => {
-      expect(generateSearchResults(eragonFetchResult)).to.eql(eragonObjects);
+      expect(cli.generateSearchResults(eragonFetchResult)).to.eql(
+        eragonObjects
+      );
     });
   });
 
   describe("#collectBookTitles(books)", function() {
     it("Generates array with correct book titles", () => {
-      expect(collectBookTitles(eragonObjects)).to.eql(eragonTitles);
+      expect(cli.collectBookTitles(eragonObjects)).to.eql(eragonTitles);
     });
   });
 
@@ -69,7 +61,7 @@ describe("books.js", function() {
     it("should log the correct values to console", () => {
       let spy = sinon.spy(console, "log");
 
-      displayBooks(eragonObjects);
+      cli.displayBooks(eragonObjects);
 
       assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
       assert(spy.calledWith("   Author(s): Christopher Paolini"));
@@ -81,9 +73,9 @@ describe("books.js", function() {
   describe("#displayOptions()", function() {
     it("should log the correct value to console", () => {
       let spy = sinon.spy(console, "log");
-      window.searchResults = eragonObjects;
-      window.readingList = [];
-      displayOptions();
+      cli.searchResults = eragonObjects;
+      cli.readingList = [];
+      cli.displayOptions();
 
       assert(spy.calledWith("Choose one of the following options: \n"));
       assert(
@@ -102,13 +94,13 @@ describe("books.js", function() {
   describe("#handleOptionSelection(err, selectionObj)", function() {
     it("should display readingList and options when passed 'list'", function() {
       let stub3 = sinon
-        .stub(window, "initiateListOptionsPrompt")
+        .stub(cli, "initiateListOptionsPrompt")
         .callsFake(() => true);
 
       let spy = sinon.spy(console, "log");
-      window.readingList = eragonObjects;
+      cli.readingList = eragonObjects;
 
-      handleOptionSelection("", { input: "list" });
+      cli.handleOptionSelection("", { input: "list" });
       assert(spy.calledWith("The current reading list is: \n"));
       assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
       assert(spy.calledWith("   Author(s): Christopher Paolini"));
@@ -123,13 +115,11 @@ describe("books.js", function() {
 
     it("should initiate a new search when passed 'search'", function() {
       //let spy = sinon.spy(window, "initiateSearchPrompt");
-      let stub = sinon
-        .stub(window, "initiateSearchPrompt")
-        .callsFake(() => true);
+      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
 
-      window.readingList = eragonObjects;
+      cli.readingList = eragonObjects;
 
-      handleOptionSelection("", { input: "search" });
+      cli.handleOptionSelection("", { input: "search" });
 
       assert(stub.called);
       stub.restore();
@@ -137,27 +127,27 @@ describe("books.js", function() {
 
     it("should call addBookToList(book) when passed an integer", function() {
       let stub2 = sinon
-        .stub(window, "initiateOptionsPrompt")
+        .stub(cli, "initiateOptionsPrompt")
         .callsFake(() => true);
 
-      let spy = sinon.spy(window, "addBookToList");
-      window.readingList = [];
-      window.searchResults = eragonObjects;
+      let spy = sinon.spy(cli, "addBookToList");
+      cli.readingList = [];
+      cli.searchResults = eragonObjects;
 
-      handleOptionSelection("", { input: "1" });
+      cli.handleOptionSelection("", { input: "1" });
 
       assert(spy.calledWith(0));
-      expect(window.readingList).to.eql(eragonObjects);
+      expect(cli.readingList).to.eql(eragonObjects);
       spy.restore();
       stub2.restore();
     });
 
     it("should call initiateOptionsPrompt when passed invalid selections", function() {
       let stub2 = sinon
-        .stub(window, "initiateOptionsPrompt")
+        .stub(cli, "initiateOptionsPrompt")
         .callsFake(() => true);
 
-      handleOptionSelection("", { input: "gibberish" });
+      cli.handleOptionSelection("", { input: "gibberish" });
 
       assert(stub2.called);
       stub2.restore();
@@ -166,7 +156,7 @@ describe("books.js", function() {
     it("should exit the program when passed 'exit'", () => {
       let spy = sinon.spy(console, "log");
 
-      handleOptionSelection("", { input: "exit" });
+      cli.handleOptionSelection("", { input: "exit" });
 
       assert(spy.calledWith("Thanks for using Book CLI \n"));
       spy.restore();
@@ -175,20 +165,18 @@ describe("books.js", function() {
 
   describe("#handleListOptionSelection(err, selectionObj)", function() {
     it("should initiate a new search when passed 'search'", function() {
-      let stub = sinon
-        .stub(window, "initiateSearchPrompt")
-        .callsFake(() => true);
+      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
 
-      handleListOptionSelection("", { input: "search" });
+      cli.handleListOptionSelection("", { input: "search" });
       assert(stub.called);
       stub.restore();
     });
 
     it("should call initiateListOptionsPrompt when passed invalid selections", function() {
       let stub3 = sinon
-        .stub(window, "initiateListOptionsPrompt")
+        .stub(cli, "initiateListOptionsPrompt")
         .callsFake(() => true);
-      handleListOptionSelection("", { input: "gibberish" });
+      cli.handleListOptionSelection("", { input: "gibberish" });
 
       assert(stub3.called);
       stub3.restore();
@@ -197,7 +185,7 @@ describe("books.js", function() {
     it("should exit the program when passed 'exit'", () => {
       let spy = sinon.spy(console, "log");
 
-      handleListOptionSelection("", { input: "exit" });
+      cli.handleListOptionSelection("", { input: "exit" });
 
       assert(spy.calledWith("Thanks for using Book CLI \n"));
       spy.restore();

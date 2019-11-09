@@ -1,5 +1,3 @@
-const sinon = require("sinon");
-const assert = require("assert");
 const Cli = require("../object-oriented/cli").Cli;
 const Book = require("../object-oriented/book").Book;
 
