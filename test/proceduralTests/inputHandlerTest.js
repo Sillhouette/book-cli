@@ -1,4 +1,4 @@
-const inputHandler = require("../procedural/inputHandler");
+const inputHandler = require("../../procedural/inputHandler");
 
 describe("inputHandler.js", function() {
   describe("#handleOptionSelection(err, selectionObj)", function() {

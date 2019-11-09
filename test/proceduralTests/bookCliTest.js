@@ -1,4 +1,4 @@
-const cli = require("../procedural/bookCli");
+const cli = require("../../procedural/bookCli");
 
 describe("bookCli.js", function() {
   describe("#generateSearchResults(booksData)", function() {

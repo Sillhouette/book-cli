@@ -1,5 +1,5 @@
-const inputHandler = require("../procedural/inputHandler");
-const fetchHandler = require("../procedural/fetchHandler");
+const inputHandler = require("../../procedural/inputHandler");
+const fetchHandler = require("../../procedural/fetchHandler");
 
 describe("bookCli.js", function() {
   describe("#initiateSearch(err, queryObj)", function() {

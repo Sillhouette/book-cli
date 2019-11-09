@@ -1,5 +1,5 @@
-const Cli = require("../object-oriented/cli").Cli;
-const Book = require("../object-oriented/book").Book;
+const Cli = require("../../object-oriented/cli").Cli;
+const Book = require("../../object-oriented/book").Book;
 
 describe("cli.js", function() {
   describe("CLI constructor", function() {
