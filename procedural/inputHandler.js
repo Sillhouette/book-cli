@@ -77,7 +77,6 @@ exports.handleOptionSelection = (err, { input }) => {
       if (global.searchResults[index - 1]) {
         this.listHandler.addBookToList(index - 1);
       } else {
-        console.log(global.searchResults);
         //If invalid input re-prompt for valid input
         console.log("That input was invalid, please try again");
         this.initiateOptionsPrompt();

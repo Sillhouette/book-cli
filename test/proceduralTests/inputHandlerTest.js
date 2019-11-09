@@ -1,5 +1,9 @@
 const inputHandler = require("../../procedural/inputHandler");
 
+// Prompt module handles users entering empty input
+// Could not find a way to craft tests to confirm with but
+// Manual testing shows everything works as expected
+
 describe("inputHandler.js", function() {
   describe("#handleOptionSelection(err, selectionObj)", function() {
     it("should display readingList and options when passed 'list'", function() {
@@ -53,12 +57,25 @@ describe("inputHandler.js", function() {
       stub2.restore();
     });
 
+    //Testing for invalid input
     it("should call initiateOptionsPrompt when passed invalid selections", function() {
       let stub2 = sinon
         .stub(inputHandler, "initiateOptionsPrompt")
         .callsFake(() => true);
 
       inputHandler.handleOptionSelection("", { input: "gibberish" });
+
+      assert(stub2.called);
+      stub2.restore();
+    });
+
+    //Testing for invalid input
+    it("should call initiateOptionsPrompt when passed invalid selections", function() {
+      let stub2 = sinon
+        .stub(inputHandler, "initiateOptionsPrompt")
+        .callsFake(() => true);
+
+      inputHandler.handleOptionSelection("", { input: "gadsgasfgEAGS" });
 
       assert(stub2.called);
       stub2.restore();
@@ -91,6 +108,20 @@ describe("inputHandler.js", function() {
         .callsFake(() => true);
 
       inputHandler.handleListOptionSelection("", { input: "gibberish" });
+
+      assert(stub3.called);
+      stub3.restore();
+    });
+
+    //Testing for invalid input
+    it("should call initiateListOptionsPrompt when passed invalid selections", function() {
+      let stub3 = sinon
+        .stub(inputHandler, "initiateListOptionsPrompt")
+        .callsFake(() => true);
+
+      inputHandler.handleListOptionSelection("", {
+        input: "asregaewgasdefvaewgv"
+      });
 
       assert(stub3.called);
       stub3.restore();

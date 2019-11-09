@@ -4,6 +4,12 @@ global.expect = chai.expect;
 global.spies = require("chai-spies");
 global.assert = require("assert");
 
+global.assertOutputs = (outputs, spy) => {
+  for (output of outputs) {
+    assert(spy.calledWith(output));
+  }
+};
+
 chai.use(spies);
 
 global.eragonFetchResult = [
