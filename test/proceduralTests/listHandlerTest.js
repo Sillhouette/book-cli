@@ -16,4 +16,17 @@ describe("listHandler.js", function() {
       );
     });
   });
+
+  describe("#addBookToList(searchResultIndex)", function() {
+    it("Adds book at index of search result array to the reading list", () => {
+      let stub = sinon
+        .stub(listHandler.inputHandler, "initiateOptionsPrompt")
+        .callsFake(() => true);
+
+      listHandler.addBookToList(0);
+      expect(global.readingList).to.eql(global.eragonObjects);
+      assert(stub.called);
+      stub.restore();
+    });
+  });
 });

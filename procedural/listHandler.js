@@ -27,7 +27,7 @@ exports.generateSearchResults = books => {
 exports.addBookToList = index => {
   const present = this.readingListContains(global.searchResults[index], index);
   const error = `\u2717 `;
-
+  console.log(global.searchResults);
   if (!present) {
     global.readingList.push(global.searchResults[index]);
     this.cli.displaySearchResults(
