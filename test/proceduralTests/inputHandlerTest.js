@@ -15,14 +15,18 @@ describe("inputHandler.js", function() {
       global.readingList = global.eragonObjects;
 
       inputHandler.handleOptionSelection("", { input: "list" });
-      assert(spy.calledWith("The current reading list is: \n"));
-      assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
-      assert(spy.calledWith("   Author(s): Christopher Paolini"));
-      assert(spy.calledWith("   Publisher: Random House\n"));
-      assert(spy.calledWith("Choose one of the following options: \n"));
-      assert(spy.calledWith("  search - Search for a new book"));
-      assert(spy.calledWith("  exit - Exit the program"));
 
+      const outputs = [
+        "The current reading list is: \n",
+        "1. Eragon and Eldest Omnibus",
+        "   Author(s): Christopher Paolini",
+        "   Publisher: Random House\n",
+        "Choose one of the following options: \n",
+        "  search - Search for a new book",
+        "  exit - Exit the program"
+      ];
+
+      assertOutputs(outputs, spy);
       spy.restore();
       stub3.restore();
     });
@@ -131,7 +135,7 @@ describe("inputHandler.js", function() {
       let spy = sinon.spy(console, "log");
 
       inputHandler.handleListOptionSelection("", { input: "exit" });
-
+      const outputs = ["Thanks for using Book CLI \n"];
       assert(spy.calledWith("Thanks for using Book CLI \n"));
       spy.restore();
       process.stdin.destroy();

@@ -67,7 +67,7 @@ describe("bookCli.js", function() {
 
       cli.displayBooks([]);
 
-      const outputs = ["There are no books in the reading list yet."];
+      const outputs = ["There are no books in this list yet.\n"];
       assertOutputs(outputs, spy);
       spy.restore();
     });
