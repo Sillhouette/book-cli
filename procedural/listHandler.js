@@ -1,5 +1,5 @@
 // Import cli functions for use after adding/removing books
-exports.cli = require("./bookCli");
+exports.cli = require("./cli");
 // Import input functions for use after removing books
 exports.inputHandler = require("./inputHandler");
 

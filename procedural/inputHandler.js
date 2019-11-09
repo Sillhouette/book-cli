@@ -1,7 +1,7 @@
 //Import command line prompt created by flatiron: https://github.com/flatiron/prompt
 exports.prompt = require("prompt");
 //Import the cli module for access to it's methods
-exports.cli = require("./bookCli");
+exports.cli = require("./cli");
 //Import the cli module for access to it's methods
 exports.fetchHandler = require("./fetchHandler");
 //Import the listHandler module for managing the book lists

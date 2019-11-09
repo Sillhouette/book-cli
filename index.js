@@ -1,5 +1,5 @@
 const prompt = require("prompt");
-const procedural = require("./procedural/bookCli");
+const procedural = require("./procedural/cli");
 const Cli = require("./object-oriented/cli").Cli;
 
 //Set the global configuration settings for the prompt

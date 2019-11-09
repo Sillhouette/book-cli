@@ -5,7 +5,7 @@ exports.inputHandler = require("./inputHandler");
 //Import listHandler for use of generateSearchResults
 exports.listHandler = require("./listHandler");
 //Import cli for use of cli functions
-exports.cli = require("./bookCli");
+exports.cli = require("./cli");
 
 //Receives userInput from the search prompt and fetches 5 books from Google's API
 exports.initiateSearch = (err, { query }) => {
