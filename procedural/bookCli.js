@@ -1,7 +1,3 @@
-//Import command line prompt created by flatiron: https://github.com/flatiron/prompt
-exports.prompt = require("prompt");
-//Import node-fetch library for querying the Google Books API
-exports.fetch = require("node-fetch");
 exports.inputHandler = require("./inputHandler");
 
 //Declare arrays to store search results and reading list
@@ -13,49 +9,8 @@ exports.initialize = () => {
   console.clear();
   console.log("Welcome to the procedural version of book cli");
   console.log("\nPlease enter the name of the book you would like to find:");
-  this.setupPrompt();
-  this.initiateSearchPrompt();
-};
-
-//Set the global configuration settings for the prompt
-exports.setupPrompt = () => {
-  this.prompt.start();
-  this.prompt.message = "";
-  this.prompt.colors = false;
-  this.prompt.delimiter = "";
-};
-
-//Set the properties for the search prompt and initiate it
-exports.initiateSearchPrompt = () => {
-  const properties = {
-    name: "query",
-    type: "string",
-    description: "Please enter a search query:",
-    message: "Please enter a search term",
-    required: true
-  };
-
-  this.prompt.get([properties], this.initiateSearch);
-};
-
-//Receives userInput from the search prompt and fetches 5 books from Google's API
-exports.initiateSearch = (err, { query }) => {
-  const baseURL = "https://www.googleapis.com/books/v1/volumes?";
-  const maxResults = "maxResults=5&";
-  const queryStructure = "q=";
-  const encodedQuery = encodeURI(query);
-
-  this.fetch(baseURL + maxResults + queryStructure + encodedQuery)
-    .then(resp => resp.json())
-    .then(json => {
-      this.generateSearchResults(json.items);
-      this.displaySearchResults();
-    })
-    .catch(error => {
-      console.log("There was a fatal error, please try again.");
-      this.initiateSearchPrompt();
-    })
-    .catch(error => error);
+  this.inputHandler.setupPrompt();
+  this.inputHandler.initiateSearchPrompt();
 };
 
 exports.displaySearchResults = (message = null) => {
@@ -64,7 +19,7 @@ exports.displaySearchResults = (message = null) => {
   this.displayBooks(global.searchResults);
   this.displayOptions();
   message ? console.log(message) : null;
-  this.initiateOptionsPrompt();
+  this.inputHandler.initiateOptionsPrompt();
 };
 
 //Generates the basic objects using the relevant attributes for each book
@@ -143,19 +98,6 @@ exports.displayOptions = () => {
   }
 };
 
-//Set the properties for post-search prompt and initiate it
-exports.initiateOptionsPrompt = () => {
-  const properties = {
-    name: "input",
-    type: "string",
-    description: "Please select an option:",
-    message: "Please select a valid option",
-    required: true
-  };
-
-  this.prompt.get([properties], this.inputHandler.handleOptionSelection);
-};
-
 //Add a book to the reading list if it's not already there
 exports.addBookToList = index => {
   const present = this.readingListContains(global.searchResults[index], index);
@@ -180,7 +122,7 @@ exports.displayList = (message = null) => {
   this.displayBooks(global.readingList);
   this.displayListOptions();
   message ? console.log(message) : null;
-  this.initiateListOptionsPrompt();
+  this.inputHandler.initiateListOptionsPrompt();
 };
 
 //Display menu while user is looking at reading list
@@ -204,19 +146,6 @@ exports.displayListOptions = () => {
   for (const option of options) {
     console.log(option);
   }
-};
-
-//Set properties for post reading list prompt and initialize it
-exports.initiateListOptionsPrompt = books => {
-  const properties = {
-    name: "input",
-    type: "string",
-    description: "Please select an option:",
-    message: "Please select a valid option",
-    required: true
-  };
-
-  this.prompt.get([properties], this.inputHandler.handleListOptionSelection);
 };
 
 //Remove a book from the reading list then re-prompt

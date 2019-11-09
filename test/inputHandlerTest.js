@@ -4,7 +4,7 @@ describe("inputHandler.js", function() {
   describe("#handleOptionSelection(err, selectionObj)", function() {
     it("should display readingList and options when passed 'list'", function() {
       let stub3 = sinon
-        .stub(inputHandler.cli, "initiateListOptionsPrompt")
+        .stub(inputHandler, "initiateListOptionsPrompt")
         .callsFake(() => true);
 
       let spy = sinon.spy(console, "log");
@@ -24,9 +24,8 @@ describe("inputHandler.js", function() {
     });
 
     it("should initiate a new search when passed 'search'", function() {
-      //let spy = sinon.spy(window, "initiateSearchPrompt");
       let stub = sinon
-        .stub(inputHandler.cli, "initiateSearchPrompt")
+        .stub(inputHandler, "initiateSearchPrompt")
         .callsFake(() => true);
 
       global.readingList = global.eragonObjects;
@@ -39,7 +38,7 @@ describe("inputHandler.js", function() {
 
     it("should call addBookToList(book) when passed an integer", function() {
       let stub2 = sinon
-        .stub(inputHandler.cli, "initiateOptionsPrompt")
+        .stub(inputHandler, "initiateOptionsPrompt")
         .callsFake(() => true);
 
       let spy = sinon.spy(inputHandler.cli, "addBookToList");
@@ -56,7 +55,7 @@ describe("inputHandler.js", function() {
 
     it("should call initiateOptionsPrompt when passed invalid selections", function() {
       let stub2 = sinon
-        .stub(inputHandler.cli, "initiateOptionsPrompt")
+        .stub(inputHandler, "initiateOptionsPrompt")
         .callsFake(() => true);
 
       inputHandler.handleOptionSelection("", { input: "gibberish" });
@@ -78,7 +77,7 @@ describe("inputHandler.js", function() {
   describe("#handleListOptionSelection(err, selectionObj)", function() {
     it("should initiate a new search when passed 'search'", function() {
       let stub = sinon
-        .stub(inputHandler.cli, "initiateSearchPrompt")
+        .stub(inputHandler, "initiateSearchPrompt")
         .callsFake(() => true);
 
       inputHandler.handleListOptionSelection("", { input: "search" });
@@ -88,7 +87,7 @@ describe("inputHandler.js", function() {
 
     it("should call initiateListOptionsPrompt when passed invalid selections", function() {
       let stub3 = sinon
-        .stub(inputHandler.cli, "initiateListOptionsPrompt")
+        .stub(inputHandler, "initiateListOptionsPrompt")
         .callsFake(() => true);
 
       inputHandler.handleListOptionSelection("", { input: "gibberish" });

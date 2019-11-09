@@ -1,28 +1,6 @@
 const cli = require("../procedural/bookCli");
 
 describe("bookCli.js", function() {
-  describe("#initiateSearch(err, queryObj)", function() {
-    it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
-      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
-
-      let stub2 = sinon
-        .stub(cli, "initiateOptionsPrompt")
-        .callsFake(() => true);
-
-      chai.spy.on(cli, "fetch");
-      const encoded_eragon = encodeURI("eragon");
-      await cli.initiateSearch("", { query: encoded_eragon });
-      expect(
-        cli.fetch,
-        "A fetch to the API was not found"
-      ).to.have.been.called.with(
-        "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon"
-      );
-      stub.restore();
-      stub2.restore();
-    });
-  });
-
   describe("#generateSearchResults(booksData)", function() {
     it("Generates object with correct book information", () => {
       expect(cli.generateSearchResults(global.eragonFetchResult)).to.eql(
