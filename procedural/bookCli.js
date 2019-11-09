@@ -12,16 +12,16 @@ exports.initialize = () => {
   console.clear();
   console.log("Welcome to the procedural version of book cli");
   console.log("\nPlease enter the name of the book you would like to find:");
-  setupPrompt();
-  initiateSearchPrompt();
+  this.setupPrompt();
+  this.initiateSearchPrompt();
 };
 
 //Set the global configuration settings for the prompt
 exports.setupPrompt = () => {
-  prompt.start();
-  prompt.message = "";
-  prompt.colors = false;
-  prompt.delimiter = "";
+  this.prompt.start();
+  this.prompt.message = "";
+  this.prompt.colors = false;
+  this.prompt.delimiter = "";
 };
 
 //Set the properties for the search prompt and initiate it
@@ -34,7 +34,7 @@ exports.initiateSearchPrompt = () => {
     required: true
   };
 
-  prompt.get([properties], initiateSearch);
+  this.prompt.get([properties], this.initiateSearch);
 };
 
 //Receives userInput from the search prompt and fetches 5 books from Google's API
@@ -68,18 +68,18 @@ exports.displaySearchResults = (message = null) => {
 
 //Generates the basic objects using the relevant attributes for each book
 exports.generateSearchResults = books => {
-  searchResults = [];
+  this.searchResults = [];
   for (let {
     volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
   } of books) {
     authors = Array.isArray(authors) ? authors.join() : authors;
-    searchResults.push({
+    this.searchResults.push({
       title: title,
       authors: authors,
       publisher: publisher
     });
   }
-  return searchResults;
+  return this.searchResults;
 };
 
 //Collects the titles of the books into an array for ease of listing
@@ -110,8 +110,8 @@ exports.displayBooks = books => {
 exports.readingListContains = (book, index) => {
   return this.readingList.some(book => {
     return (
-      book.title === searchResults[index].title &&
-      book.authors === searchResults[index].authors
+      book.title === this.searchResults[index].title &&
+      book.authors === this.searchResults[index].authors
     );
   });
 };
@@ -152,7 +152,7 @@ exports.initiateOptionsPrompt = () => {
     required: true
   };
 
-  prompt.get([properties], handleOptionSelection);
+  this.prompt.get([properties], this.handleOptionSelection);
 };
 
 //Read user menu selection and handle the response
@@ -175,7 +175,7 @@ exports.handleOptionSelection = (err, { input }) => {
       console.clear();
       const index = parseInt(input);
       //Handle case where user wants to add book to reading list
-      if (searchResults[index - 1]) {
+      if (this.searchResults[index - 1]) {
         this.addBookToList(index - 1);
       } else {
         //If invalid input re-prompt for valid input
@@ -246,7 +246,7 @@ exports.initiateListOptionsPrompt = books => {
     required: true
   };
 
-  prompt.get([properties], handleListOptionSelection);
+  this.prompt.get([properties], this.handleListOptionSelection);
 };
 
 //Read user post reading list menu selection and handle response
@@ -265,7 +265,7 @@ exports.handleListOptionSelection = (err, { input }) => {
       break;
     default:
       const index = parseInt(input.toLowerCase);
-      // if (readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
+      // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
       //   removeBookFromList(index - 1);
       // } else {
       console.log("That input was invalid, please try again");
@@ -277,11 +277,11 @@ exports.handleListOptionSelection = (err, { input }) => {
 
 //Remove a book from the reading list then re-prompt
 exports.removeBookFromList = index => {
-  readingList.splice(index, 1);
+  this.readingList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
-  displayBooks(readingList);
-  displayListOptions();
-  initiateListOptionsPrompt();
+  this.displayBooks(this.readingList);
+  this.displayListOptions();
+  this.initiateListOptionsPrompt();
 };
 
 exports.exit = () => {
