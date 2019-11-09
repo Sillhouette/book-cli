@@ -2,6 +2,8 @@
 exports.fetch = require("node-fetch");
 //Import inputHandler for use of initiateSearchPrompt
 exports.inputHandler = require("./inputHandler");
+//Import listHandler for use of generateSearchResults
+exports.listHandler = require("./listHandler");
 //Import cli for use of cli functions
 exports.cli = require("./bookCli");
 
@@ -15,7 +17,7 @@ exports.initiateSearch = (err, { query }) => {
   this.fetch(baseURL + maxResults + queryStructure + encodedQuery)
     .then(resp => resp.json())
     .then(json => {
-      this.cli.generateSearchResults(json.items);
+      this.listHandler.generateSearchResults(json.items);
       this.cli.displaySearchResults();
     })
     .catch(error => {

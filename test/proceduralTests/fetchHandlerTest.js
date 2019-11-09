@@ -1,7 +1,7 @@
 const inputHandler = require("../../procedural/inputHandler");
 const fetchHandler = require("../../procedural/fetchHandler");
 
-describe("bookCli.js", function() {
+describe("fetchHandler.js", function() {
   describe("#initiateSearch(err, queryObj)", function() {
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
       let stub = sinon

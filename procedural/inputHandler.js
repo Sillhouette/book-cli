@@ -4,6 +4,8 @@ exports.prompt = require("prompt");
 exports.cli = require("./bookCli");
 //Import the cli module for access to it's methods
 exports.fetchHandler = require("./fetchHandler");
+//Import the listHandler module for managing the book lists
+exports.listHandler = require("./listHandler");
 
 //Set the global configuration settings for the prompt
 exports.setupPrompt = () => {
@@ -73,7 +75,7 @@ exports.handleOptionSelection = (err, { input }) => {
       const index = parseInt(input);
       //Handle case where user wants to add book to reading list
       if (global.searchResults[index - 1]) {
-        this.cli.addBookToList(index - 1);
+        this.listHandler.addBookToList(index - 1);
       } else {
         console.log(global.searchResults);
         //If invalid input re-prompt for valid input

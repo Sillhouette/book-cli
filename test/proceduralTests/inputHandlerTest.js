@@ -41,7 +41,7 @@ describe("inputHandler.js", function() {
         .stub(inputHandler, "initiateOptionsPrompt")
         .callsFake(() => true);
 
-      let spy = sinon.spy(inputHandler.cli, "addBookToList");
+      let spy = sinon.spy(inputHandler.listHandler, "addBookToList");
       global.readingList = [];
       global.searchResults = global.eragonObjects;
 
