@@ -24,7 +24,7 @@ describe("listHandler.js", function() {
         .callsFake(() => true);
 
       listHandler.addBookToList(0);
-      expect(global.readingList).to.eql(global.eragonObjects);
+      expect(global.proceduralReadingList).to.eql(global.eragonObjects);
       assert(stub.called);
       stub.restore();
     });

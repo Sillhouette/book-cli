@@ -69,7 +69,7 @@ exports.displayOptions = () => {
 exports.displayList = (message = null) => {
   console.clear();
   console.log("The current reading list is: \n");
-  this.displayBooks(global.readingList);
+  this.displayBooks(global.proceduralReadingList);
   this.displayListOptions();
   message ? console.log(message) : null;
   this.inputHandler.initiateListOptionsPrompt();
@@ -77,7 +77,9 @@ exports.displayList = (message = null) => {
 
 //Display menu while user is looking at reading list
 exports.displayListOptions = () => {
-  const bookTitles = this.listHandler.collectBookTitles(global.readingList);
+  const bookTitles = this.listHandler.collectBookTitles(
+    global.proceduralReadingList
+  );
   const removeBookList = [];
   for (const [index, book] of bookTitles.entries()) {
     removeBookList.push(

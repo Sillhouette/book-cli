@@ -91,7 +91,7 @@ describe("bookCli.js", function() {
     it("should log the correct options to the console with one book in the reading list", () => {
       let spy = sinon.spy(console, "log");
       global.searchResults = global.eragonObjects;
-      global.readingList = [];
+      global.proceduralReadingList = [];
       cli.displayOptions();
 
       const outputs = [
@@ -110,7 +110,7 @@ describe("bookCli.js", function() {
     it("should log the correct options to the console when a book is already in the reading list", () => {
       let spy = sinon.spy(console, "log");
       global.searchResults = global.eragonObjects;
-      global.readingList = global.eragonObjects;
+      global.proceduralReadingList = global.eragonObjects;
       cli.displayOptions();
 
       const outputs = [
@@ -148,7 +148,7 @@ describe("bookCli.js", function() {
   describe("#displayListOptions()", function() {
     it("should log the reading list options to the console with one book in the reading list", () => {
       let spy = sinon.spy(console, "log");
-      global.readingList = [global.eragonObjects];
+      global.proceduralReadingList = [global.eragonObjects];
       cli.displayListOptions();
 
       const outputs = [

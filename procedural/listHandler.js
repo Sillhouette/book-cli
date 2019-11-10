@@ -5,7 +5,7 @@ exports.inputHandler = require("./inputHandler");
 
 //Declare arrays to store search results and reading list
 global.searchResults = [];
-global.readingList = [];
+global.proceduralReadingList = [];
 
 //Generates the basic objects using the relevant attributes for each book
 exports.generateSearchResults = books => {
@@ -30,10 +30,11 @@ exports.addBookToList = index => {
   const check = `\u2713`;
 
   if (!present) {
-    global.readingList.push(global.searchResults[index]);
+    global.proceduralReadingList.push(global.searchResults[index]);
     this.cli.displaySearchResults(
       `${check} Added ${
-        global.readingList[global.readingList.length - 1].title
+        global.proceduralReadingList[global.proceduralReadingList.length - 1]
+          .title
       } to the reading list.\n`
     );
   } else {
@@ -46,9 +47,9 @@ exports.addBookToList = index => {
 
 //Remove a book from the reading list then re-prompt
 exports.removeBookFromList = index => {
-  global.readingList.splice(index, 1);
+  global.proceduralReadingList.splice(index, 1);
   console.log("\nThe current reading list is as follows: ");
-  this.cli.displayBooks(global.readingList);
+  this.cli.displayBooks(global.proceduralReadingList);
   this.cli.displayListOptions();
   this.inputHandler.initiateListOptionsPrompt();
 };
@@ -63,7 +64,7 @@ exports.collectBookTitles = books => {
 };
 
 exports.readingListContains = (book, index) => {
-  return global.readingList.some(book => {
+  return global.proceduralReadingList.some(book => {
     return (
       book.title === global.searchResults[index].title &&
       book.authors === global.searchResults[index].authors

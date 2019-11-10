@@ -12,7 +12,7 @@ describe("inputHandler.js", function() {
         .callsFake(() => true);
 
       let spy = sinon.spy(console, "log");
-      global.readingList = global.eragonObjects;
+      global.proceduralReadingList = global.eragonObjects;
 
       inputHandler.handleOptionSelection("", { input: "list" });
 
@@ -36,7 +36,7 @@ describe("inputHandler.js", function() {
         .stub(inputHandler, "initiateSearchPrompt")
         .callsFake(() => true);
 
-      global.readingList = global.eragonObjects;
+      global.proceduralReadingList = global.eragonObjects;
 
       inputHandler.handleOptionSelection("", { input: "search" });
 
@@ -50,13 +50,13 @@ describe("inputHandler.js", function() {
         .callsFake(() => true);
 
       let spy = sinon.spy(inputHandler.listHandler, "addBookToList");
-      global.readingList = [];
+      global.proceduralReadingList = [];
       global.searchResults = global.eragonObjects;
 
       inputHandler.handleOptionSelection("", { input: "1" });
 
       assert(spy.calledWith(0));
-      expect(global.readingList).to.eql(global.eragonObjects);
+      expect(global.proceduralReadingList).to.eql(global.eragonObjects);
       spy.restore();
       stub2.restore();
     });
