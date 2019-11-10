@@ -59,6 +59,7 @@ exports.initiateListOptionsPrompt = books => {
 
 //Read user menu selection and handle the response
 exports.handleOptionSelection = (err, { input }) => {
+  // Lowercase input to make it more user friendly
   switch (input.toLowerCase()) {
     //Display the current reading list
     case "list":
@@ -75,6 +76,7 @@ exports.handleOptionSelection = (err, { input }) => {
       break;
     default:
       const index = parseInt(input);
+
       //Handle case where user wants to add book to reading list
       if (global.searchResults[index - 1]) {
         this.listHandler.addBookToList(index - 1);
@@ -102,7 +104,7 @@ exports.handleListOptionSelection = (err, { input }) => {
       this.cli.exit();
       break;
     default:
-      const index = parseInt(input.toLowerCase);
+      //const index = parseInt(input);
       // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not include additional features in the applicaton
       //   removeBookFromList(index - 1);
       // } else {

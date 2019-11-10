@@ -1,10 +1,14 @@
-//Import command line prompt created by flatiron: https://github.com/flatiron/prompt
-
+//Import BookFetch so we can create a fetch object for the api call
 const BookFetch = require("./bookFetch").BookFetch;
+//Import List so we can create new lists
 const List = require("./list").List;
+
+// \u2717 is the unicode for ✗
+const errorSym = "\u2717";
 
 exports.UserInput = class UserInput {
   constructor() {
+    //Use command line prompt created by flatiron: https://github.com/flatiron/prompt
     this.prompt = require("prompt");
     this.prompt.start();
     this.prompt.message = "";
@@ -19,7 +23,7 @@ exports.UserInput = class UserInput {
       name: "query",
       type: "string",
       description: "Please enter a search query:",
-      message: "Please enter a search term",
+      message: `${errorSym} Please enter a search term`,
       required: true
     };
     const cb = this.bookFetch.fetchResults.bind(this.bookFetch);
@@ -32,7 +36,7 @@ exports.UserInput = class UserInput {
       name: "input",
       type: "string",
       description: "Please select an option:",
-      message: "Please select a valid option",
+      message: `${errorSym} Please select a valid option`,
       required: true
     };
 
@@ -46,7 +50,7 @@ exports.UserInput = class UserInput {
       name: "input",
       type: "string",
       description: "Please select an option:",
-      message: "Please select a valid option",
+      message: `${errorSym} Please select a valid option`,
       required: true
     };
 
@@ -56,9 +60,11 @@ exports.UserInput = class UserInput {
 
   //Read user menu selection and handle the response
   handleOptionSelection(err, { input }) {
+    // Lowercase input to make it more user friendly
     switch (input.toLowerCase()) {
       //Display the current reading list
       case "list":
+        // Create Reading list if it doesnt exist
         global.readingList = global.readingList
           ? global.readingList
           : new List();
@@ -69,6 +75,7 @@ exports.UserInput = class UserInput {
         break;
       //Search for a new book
       case "search":
+        console.clear();
         this.initiateSearchPrompt();
         break;
       //Exit the program
@@ -108,6 +115,7 @@ exports.UserInput = class UserInput {
         global.cli.displaySearchResults();
         break;
       case "search":
+        console.clear();
         this.initiateSearchPrompt();
         break;
       case "exit":
@@ -116,8 +124,9 @@ exports.UserInput = class UserInput {
       default:
         // const index = parseInt(input);
         // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not add additional features
-        // } else {
         //   this.removeBookFromList(index - 1);
+        // } else {
+        //If invalid input re-prompt for valid input
         console.log("That command was invalid, please try again");
         this.initiateListOptionsPrompt();
         // }
