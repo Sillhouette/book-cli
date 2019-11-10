@@ -1,70 +1,30 @@
-//Import command line prompt created by flatiron: https://github.com/flatiron/prompt
-const prompt = require("prompt");
 //Import node-fetch library for querying the Google Books API
 
 //Import Book class
 const Book = require("./book").Book;
 
+const UserInput = require("./userInput").UserInput;
+
+// global.bookList = new List();
+// global.readingList = new List();
+
 class Cli {
   //Construct the CLI object and set initial attributes
-  constructor(numResults = 5) {
-    this.searchResults = [];
-    this.readingList = [];
-    this.fetch = require("node-fetch");
-    this.baseURL = "https://www.googleapis.com/books/v1/volumes?";
-    this.maxResults = `maxResults=${numResults}&`;
-    this.queryStructure = "q=";
-    prompt.start();
-    prompt.message = "";
-    prompt.colors = false;
-    prompt.delimiter = "";
+  constructor() {
+    this.userInput = new UserInput();
   }
 
   //Initialize the CLI
   initialize() {
     console.log("\nWelcome to the object oriented version of book cli");
     console.log("\nPlease enter the name of the book you would like to find:");
-    this.initiateSearchPrompt();
-  }
-
-  //Set the properties for the search prompt and initiate it
-  initiateSearchPrompt() {
-    const properties = {
-      name: "query",
-      type: "string",
-      description: "Please enter a search query:",
-      message: "Please enter a search term",
-      required: true
-    };
-    const cb = this.initiateSearch.bind(this);
-    prompt.get([properties], cb);
-  }
-
-  //Receives userInput from the search prompt and fetches 5 books from Google's API
-  initiateSearch(err, { query }) {
-    const encodedQuery = encodeURI(query);
-    const searchPrompt = this.initiateSearchPrompt.bind(this);
-    const displayResults = this.displaySearchResults.bind(this);
-
-    this.fetch(
-      this.baseURL + this.maxResults + this.queryStructure + encodedQuery
-    )
-      .then(resp => resp.json())
-      .then(json => {
-        console.log(`\nFetching results for ${query}: \n`);
-        this.searchResults = Book.generateBooks(json.items);
-        displayResults();
-      })
-      .catch(error => {
-        console.log("There was a fatal error, please try again.");
-        searchPrompt();
-      });
+    this.userInput.initiateSearchPrompt();
   }
 
   displaySearchResults() {
-    this.displayBooks(this.searchResults);
+    this.displayBooks(global.searchResults.books);
     this.displayOptions();
-    this.initiateOptionsPrompt();
+    this.userInput.initiateOptionsPrompt();
   }
 
   //Takes array of books and displays them
@@ -76,7 +36,7 @@ class Cli {
 
   //Generates the post-search menu
   displayOptions() {
-    const bookTitles = Book.collectBookTitles(this.searchResults);
+    const bookTitles = global.searchResults.collectBookTitles();
     const addBookList = [];
     for (const [index, book] of bookTitles.entries()) {
       addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
@@ -92,75 +52,6 @@ class Cli {
 
     for (const option of options) {
       console.log(option);
-    }
-  }
-
-  //Set the properties for post-search prompt and initiate it
-  initiateOptionsPrompt() {
-    const properties = {
-      name: "input",
-      type: "string",
-      description: "Please select an option:",
-      message: "Please select a valid option",
-      required: true
-    };
-
-    const cb = this.handleOptionSelection.bind(this);
-    prompt.get([properties], cb);
-  }
-
-  //Read user menu selection and handle the response
-  handleOptionSelection(err, { input }) {
-    switch (input.toLowerCase()) {
-      //Display the current reading list
-      case "list":
-        console.log("\nThe current reading list is as follows: ");
-        this.displayBooks(this.readingList);
-        this.displayListOptions();
-        this.initiateListOptionsPrompt();
-        break;
-      //Search for a new book
-      case "search":
-        this.initiateSearchPrompt();
-        break;
-      //Exit the program
-      case "exit":
-        console.log("Goodbye");
-        break;
-      default:
-        const index = parseInt(input);
-        //Handle case where user wants to add book to reading list
-        if (this.searchResults[index - 1]) {
-          this.addBookToList(index - 1);
-        } else {
-          //If invalid input re-prompt for valid input
-          console.log("That command was invalid, please try again");
-          this.initiateOptionsPrompt();
-        }
-        break;
-    }
-  }
-
-  //Add a book to the reading list if it's not already there
-  addBookToList(index) {
-    const present = this.readingList.some(book => {
-      return (
-        book.title === this.searchResults[index].title &&
-        book.authors === this.searchResults[index].authors
-      );
-    });
-    if (!present) {
-      this.readingList.push(this.searchResults[index]);
-      console.log(
-        `Added ${
-          this.readingList[this.readingList.length - 1].title
-        } to the reading list.`
-      );
-      this.displayOptions();
-      this.initiateOptionsPrompt();
-    } else {
-      console.log("That book is already in the book list.");
-      this.initiateOptionsPrompt();
     }
   }
 
@@ -185,53 +76,6 @@ class Cli {
     for (const option of options) {
       console.log(option);
     }
-  }
-
-  //Set properties for post-reading list prompt and initialize it
-  initiateListOptionsPrompt() {
-    const properties = {
-      name: "input",
-      type: "string",
-      description: "Please select an option:",
-      message: "Please select a valid option",
-      required: true
-    };
-
-    const cb = this.handleListOptionSelection.bind(this);
-    prompt.get([properties], cb);
-  }
-
-  //Read user post reading list menu selection and handle response
-  handleListOptionSelection(err, { input }) {
-    switch (input.toLowerCase()) {
-      case "back":
-        this.displaySearchResults();
-        break;
-      case "search":
-        this.initiateSearchPrompt();
-        break;
-      case "exit":
-        console.log("Goodbye");
-        break;
-      default:
-        // const index = parseInt(input);
-        // if (this.readingList[index - 1]) { //Removed as the instructions asked us to not add additional features
-        // } else {
-        //   this.removeBookFromList(index - 1);
-        console.log("That command was invalid, please try again");
-        this.initiateListOptionsPrompt();
-        // }
-        break;
-    }
-  }
-
-  //Remove a book from the reading list then re-prompt
-  removeBookFromList(index) {
-    this.readingList.splice(index, 1);
-    console.log("\nThe new reading list is as follows: ");
-    this.displayBooks(this.readingList);
-    this.displayListOptions();
-    this.initiateListOptionsPrompt();
   }
 }
 

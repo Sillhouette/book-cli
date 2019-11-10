@@ -6,21 +6,6 @@ describe("cli.js", function() {
     it("should create a new CLI with proper default settings", function() {
       let cli = new Cli();
       expect(cli).to.be.an.instanceof(Cli);
-      expect(cli.baseURL).to.equal(
-        "https://www.googleapis.com/books/v1/volumes?"
-      );
-      expect(cli.maxResults).to.equal("maxResults=5&");
-      expect(cli.queryStructure).to.equal("q=");
-    });
-
-    it("should create a new CLI proper settings", function() {
-      let cli = new Cli(10);
-      expect(cli).to.be.an.instanceof(Cli);
-      expect(cli.baseURL).to.equal(
-        "https://www.googleapis.com/books/v1/volumes?"
-      );
-      expect(cli.maxResults).to.equal("maxResults=10&");
-      expect(cli.queryStructure).to.equal("q=");
     });
   });
 
@@ -35,32 +20,6 @@ describe("cli.js", function() {
 
       assert(stub.called);
       stub.restore();
-    });
-  });
-
-  describe("CLI #initiateSearch(err, queryObj)", function() {
-    // before(() => {
-    //   cli = new Cli();
-    // });
-    it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
-      cli = new Cli();
-      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
-
-      let stub2 = sinon
-        .stub(cli, "initiateOptionsPrompt")
-        .callsFake(() => true);
-
-      chai.spy.on(cli, "fetch");
-      const encoded_eragon = encodeURI("eragon");
-      await cli.initiateSearch("", { query: encoded_eragon });
-      expect(
-        cli.fetch,
-        "A fetch to the API was not found"
-      ).to.have.been.called.with(
-        "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon"
-      );
-      stub.restore();
-      stub2.restore();
     });
   });
 

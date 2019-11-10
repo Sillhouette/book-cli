@@ -28,7 +28,7 @@ const chooseVersion = (err, { query }) => {
   if (query === "1") {
     procedural.initialize();
   } else if (query === "2") {
-    cli = new Cli();
+    global.cli = new Cli();
     cli.initialize();
   } else if (query === "exit") {
     console.log("Goodbye");
