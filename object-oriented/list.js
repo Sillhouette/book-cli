@@ -1,21 +1,24 @@
 const Book = require("./book").Book;
 
 exports.List = class List {
-  constructor(bookData) {
+  constructor(bookData = null) {
     this.books = [];
-
-    let bookConfigs = [];
-    for (let {
-      volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
-    } of bookData) {
-      authors = Array.isArray(authors) ? authors.join() : authors;
-      this.books.push(
-        new Book({
-          title: title,
-          authors: authors,
-          publisher: publisher
-        })
-      );
+    if (Array.isArray(bookData)) {
+      let bookConfigs = [];
+      for (let {
+        volumeInfo: { title, authors = "Unknown", publisher = "Unknown" }
+      } of bookData) {
+        authors = Array.isArray(authors) ? authors.join() : authors;
+        this.books.push(
+          new Book({
+            title: title,
+            authors: authors,
+            publisher: publisher
+          })
+        );
+      }
+    } else {
+      this.books.push(new Book(bookData));
     }
   }
 
@@ -28,15 +31,19 @@ exports.List = class List {
     return bookTitles;
   }
 
-  //Add a book to the reading list if it's not already there
-  addBookToList(index) {
-    const present = this.readingList.some(book => {
+  listHasBook(index) {
+    return this.books.some(book => {
       return (
-        book.title === this.searchResults[index].title &&
-        book.authors === this.searchResults[index].authors
+        book.title === global.searchResults.books[index].title &&
+        book.authors === global.searchResults.books[index].authors &&
+        book.authors === global.searchResults.books[index].publisher
       );
     });
-    if (!present) {
+  }
+
+  //Add a book to the reading list if it's not already there
+  addBookToList(index) {
+    if (!listHasBook(index)) {
       this.readingList.push(this.searchResults[index]);
       console.log(
         `Added ${
