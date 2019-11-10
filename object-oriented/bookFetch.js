@@ -11,8 +11,6 @@ exports.BookFetch = class BookFetch {
   //Receives userInput from the search prompt and fetches 5 books from Google's API
   fetchResults(err, { query }) {
     const encodedQuery = encodeURI(query);
-    const searchPrompt = cli.initiateSearchPrompt;
-    const displayResults = cli.displaySearchResults;
 
     this.fetch(
       this.baseURL + this.maxResults + this.queryStructure + encodedQuery
@@ -20,13 +18,16 @@ exports.BookFetch = class BookFetch {
       .then(resp => resp.json())
       .then(json => {
         console.log(`\nFetching results for ${query}: \n`);
-        global.searchResults = new List(json.items); //Book.generateBooks(json.items);
+        global.searchResults = new List(json.items);
         global.cli.displaySearchResults();
       })
       .catch(error => {
-        console.log(error);
-        console.log("There was a fatal error, please try again.");
-        global.cli.searchPrompt();
+        // \u2717 is the unicode for the ✗
+        console.log("\u2717 There was an error, please try again.");
+        global.cli.userInput.initiateSearchPrompt();
+      })
+      .catch(error => {
+        console.log(`\u2717 There was a fatal error, please restart the app.`);
       });
   }
 };

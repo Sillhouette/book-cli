@@ -1,11 +1,12 @@
-class Book {
+exports.Book = class Book {
+  //Constructor to build book objects
   constructor({ title, authors, publisher }) {
     this.authors = authors;
     this.title = title;
     this.publisher = publisher;
   }
 
-  //Displays a book to the user
+  //Display a book to the user
   display(number) {
     const spacing = "   ";
 
@@ -13,9 +14,4 @@ class Book {
     console.log(`${spacing}Author(s): ${this.authors}`);
     console.log(`${spacing}Publisher: ${this.publisher}\n`);
   }
-}
-
-//Export the class for Cli and tests to use
-module.exports = {
-  Book: Book
 };
