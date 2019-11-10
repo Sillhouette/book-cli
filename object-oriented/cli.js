@@ -91,7 +91,7 @@ exports.Cli = class Cli {
   // Exit the program
   exit() {
     console.clear();
-    console.log("Thanks for using Book CLI \n");
+    console.log("Thanks for using object-oriented Book CLI! \n");
   }
 };
 

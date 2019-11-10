@@ -64,11 +64,12 @@ exports.UserInput = class UserInput {
     switch (input.toLowerCase()) {
       //Display the current reading list
       case "list":
+        console.clear();
         // Create Reading list if it doesnt exist
         global.readingList = global.readingList
           ? global.readingList
           : new List();
-        console.log("\nThe current reading list is as follows: ");
+        console.log("The current reading list is as follows: \n");
         global.cli.displayBooks(global.readingList.books);
         global.cli.displayListOptions();
         this.initiateListOptionsPrompt();

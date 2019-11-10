@@ -103,7 +103,7 @@ exports.displayListOptions = () => {
 // Exit the program
 exports.exit = () => {
   console.clear();
-  console.log("Thanks for using Book CLI \n");
+  console.log("Thanks for using the procedural Book CLI! \n");
 };
 
 // Uncomment this line if you want to use `node ./procedural/bookCli.js` to run this version
