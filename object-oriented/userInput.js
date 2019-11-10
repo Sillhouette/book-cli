@@ -1,6 +1,7 @@
 //Import command line prompt created by flatiron: https://github.com/flatiron/prompt
 
 const BookFetch = require("./bookFetch").BookFetch;
+const List = require("./list").List;
 
 exports.UserInput = class UserInput {
   constructor() {
@@ -59,8 +60,8 @@ exports.UserInput = class UserInput {
       //Display the current reading list
       case "list":
         console.log("\nThe current reading list is as follows: ");
-        this.displayBooks(this.readingList);
-        this.displayListOptions();
+        global.cli.displayBooks(this.readingList);
+        global.cli.displayListOptions();
         this.initiateListOptionsPrompt();
         break;
       //Search for a new book
@@ -72,10 +73,16 @@ exports.UserInput = class UserInput {
         console.log("Goodbye");
         break;
       default:
-        const index = parseInt(input);
+        const index = parseInt(input) - 1;
+
         //Handle case where user wants to add book to reading list
-        if (this.searchResults[index - 1]) {
-          this.addBookToList(index - 1);
+        if (global.searchResults.books[index]) {
+          //because the procedural
+          if (global.readingList) {
+            global.readingList.addBookToList(global.searchResults.books[index]);
+          } else {
+            global.readingList = new List(global.searchResults.books[index]);
+          }
         } else {
           //If invalid input re-prompt for valid input
           console.log("That command was invalid, please try again");
