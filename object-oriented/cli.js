@@ -21,14 +21,20 @@ class Cli {
     this.userInput.initiateSearchPrompt();
   }
 
-  displaySearchResults() {
+  displaySearchResults(message = null) {
+    console.clear();
+    console.log("The current search results are: \n");
     this.displayBooks(global.searchResults.books);
     this.displayOptions();
+    message ? console.log(message) : null;
     this.userInput.initiateOptionsPrompt();
   }
 
   //Takes array of books and displays them
   displayBooks(books) {
+    if (books.length === 0) {
+      console.log("\nThere are no books in this list yet.\n");
+    }
     for (const [index, book] of books.entries()) {
       book.display(index + 1);
     }
@@ -37,9 +43,16 @@ class Cli {
   //Generates the post-search menu
   displayOptions() {
     const bookTitles = global.searchResults.collectBookTitles();
+    let added = false;
     const addBookList = [];
+    const check = `\u2713`;
     for (const [index, book] of bookTitles.entries()) {
-      addBookList.push(`  ${index + 1} - Add ${book} to the reading list`);
+      if (global.readingList) {
+        added = global.readingList.listHasBook(index);
+      }
+      addBookList.push(
+        `  ${added ? check : index + 1} - Add ${book} to the reading list`
+      );
     }
     const options = [
       `Choose one of the following options: \n`,
@@ -57,7 +70,7 @@ class Cli {
 
   //Display menu for reading list
   displayListOptions() {
-    const bookTitles = Book.collectBookTitles(this.readingList);
+    const bookTitles = global.readingList.collectBookTitles();
     const removeBookList = [];
     for (const [index, book] of bookTitles.entries()) {
       removeBookList.push(
@@ -76,6 +89,12 @@ class Cli {
     for (const option of options) {
       console.log(option);
     }
+  }
+
+  // Exit the program
+  exit() {
+    console.clear();
+    console.log("Thanks for using Book CLI \n");
   }
 }
 

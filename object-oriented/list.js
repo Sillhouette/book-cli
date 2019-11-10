@@ -18,7 +18,11 @@ exports.List = class List {
         );
       }
     } else {
-      this.books.push(new Book(bookData));
+      if (bookData) {
+        this.books.push(new Book(bookData));
+      } else {
+        this.books = [];
+      }
     }
   }
 
@@ -36,34 +40,29 @@ exports.List = class List {
       return (
         book.title === global.searchResults.books[index].title &&
         book.authors === global.searchResults.books[index].authors &&
-        book.authors === global.searchResults.books[index].publisher
+        book.publisher === global.searchResults.books[index].publisher
       );
     });
   }
 
   //Add a book to the reading list if it's not already there
-  addBookToList(index) {
-    if (!listHasBook(index)) {
-      this.readingList.push(this.searchResults[index]);
-      console.log(
-        `Added ${
-          this.readingList[this.readingList.length - 1].title
-        } to the reading list.`
-      );
-      this.displayOptions();
-      this.initiateOptionsPrompt();
+  addBookToList(book, index) {
+    const error = `\u2717 `;
+    const check = `\u2713`;
+    if (!this.listHasBook(index)) {
+      this.books.push(book);
+      return `${check} Added ${book.title} to the reading list.\n`;
     } else {
-      console.log("That book is already in the book list.");
-      this.initiateOptionsPrompt();
+      return `${error} ${book.title} is already in the book list.\n`;
     }
   }
 
   //Remove a book from the reading list then re-prompt
   removeBookFromList(index) {
-    this.readingList.splice(index, 1);
+    global.readingList.splice(index, 1);
     console.log("\nThe new reading list is as follows: ");
-    this.displayBooks(this.readingList);
-    this.displayListOptions();
-    this.initiateListOptionsPrompt();
+    global.cli.displayBooks(global.readingList);
+    global.cli.displayListOptions();
+    global.cli.userInput.initiateListOptionsPrompt();
   }
 };

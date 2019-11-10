@@ -51,7 +51,7 @@ exports.UserInput = class UserInput {
     };
 
     const cb = this.handleListOptionSelection.bind(this);
-    prompt.get([properties], cb);
+    this.prompt.get([properties], cb);
   }
 
   //Read user menu selection and handle the response
@@ -59,8 +59,11 @@ exports.UserInput = class UserInput {
     switch (input.toLowerCase()) {
       //Display the current reading list
       case "list":
+        global.readingList = global.readingList
+          ? global.readingList
+          : new List();
         console.log("\nThe current reading list is as follows: ");
-        global.cli.displayBooks(this.readingList);
+        global.cli.displayBooks(global.readingList.books);
         global.cli.displayListOptions();
         this.initiateListOptionsPrompt();
         break;
@@ -70,22 +73,28 @@ exports.UserInput = class UserInput {
         break;
       //Exit the program
       case "exit":
-        console.log("Goodbye");
+        global.cli.exit();
         break;
       default:
         const index = parseInt(input) - 1;
 
         //Handle case where user wants to add book to reading list
-        if (global.searchResults.books[index]) {
+        let book, message;
+        const error = `\u2717 `;
+        const check = `\u2713`;
+
+        if ((book = global.searchResults.books[index])) {
           //because the procedural
           if (global.readingList) {
-            global.readingList.addBookToList(global.searchResults.books[index]);
+            message = global.readingList.addBookToList(book, index);
           } else {
-            global.readingList = new List(global.searchResults.books[index]);
+            global.readingList = new List(book);
+            message = `${check} Added ${book.title} to the reading list.\n`;
           }
+          global.cli.displaySearchResults(message);
         } else {
           //If invalid input re-prompt for valid input
-          console.log("That command was invalid, please try again");
+          console.log(`${error} That command was invalid, please try again`);
           this.initiateOptionsPrompt();
         }
         break;
@@ -96,13 +105,13 @@ exports.UserInput = class UserInput {
   handleListOptionSelection(err, { input }) {
     switch (input.toLowerCase()) {
       case "back":
-        this.displaySearchResults();
+        global.cli.displaySearchResults();
         break;
       case "search":
         this.initiateSearchPrompt();
         break;
       case "exit":
-        console.log("Goodbye");
+        global.cli.exit();
         break;
       default:
         // const index = parseInt(input);
