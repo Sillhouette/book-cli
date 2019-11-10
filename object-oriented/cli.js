@@ -1,12 +1,5 @@
-//Import node-fetch library for querying the Google Books API
-
-//Import Book class
-const Book = require("./book").Book;
-
+//Import UserInput class
 const UserInput = require("./userInput").UserInput;
-
-// global.bookList = new List();
-// global.readingList = new List();
 
 class Cli {
   //Construct the CLI object and set initial attributes
@@ -16,11 +9,13 @@ class Cli {
 
   //Initialize the CLI
   initialize() {
-    console.log("\nWelcome to the object oriented version of book cli");
+    console.clear();
+    console.log("Welcome to the object oriented version of book cli");
     console.log("\nPlease enter the name of the book you would like to find:");
     this.userInput.initiateSearchPrompt();
   }
 
+  // Display the search results with optional message
   displaySearchResults(message = null) {
     console.clear();
     console.log("The current search results are: \n");
@@ -30,7 +25,7 @@ class Cli {
     this.userInput.initiateOptionsPrompt();
   }
 
-  //Takes array of books and displays them
+  // Display books from array
   displayBooks(books) {
     if (books.length === 0) {
       console.log("\nThere are no books in this list yet.\n");
@@ -40,12 +35,13 @@ class Cli {
     }
   }
 
-  //Generates the post-search menu
+  //Generate the post-search menu
   displayOptions() {
     const bookTitles = global.searchResults.collectBookTitles();
     let added = false;
     const addBookList = [];
     const check = `\u2713`;
+
     for (const [index, book] of bookTitles.entries()) {
       if (global.readingList) {
         added = global.readingList.listHasBook(index);
@@ -54,6 +50,7 @@ class Cli {
         `  ${added ? check : index + 1} - Add ${book} to the reading list`
       );
     }
+
     const options = [
       `Choose one of the following options: \n`,
       ...addBookList,
@@ -68,7 +65,7 @@ class Cli {
     }
   }
 
-  //Display menu for reading list
+  //Display reading list menu
   displayListOptions() {
     const bookTitles = global.readingList.collectBookTitles();
     const removeBookList = [];
@@ -100,8 +97,8 @@ class Cli {
 
 // Uncomment these lines if you want to use `node ./object-oriented/cli.js` to run this version
 // Don't forget to re-comment them if you want the version selector to run properly
-// let cli = new Cli();
-// cli.initialize();
+// global.cli = new Cli();
+// global.cli.initialize();
 
 //Export the class for tests and version selector to use
 module.exports = {
