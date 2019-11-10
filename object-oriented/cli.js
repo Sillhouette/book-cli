@@ -99,8 +99,3 @@ exports.Cli = class Cli {
 // Don't forget to re-comment them if you want the version selector to run properly
 // global.cli = new Cli();
 // global.cli.initialize();
-
-//Export the class for tests and version selector to use
-module.exports = {
-  Cli: Cli
-};
