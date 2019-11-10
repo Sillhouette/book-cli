@@ -1,7 +1,7 @@
 //Import UserInput class
 const UserInput = require("./userInput").UserInput;
 
-class Cli {
+exports.Cli = class Cli {
   //Construct the CLI object and set initial attributes
   constructor() {
     this.userInput = new UserInput();
@@ -93,7 +93,7 @@ class Cli {
     console.clear();
     console.log("Thanks for using Book CLI \n");
   }
-}
+};
 
 // Uncomment these lines if you want to use `node ./object-oriented/cli.js` to run this version
 // Don't forget to re-comment them if you want the version selector to run properly
