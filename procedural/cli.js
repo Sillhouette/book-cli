@@ -6,8 +6,8 @@ const colors = require("colors/safe");
 //Configure the prompt and prompt for the initial search
 exports.initialize = () => {
   console.clear();
-  console.log("Welcome to the procedural version of book cli");
-  console.log("\nPlease enter the name of the book you would like to find:");
+  console.log("Welcome to the procedural version of Book Cli");
+  console.log("\nPlease enter the name of the book you would like to find");
   this.inputHandler.setupPrompt();
   this.inputHandler.initiateSearchPrompt();
 };
