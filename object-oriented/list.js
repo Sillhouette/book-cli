@@ -54,17 +54,18 @@ exports.List = class List {
 
   //Add a book to the reading list if it's not already there
   addBookToList(book, index) {
-    const error = `\u2717 `;
+    const error = `\u2717`;
     const check = `\u2713`;
     if (!this.listHasBook(index)) {
       this.books.push(book);
       return `${check} Added ${book.title} to the reading list.\n`;
     } else {
-      return `${error} ${book.title} is already in the book list.\n`;
+      return `${error} ${book.title} is already in the reading list.\n`;
     }
   }
 
-  //Remove a book from the reading list then re-prompt
+  // Remove a book from the reading list then re-prompt
+  // Method never invoked as we were asked to not include additional features
   removeBookFromList(index) {
     global.readingList.splice(index, 1);
     console.log("\nThe current list is as follows: ");
