@@ -8,8 +8,8 @@ describe("cli.js", function() {
       cli.initialize();
 
       const outputs = [
-        "Welcome to the procedural version of book cli",
-        "\nPlease enter the name of the book you would like to find:"
+        "Welcome to the procedural version of Book Cli",
+        "\nPlease enter the name of the book you would like to find"
       ];
 
       assertOutputs(outputs, spy);
