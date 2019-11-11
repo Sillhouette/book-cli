@@ -30,15 +30,15 @@ Clone this repository, change directories into the folder for the repo and run `
 
 Start the application with the version selector: Run `node index.js` then choose which version of the app you want to run **(recommended)**
 
-Start the procedural version directly: Open up `bookCli.js` and uncomment the call to `initialize()`. Run `node ./procedural/bookCli.js` **NOTE:** This breaks the version selector so when you're done re-comment the line if you want to use the selector
+Start the procedural version directly: Open up `/procedural/cli.js` and uncomment the call to `initialize()`. Run `node ./procedural/cli.js` **NOTE:** This breaks the version selector so when you're done re-comment the line if you want to use the selector
 
-Start the object-oriented version directly: Open up `cli.js` and uncomment the instantiation of the cli object and the call to `initialize()`. Run `node ./object-oriented/cli.js` **NOTE:** This breaks the version selector so when you're done re-comment the lines if you want to use the selector
+Start the object-oriented version directly: Open up `/object-oriented/cli.js` and uncomment the instantiation of the cli object and the call to `initialize()`. Run `node ./object-oriented/cli.js` **NOTE:** This breaks the version selector so when you're done re-comment the lines if you want to use the selector
 
 #### Test
 
 Run the test suite using the command `npm test`
 
-There are three test files, bookCliTest.js tests the procedural version of the code and the other two test their respective classes.
+If you get a prompt after the tests run use `ctrl + c` to exit the prompt
 
 **Note:** The output from the running of the cli still gets printed to the console so you likely have to scroll up to see the results of the tests once they have been run
 
