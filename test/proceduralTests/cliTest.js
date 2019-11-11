@@ -115,7 +115,9 @@ describe("cli.js", function() {
 
       const outputs = [
         "Choose one of the following options: \n",
-        "  \u2713 - Add Eragon and Eldest Omnibus to the reading list",
+        global.colors.green(
+          "  \u2713 - Add Eragon and Eldest Omnibus to the reading list"
+        ),
         "  list - View current reading list",
         "  search - Search for a new book",
         "  exit - Exit the program",

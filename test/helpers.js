@@ -3,6 +3,8 @@ global.chai = require("chai");
 global.expect = chai.expect;
 global.spies = require("chai-spies");
 global.assert = require("assert");
+// Import colors for a colorful ui
+global.colors = require("colors/safe");
 
 global.assertOutputs = (outputs, spy) => {
   for (output of outputs) {
