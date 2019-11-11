@@ -90,7 +90,7 @@ describe("inputHandler.js", function() {
 
       inputHandler.handleOptionSelection("", { input: "exit" });
 
-      assert(spy.calledWith("Thanks for using Book CLI \n"));
+      assert(spy.calledWith("Thanks for using the procedural Book CLI! \n"));
       spy.restore();
     });
   });
@@ -135,10 +135,8 @@ describe("inputHandler.js", function() {
       let spy = sinon.spy(console, "log");
 
       inputHandler.handleListOptionSelection("", { input: "exit" });
-      const outputs = ["Thanks for using Book CLI \n"];
-      assert(spy.calledWith("Thanks for using Book CLI \n"));
+      assert(spy.calledWith("Thanks for using the procedural Book CLI! \n"));
       spy.restore();
-      process.stdin.destroy();
     });
   });
 });
