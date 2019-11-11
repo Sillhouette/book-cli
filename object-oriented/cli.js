@@ -1,5 +1,7 @@
 //Import UserInput class
 const UserInput = require("./userInput").UserInput;
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 exports.Cli = class Cli {
   //Construct the CLI object and set initial attributes
@@ -46,9 +48,10 @@ exports.Cli = class Cli {
       if (global.readingList) {
         added = global.readingList.listHasBook(index);
       }
-      addBookList.push(
-        `  ${added ? check : index + 1} - Add ${book} to the reading list`
-      );
+      const message = added
+        ? colors.green(`  ${check} - Add ${book} to the reading list`)
+        : `  ${index + 1} - Add ${book} to the reading list`;
+      addBookList.push(message);
     }
 
     const options = [

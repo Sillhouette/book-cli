@@ -6,6 +6,8 @@ exports.inputHandler = require("./inputHandler");
 exports.listHandler = require("./listHandler");
 //Import cli for use of cli functions
 exports.cli = require("./cli");
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 //Receives userInput from the search prompt and fetches 5 books from Google's API
 exports.initiateSearch = (err, { query }) => {
@@ -22,10 +24,12 @@ exports.initiateSearch = (err, { query }) => {
     })
     .catch(error => {
       // \u2717 is the unicode for the ✗
-      console.log("\u2717 There was an error, please try again.");
+      console.log(colors.red("\u2717 There was an error, please try again."));
       this.inputHandler.initiateSearchPrompt();
     })
     .catch(error => {
-      console.log(`\u2717 There was a fatal error, please restart the app.`);
+      console.log(
+        colors.red(`\u2717 There was a fatal error, please restart the app.`)
+      );
     });
 };

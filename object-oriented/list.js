@@ -1,5 +1,7 @@
 // Import book so we can create new books
 const Book = require("./book").Book;
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 exports.List = class List {
   // Constructor for list object
@@ -58,9 +60,13 @@ exports.List = class List {
     const check = `\u2713`;
     if (!this.listHasBook(index)) {
       this.books.push(book);
-      return `${check} Added ${book.title} to the reading list.\n`;
+      return colors.green(
+        `${check} Added ${book.title} to the reading list.\n`
+      );
     } else {
-      return `${error} ${book.title} is already in the reading list.\n`;
+      return colors.red(
+        `${error} ${book.title} is already in the reading list.\n`
+      );
     }
   }
 

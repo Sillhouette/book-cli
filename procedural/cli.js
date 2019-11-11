@@ -1,5 +1,7 @@
 exports.inputHandler = require("./inputHandler");
 exports.listHandler = require("./listHandler");
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 //Configure the prompt and prompt for the initial search
 exports.initialize = () => {
@@ -47,9 +49,11 @@ exports.displayOptions = () => {
       index
     );
 
-    addBookList.push(
-      `  ${added ? check : index + 1} - Add ${book} to the reading list`
-    );
+    const message = added
+      ? colors.green(`  ${check} - Add ${book} to the reading list`)
+      : `  ${index + 1} - Add ${book} to the reading list`;
+
+    addBookList.push(message);
   }
   const options = [
     `Choose one of the following options: \n`,

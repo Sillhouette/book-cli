@@ -2,6 +2,8 @@
 const BookFetch = require("./bookFetch").BookFetch;
 //Import List so we can create new lists
 const List = require("./list").List;
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 // \u2717 is the unicode for ✗
 const errorSym = "\u2717";
@@ -23,7 +25,7 @@ exports.UserInput = class UserInput {
       name: "query",
       type: "string",
       description: "Please enter a search query:",
-      message: `${errorSym} Please enter a search term`,
+      message: colors.red(`${errorSym} Please enter a search term`),
       required: true
     };
     const cb = this.bookFetch.fetchResults.bind(this.bookFetch);
@@ -36,7 +38,7 @@ exports.UserInput = class UserInput {
       name: "input",
       type: "string",
       description: "Please select an option:",
-      message: `${errorSym} Please select a valid option`,
+      message: colors.red(`${errorSym} Please select a valid option`),
       required: true
     };
 
@@ -50,7 +52,7 @@ exports.UserInput = class UserInput {
       name: "input",
       type: "string",
       description: "Please select an option:",
-      message: `${errorSym} Please select a valid option`,
+      message: colors.red(`${errorSym} Please select a valid option`),
       required: true
     };
 
@@ -97,12 +99,16 @@ exports.UserInput = class UserInput {
             message = global.readingList.addBookToList(book, index);
           } else {
             global.readingList = new List(book);
-            message = `${check} Added ${book.title} to the reading list.\n`;
+            message = colors.green(
+              `${check} Added ${book.title} to the reading list.\n`
+            );
           }
           global.cli.displaySearchResults(message);
         } else {
           //If invalid input re-prompt for valid input
-          console.log(`${error} That command was invalid, please try again`);
+          console.log(
+            colors.red(`${error} That command was invalid, please try again`)
+          );
           this.initiateOptionsPrompt();
         }
         break;
@@ -128,7 +134,9 @@ exports.UserInput = class UserInput {
         //   this.removeBookFromList(index - 1);
         // } else {
         //If invalid input re-prompt for valid input
-        console.log(`${errorSym} That command was invalid, please try again`);
+        console.log(
+          colors.red(`${errorSym} That command was invalid, please try again`)
+        );
         this.initiateListOptionsPrompt();
         // }
         break;

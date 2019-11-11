@@ -1,4 +1,5 @@
 const List = require("./list").List;
+const colors = require("colors/safe");
 
 exports.BookFetch = class BookFetch {
   constructor(numResults = 5) {
@@ -23,11 +24,13 @@ exports.BookFetch = class BookFetch {
       })
       .catch(error => {
         // \u2717 is the unicode for the ✗
-        console.log("\u2717 There was an error, please try again.");
+        console.log(colors.red("\u2717 There was an error, please try again."));
         global.cli.userInput.initiateSearchPrompt();
       })
       .catch(error => {
-        console.log(`\u2717 There was a fatal error, please restart the app.`);
+        console.log(
+          colors.red(`\u2717 There was a fatal error, please restart the app.`)
+        );
       });
   }
 };

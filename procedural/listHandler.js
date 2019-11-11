@@ -2,6 +2,8 @@
 exports.cli = require("./cli");
 // Import input functions for use after removing books
 exports.inputHandler = require("./inputHandler");
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 //Declare arrays to store search results and reading list
 global.searchResults = [];
@@ -32,15 +34,19 @@ exports.addBookToList = index => {
   if (!present) {
     global.proceduralReadingList.push(global.searchResults[index]);
     this.cli.displaySearchResults(
-      `${check} Added ${
-        global.proceduralReadingList[global.proceduralReadingList.length - 1]
-          .title
-      } to the reading list.\n`
+      colors.green(
+        `${check} Added ${
+          global.proceduralReadingList[global.proceduralReadingList.length - 1]
+            .title
+        } to the reading list.\n`
+      )
     );
   } else {
     this.cli.displaySearchResults(
-      `${error +
-        global.searchResults[index].title} is already in the reading list.\n`
+      colors.red(
+        `${error +
+          global.searchResults[index].title} is already in the reading list.\n`
+      )
     );
   }
 };

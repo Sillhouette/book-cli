@@ -6,6 +6,8 @@ exports.cli = require("./cli");
 exports.fetchHandler = require("./fetchHandler");
 //Import the listHandler module for managing the book lists
 exports.listHandler = require("./listHandler");
+// Import colors for a colorful ui
+const colors = require("colors/safe");
 
 // \u2717 is the unicode for ✗
 const errorSym = "\u2717";
@@ -24,7 +26,7 @@ exports.initiateSearchPrompt = () => {
     name: "query",
     type: "string",
     description: "Please enter a search query:",
-    message: `${errorSym} Please enter a search term`,
+    message: colors.red(`${errorSym} Please enter a search term`),
     required: true
   };
 
@@ -37,7 +39,7 @@ exports.initiateOptionsPrompt = () => {
     name: "input",
     type: "string",
     description: "Please select an option:",
-    message: `${errorSym} Please select a valid option`,
+    message: colors.red(`${errorSym} Please select a valid option`),
     required: true
   };
 
@@ -50,7 +52,7 @@ exports.initiateListOptionsPrompt = books => {
     name: "input",
     type: "string",
     description: "Please select an option:",
-    message: `${errorSym} Please select a valid option`,
+    message: colors.red(`${errorSym} Please select a valid option`),
     required: true
   };
 
@@ -82,7 +84,9 @@ exports.handleOptionSelection = (err, { input }) => {
         this.listHandler.addBookToList(index - 1);
       } else {
         //If invalid input re-prompt for valid input
-        console.log(`${errorSym} That input was invalid, please try again`);
+        console.log(
+          colors.red(`${errorSym} That input was invalid, please try again`)
+        );
         this.initiateOptionsPrompt();
       }
       break;
@@ -109,7 +113,9 @@ exports.handleListOptionSelection = (err, { input }) => {
       //   removeBookFromList(index - 1);
       // } else {
       //If invalid input re-prompt for valid input
-      console.log(`${errorSym}  That input was invalid, please try again`);
+      console.log(
+        colors.red(`${errorSym}  That input was invalid, please try again`)
+      );
       this.initiateListOptionsPrompt();
       // }
       break;
