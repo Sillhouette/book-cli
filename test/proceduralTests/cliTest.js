@@ -1,6 +1,6 @@
 const cli = require("../../procedural/cli");
 
-describe("bookCli.js", function() {
+describe("cli.js", function() {
   describe("#initialize()", function() {
     it("should log the welcome message to console", () => {
       let spy = sinon.spy(console, "log");
@@ -170,7 +170,7 @@ describe("bookCli.js", function() {
 
       cli.exit();
 
-      const outputs = ["Thanks for using Book CLI \n"];
+      const outputs = ["Thanks for using the procedural Book CLI! \n"];
 
       assertOutputs(outputs, spy);
       spy.restore();
