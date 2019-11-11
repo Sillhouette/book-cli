@@ -31,15 +31,17 @@ describe("bookFetch.js", function() {
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
       bookFetch = new BookFetch();
       cli = new Cli();
-      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
+      let stub = sinon
+        .stub(cli.userInput, "initiateSearchPrompt")
+        .callsFake(() => true);
 
       let stub2 = sinon
-        .stub(cli, "initiateOptionsPrompt")
+        .stub(cli.userInput, "initiateOptionsPrompt")
         .callsFake(() => true);
 
       chai.spy.on(bookFetch, "fetch");
       const encoded_eragon = encodeURI("eragon");
-      await bookFetch.initiateSearch("", { query: encoded_eragon });
+      await bookFetch.fetchResults("", { query: encoded_eragon });
       expect(
         bookFetch.fetch,
         "A fetch to the API was not found"
