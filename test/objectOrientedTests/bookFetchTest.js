@@ -25,9 +25,6 @@ describe("bookFetch.js", function() {
   });
 
   describe("CLI #fetchResults(err, queryObj)", function() {
-    // before(() => {
-    //   cli = new Cli();
-    // });
     it("sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'", async () => {
       bookFetch = new BookFetch();
       cli = new Cli();
