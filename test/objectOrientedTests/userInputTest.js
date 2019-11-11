@@ -65,7 +65,6 @@ describe("userInput.js", function() {
       userInput.handleOptionSelection("", { input: "list" });
       let outputs = [
         "The current reading list is as follows: \n",
-        "There are no books in this list yet.\n",
         "Choose one of the following options: \n",
         "  search - Search for a new book",
         "  exit - Exit the program"
