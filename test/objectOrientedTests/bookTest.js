@@ -1,4 +1,3 @@
-const Cli = require("../../object-oriented/cli").Cli;
 const Book = require("../../object-oriented/book").Book;
 
 describe("book.js", function() {
@@ -37,41 +36,6 @@ describe("book.js", function() {
       assert(spy.calledWith("   Author(s): Christopher Paolini"));
       assert(spy.calledWith("   Publisher: Random House\n"));
       spy.restore();
-    });
-  });
-
-  describe("Book .generateBooks", function() {
-    it("should generate an array of books", function() {
-      let eragon = new Book({
-        title: "Eragon and Eldest Omnibus",
-        authors: "Christopher Paolini",
-        publisher: "Random House"
-      });
-      const eragonFetchResult = [
-        {
-          volumeInfo: {
-            title: "Eragon and Eldest Omnibus",
-            authors: "Christopher Paolini",
-            publisher: "Random House"
-          }
-        }
-      ];
-
-      expect(Book.generateBooks(eragonFetchResult)).to.eql([eragon]);
-    });
-  });
-
-  describe("Book .collectBookTitles", function() {
-    it("should generate an array of books", function() {
-      let eragon = new Book({
-        title: "Eragon and Eldest Omnibus",
-        authors: "Christopher Paolini",
-        publisher: "Random House"
-      });
-
-      expect(Book.collectBookTitles([eragon])).to.eql([
-        "Eragon and Eldest Omnibus"
-      ]);
     });
   });
 });
