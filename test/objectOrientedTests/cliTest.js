@@ -1,5 +1,6 @@
 const Cli = require("../../object-oriented/cli").Cli;
 const Book = require("../../object-oriented/book").Book;
+const List = require("../../object-oriented/list").List;
 
 describe("cli.js", function() {
   describe("CLI constructor", function() {
@@ -15,11 +16,45 @@ describe("cli.js", function() {
       cli = new Cli();
     });
     it("should initiate a new search when initialized", function() {
-      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
+      let stub = sinon
+        .stub(cli.userInput, "initiateSearchPrompt")
+        .callsFake(() => true);
       cli.initialize();
 
       assert(stub.called);
       stub.restore();
+    });
+  });
+
+  describe("#displaySearchResults()", function() {
+    before(() => {
+      cli = new Cli();
+      eragonBook = new Book({
+        title: "Eragon and Eldest Omnibus",
+        authors: "Christopher Paolini",
+        publisher: "Random House"
+      });
+    });
+    it("should log the correct values to console", () => {
+      let spy = sinon.spy(console, "log");
+      global.searchResults = new List(eragonBook);
+
+      cli.displaySearchResults();
+
+      let outputs = [
+        "The current search results are: \n",
+        "1. Eragon and Eldest Omnibus",
+        "   Author(s): Christopher Paolini",
+        "   Publisher: Random House\n",
+        "Choose one of the following options: \n",
+        "  1 - Add Eragon and Eldest Omnibus to the reading list",
+        "  list - View current reading list",
+        "  search - Search for a new book",
+        "  exit - Exit the program"
+      ];
+
+      assertOutputs(outputs, spy);
+      spy.restore();
     });
   });
 
@@ -37,9 +72,13 @@ describe("cli.js", function() {
 
       cli.displayBooks([eragonBook]);
 
-      assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
-      assert(spy.calledWith("   Author(s): Christopher Paolini"));
-      assert(spy.calledWith("   Publisher: Random House\n"));
+      let outputs = [
+        "1. Eragon and Eldest Omnibus",
+        "   Author(s): Christopher Paolini",
+        "   Publisher: Random House\n"
+      ];
+
+      assertOutputs(outputs, spy);
       spy.restore();
     });
   });
@@ -55,24 +94,25 @@ describe("cli.js", function() {
     });
     it("should log the correct value to console", () => {
       let spy = sinon.spy(console, "log");
-      cli.searchResults = [eragonBook];
+      global.searchResults = new List(eragonBook);
+
       cli.displayOptions();
 
-      assert(spy.calledWith("Choose one of the following options: \n"));
-      assert(
-        spy.calledWith(
-          "  1 - Add Eragon and Eldest Omnibus to the reading list"
-        )
-      );
-      assert(spy.calledWith("  list - View current reading list"));
-      assert(spy.calledWith("  search - Search for a new book"));
-      assert(spy.calledWith("  exit - Exit the program"));
-      assert(spy.calledWith("\n"));
+      let outputs = [
+        "Choose one of the following options: \n",
+        "  1 - Add Eragon and Eldest Omnibus to the reading list",
+        "  list - View current reading list",
+        "  search - Search for a new book",
+        "  exit - Exit the program",
+        "\n"
+      ];
+
+      assertOutputs(outputs, spy);
       spy.restore();
     });
   });
 
-  describe("CLI #handleOptionSelection(err, selectionObj)", function() {
+  describe("#displayListOptions()", function() {
     before(() => {
       cli = new Cli();
       eragonBook = new Book({
@@ -81,69 +121,21 @@ describe("cli.js", function() {
         publisher: "Random House"
       });
     });
-    it("should display reading list and options when passed 'list'", function() {
-      let stub3 = sinon
-        .stub(cli, "initiateListOptionsPrompt")
-        .callsFake(() => true);
-
+    it("should log the correct value to console", () => {
       let spy = sinon.spy(console, "log");
-      cli.readingList = [eragonBook];
+      global.readingList = new List(eragonBook);
 
-      cli.handleOptionSelection("", { input: "list" });
-      assert(spy.calledWith("\nThe current reading list is as follows: "));
-      assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
-      assert(spy.calledWith("   Author(s): Christopher Paolini"));
-      assert(spy.calledWith("   Publisher: Random House\n"));
-      assert(spy.calledWith("Choose one of the following options: \n"));
-      assert(spy.calledWith("  search - Search for a new book"));
-      assert(spy.calledWith("  exit - Exit the program"));
+      cli.displayListOptions();
 
-      spy.restore();
-      stub3.restore();
-    });
+      let outputs = [
+        "Choose one of the following options: \n",
+        `  back - Return to previous search`,
+        `  search - Search for a new book`,
+        `  exit - Exit the program`,
+        `\n`
+      ];
 
-    it("should initiate a new search when passed 'search'", function() {
-      let stub = sinon.stub(cli, "initiateSearchPrompt").callsFake(() => true);
-
-      cli.handleOptionSelection("", { input: "search" });
-
-      assert(stub.called);
-      stub.restore();
-    });
-
-    it("should call addBookToList(book) when passed an integer", function() {
-      let stub2 = sinon
-        .stub(cli, "initiateOptionsPrompt")
-        .callsFake(() => true);
-
-      let spy = sinon.spy(cli, "addBookToList");
-      cli.readingList = [];
-      cli.searchResults = [eragonBook];
-
-      cli.handleOptionSelection("", { input: "1" });
-      assert(spy.calledWith(0));
-      expect(cli.readingList).to.eql([eragonBook]);
-      spy.restore();
-      stub2.restore();
-    });
-
-    it("should call initiateOptionsPrompt when passed invalid selections", function() {
-      let stub2 = sinon
-        .stub(cli, "initiateOptionsPrompt")
-        .callsFake(() => true);
-
-      cli.handleOptionSelection("", { input: "gibberish" });
-
-      assert(stub2.called);
-      stub2.restore();
-    });
-
-    it("should exit the program when passed 'exit'", () => {
-      let spy = sinon.spy(console, "log");
-
-      cli.handleOptionSelection("", { input: "exit" });
-
-      assert(spy.calledWith("Goodbye"));
+      assertOutputs(outputs, spy);
       spy.restore();
     });
   });
