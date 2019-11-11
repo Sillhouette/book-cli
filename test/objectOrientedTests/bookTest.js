@@ -32,7 +32,9 @@ describe("book.js", function() {
 
       book.display(1);
 
-      assert(spy.calledWith("1. Eragon and Eldest Omnibus"));
+      assert(
+        spy.calledWith(global.colors.blue("1. Eragon and Eldest Omnibus"))
+      );
       assert(spy.calledWith("   Author(s): Christopher Paolini"));
       assert(spy.calledWith("   Publisher: Random House\n"));
       spy.restore();

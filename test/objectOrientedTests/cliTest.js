@@ -43,11 +43,13 @@ describe("cli.js", function() {
 
       let outputs = [
         "The current search results are: \n",
-        "1. Eragon and Eldest Omnibus",
+        global.colors.blue("1. Eragon and Eldest Omnibus"),
         "   Author(s): Christopher Paolini",
         "   Publisher: Random House\n",
         "Choose one of the following options: \n",
-        "  1 - Add Eragon and Eldest Omnibus to the reading list",
+        `  ${global.colors.blue("1")} - Add ${global.colors.blue(
+          "Eragon and Eldest Omnibus"
+        )} to the reading list`,
         "  list - View current reading list",
         "  search - Search for a new book",
         "  exit - Exit the program"
@@ -73,7 +75,7 @@ describe("cli.js", function() {
       cli.displayBooks([eragonBook]);
 
       let outputs = [
-        "1. Eragon and Eldest Omnibus",
+        global.colors.blue("1. Eragon and Eldest Omnibus"),
         "   Author(s): Christopher Paolini",
         "   Publisher: Random House\n"
       ];
@@ -100,7 +102,9 @@ describe("cli.js", function() {
 
       let outputs = [
         "Choose one of the following options: \n",
-        "  1 - Add Eragon and Eldest Omnibus to the reading list",
+        `  ${global.colors.blue("1")} - Add ${global.colors.blue(
+          "Eragon and Eldest Omnibus"
+        )} to the reading list`,
         "  list - View current reading list",
         "  search - Search for a new book",
         "  exit - Exit the program",

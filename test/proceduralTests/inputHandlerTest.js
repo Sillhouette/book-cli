@@ -18,7 +18,7 @@ describe("inputHandler.js", function() {
 
       const outputs = [
         "The current reading list is: \n",
-        "1. Eragon and Eldest Omnibus",
+        global.colors.blue("1. Eragon and Eldest Omnibus"),
         "   Author(s): Christopher Paolini",
         "   Publisher: Random House\n",
         "Choose one of the following options: \n",
