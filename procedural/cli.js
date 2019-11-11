@@ -106,6 +106,6 @@ exports.exit = () => {
   console.log("Thanks for using the procedural Book CLI! \n");
 };
 
-// Uncomment this line if you want to use `node ./procedural/bookCli.js` to run this version
+// Uncomment this line if you want to use `node ./procedural/cli.js` to run this version
 // Don't forget to re-comment it if you want the version selector to run properly
 //initialize();
