@@ -110,6 +110,26 @@ describe("cli.js", function() {
       assertOutputs(outputs, spy);
       spy.restore();
     });
+    it("should log the correct options to the console when a book is already in the reading list", () => {
+      let spy = sinon.spy(console, "log");
+      global.searchResults = new List(eragonBook);
+      global.readingList = new List(eragonBook);
+      cli.displayOptions();
+
+      const outputs = [
+        "Choose one of the following options: \n",
+        global.colors.green(
+          "  \u2713 - Add Eragon and Eldest Omnibus to the reading list"
+        ),
+        "  list - View current reading list",
+        "  search - Search for a new book",
+        "  exit - Exit the program",
+        "\n"
+      ];
+
+      assertOutputs(outputs, spy);
+      spy.restore();
+    });
   });
 
   describe("#displayListOptions()", function() {
