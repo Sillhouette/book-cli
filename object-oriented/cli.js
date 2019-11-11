@@ -12,8 +12,8 @@ exports.Cli = class Cli {
   //Initialize the CLI
   initialize() {
     console.clear();
-    console.log("Welcome to the object oriented version of book cli");
-    console.log("\nPlease enter the name of the book you would like to find:");
+    console.log("Welcome to the object oriented version of Book Cli");
+    console.log("\nPlease enter the name of the book you would like to find");
     this.userInput.initiateSearchPrompt();
   }
 
@@ -29,9 +29,6 @@ exports.Cli = class Cli {
 
   // Display books from array
   displayBooks(books) {
-    if (books.length === 0) {
-      console.log("There are no books in this list yet.\n");
-    }
     for (const [index, book] of books.entries()) {
       book.display(index + 1);
     }
