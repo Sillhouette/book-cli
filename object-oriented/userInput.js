@@ -128,7 +128,7 @@ exports.UserInput = class UserInput {
         //   this.removeBookFromList(index - 1);
         // } else {
         //If invalid input re-prompt for valid input
-        console.log("That command was invalid, please try again");
+        console.log(`${errorSym} That command was invalid, please try again`);
         this.initiateListOptionsPrompt();
         // }
         break;
