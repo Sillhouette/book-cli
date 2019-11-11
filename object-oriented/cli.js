@@ -47,7 +47,9 @@ exports.Cli = class Cli {
       }
       const message = added
         ? colors.green(`  ${check} - Add ${book} to the reading list`)
-        : `  ${index + 1} - Add ${book} to the reading list`;
+        : `  ${colors.blue(index + 1)} - Add ${colors.blue(
+            book
+          )} to the reading list`;
       addBookList.push(message);
     }
 
@@ -71,7 +73,7 @@ exports.Cli = class Cli {
     const removeBookList = [];
     for (const [index, book] of bookTitles.entries()) {
       removeBookList.push(
-        `  ${index + 1} - Remove ${book} from the reading list`
+        `  ${index + 1} - Remove ${colors.blue(book)} from the reading list`
       );
     }
     const options = [
