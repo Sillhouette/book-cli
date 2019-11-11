@@ -67,7 +67,9 @@ describe("list.js", function() {
       global.searchResults = new List(eragonBook);
 
       expect(global.readingList.addBookToList(eragonBook, 0)).to.eql(
-        `\u2713 Added ${eragonBook.title} to the reading list.\n`
+        global.colors.green(
+          `\u2713 Added ${eragonBook.title} to the reading list.\n`
+        )
       );
       expect(global.readingList.books).to.eql([eragonBook]);
     });
@@ -78,7 +80,9 @@ describe("list.js", function() {
       global.searchResults = new List(eragonBook);
 
       expect(global.readingList.addBookToList(eragonBook, 0)).to.eql(
-        `\u2717 ${eragonBook.title} is already in the reading list.\n`
+        global.colors.red(
+          `\u2717 ${eragonBook.title} is already in the reading list.\n`
+        )
       );
       expect(global.readingList.books).to.eql([eragonBook]);
     });
