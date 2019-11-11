@@ -73,7 +73,8 @@ exports.readingListContains = (book, index) => {
   return global.proceduralReadingList.some(book => {
     return (
       book.title === global.searchResults[index].title &&
-      book.authors === global.searchResults[index].authors
+      book.authors === global.searchResults[index].authors &&
+      book.publisher === global.searchResults[index].publisher
     );
   });
 };
