@@ -27,6 +27,7 @@ describe("listHandler.js", function() {
       expect(global.proceduralReadingList).to.eql(global.eragonObjects);
       assert(stub.called);
       stub.restore();
+      process.stdin.destroy();
     });
   });
 });
