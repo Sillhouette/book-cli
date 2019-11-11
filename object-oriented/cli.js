@@ -28,7 +28,7 @@ exports.Cli = class Cli {
   // Display books from array
   displayBooks(books) {
     if (books.length === 0) {
-      console.log("\nThere are no books in this list yet.\n");
+      console.log("There are no books in this list yet.\n");
     }
     for (const [index, book] of books.entries()) {
       book.display(index + 1);
