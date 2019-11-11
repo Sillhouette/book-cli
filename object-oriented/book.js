@@ -1,3 +1,6 @@
+// Import colors for a colorful ui
+const colors = require("colors/safe");
+
 exports.Book = class Book {
   //Constructor to build book objects
   constructor({ title, authors, publisher }) {
@@ -10,7 +13,7 @@ exports.Book = class Book {
   display(number) {
     const spacing = "   ";
 
-    console.log(`${number}. ${this.title}`);
+    console.log(colors.blue(`${number}. ${this.title}`));
     console.log(`${spacing}Author(s): ${this.authors}`);
     console.log(`${spacing}Publisher: ${this.publisher}\n`);
   }
