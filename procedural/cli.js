@@ -32,7 +32,7 @@ exports.displayBooks = books => {
     index,
     { title, authors, publisher = "unknown" }
   ] of books.entries()) {
-    console.log(`${index + 1}. ${title}`);
+    console.log(colors.blue(`${index + 1}. ${title}`));
     console.log(`${spacing}Author(s): ${authors}`);
     console.log(`${spacing}Publisher: ${publisher}\n`);
   }
@@ -51,7 +51,9 @@ exports.displayOptions = () => {
 
     const message = added
       ? colors.green(`  ${check} - Add ${book} to the reading list`)
-      : `  ${index + 1} - Add ${book} to the reading list`;
+      : `  ${colors.blue(index + 1)} - Add ${colors.blue(
+          book
+        )} to the reading list`;
 
     addBookList.push(message);
   }
@@ -87,7 +89,9 @@ exports.displayListOptions = () => {
   const removeBookList = [];
   for (const [index, book] of bookTitles.entries()) {
     removeBookList.push(
-      `  ${index + 1} - Remove ${book} from the reading list`
+      `  ${colors.blue(index + 1)} - Remove ${colors.blue(
+        book
+      )} from the reading list`
     );
   }
   const options = [
