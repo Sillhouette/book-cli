@@ -116,4 +116,4 @@ exports.exit = () => {
 
 // Uncomment this line if you want to use `node ./procedural/cli.js` to run this version
 // Don't forget to re-comment it if you want the version selector to run properly
-//initialize();
+//exports.initialize();
