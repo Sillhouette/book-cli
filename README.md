@@ -46,7 +46,9 @@ Run the test suite using the command `npm test`
 
 If you get a prompt after the tests run use `ctrl + c` to exit the prompt
 
-**Note:** The output from the running of the cli still gets printed to the console so you likely have to scroll up to see the results of the tests once they have been run. I highlighted the headers of the modules/classes and method names in yellow and the test expectations in magenta, this should help to separate out what output is test-related versus what output is from the application running.
+The headers of the modules/classes and method names are highlighted in yellow and the test expectations in magenta, this helps separate out which output is test-related and which output is from the execution of the program
+
+**Note:** The output from the running of the cli still gets printed to the console so you likely have to scroll up to see the results of the tests once they have been run.
 
 Thank you!
 
