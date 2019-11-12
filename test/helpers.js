@@ -14,6 +14,14 @@ global.assertOutputs = (outputs, spy) => {
 
 chai.use(spies);
 
+global.createDescribeHeader = header => {
+  return global.colors.yellow.bold.underline(header);
+};
+
+global.createItHeader = header => {
+  return global.colors.magenta.bold.underline(header);
+};
+
 global.eragonFetchResult = [
   {
     volumeInfo: {

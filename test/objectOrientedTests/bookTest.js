@@ -1,22 +1,25 @@
 const Book = require("../../object-oriented/book").Book;
 
-describe("book.js", function() {
-  describe("Book constructor", function() {
-    it("should create a new Book with proper settings", function() {
-      let book = new Book({
-        title: "Eragon and Eldest Omnibus",
-        authors: "Christopher Paolini",
-        publisher: "Random House"
-      });
-      expect(book).to.be.an.instanceof(Book);
-      expect(book.title).to.equal("Eragon and Eldest Omnibus");
-      expect(book.authors).to.equal("Christopher Paolini");
-      expect(book.publisher).to.equal("Random House");
-    });
+describe(createDescribeHeader("Object-Oriented book.js"), function() {
+  describe(createDescribeHeader("Book constructor"), function() {
+    it(
+      createItHeader("should create a new Book with proper settings"),
+      function() {
+        let book = new Book({
+          title: "Eragon and Eldest Omnibus",
+          authors: "Christopher Paolini",
+          publisher: "Random House"
+        });
+        expect(book).to.be.an.instanceof(Book);
+        expect(book.title).to.equal("Eragon and Eldest Omnibus");
+        expect(book.authors).to.equal("Christopher Paolini");
+        expect(book.publisher).to.equal("Random House");
+      }
+    );
   });
 
-  describe("Book #display(number)", function() {
-    it("should properly display a book", function() {
+  describe(createDescribeHeader("Book #display(number)"), function() {
+    it(createItHeader("should properly display a book"), function() {
       let book = new Book({
         title: "Eragon and Eldest Omnibus",
         authors: "Christopher Paolini",

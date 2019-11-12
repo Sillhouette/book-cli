@@ -1,8 +1,8 @@
 const cli = require("../../procedural/cli");
 
-describe("cli.js", function() {
-  describe("#initialize()", function() {
-    it("should log the welcome message to console", () => {
+describe(createDescribeHeader("Procedural cli.js"), function() {
+  describe(createDescribeHeader("#initialize()"), function() {
+    it(createItHeader("should log the welcome message to console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.initialize();
@@ -18,8 +18,8 @@ describe("cli.js", function() {
     });
   });
 
-  describe("#displaySearchResults()", function() {
-    it("should log the search results to console", () => {
+  describe(createDescribeHeader("#displaySearchResults()"), function() {
+    it(createItHeader("should log the search results to console"), () => {
       let spy = sinon.spy(console, "log");
 
       global.searchResults = eragonObjects;
@@ -38,31 +38,36 @@ describe("cli.js", function() {
       spy.restore();
     });
 
-    it("should log the search results and a message to the console", () => {
-      let spy = sinon.spy(console, "log");
+    it(
+      createItHeader(
+        "should log the search results and a message to the console"
+      ),
+      () => {
+        let spy = sinon.spy(console, "log");
 
-      global.searchResults = eragonObjects;
+        global.searchResults = eragonObjects;
 
-      cli.displaySearchResults(
-        "Added Eragon and Eldest Omnibus to the reading list."
-      );
+        cli.displaySearchResults(
+          "Added Eragon and Eldest Omnibus to the reading list."
+        );
 
-      const outputs = [
-        "The current search results are: \n",
-        global.colors.blue("1. Eragon and Eldest Omnibus"),
-        "   Author(s): Christopher Paolini",
-        "   Publisher: Random House\n",
-        "Added Eragon and Eldest Omnibus to the reading list."
-      ];
+        const outputs = [
+          "The current search results are: \n",
+          global.colors.blue("1. Eragon and Eldest Omnibus"),
+          "   Author(s): Christopher Paolini",
+          "   Publisher: Random House\n",
+          "Added Eragon and Eldest Omnibus to the reading list."
+        ];
 
-      assertOutputs(outputs, spy);
+        assertOutputs(outputs, spy);
 
-      spy.restore();
-    });
+        spy.restore();
+      }
+    );
   });
 
-  describe("#displayBooks(emptyBooks)", function() {
-    it("should log `There are no books...` console", () => {
+  describe(createDescribeHeader("#displayBooks(emptyBooks)"), function() {
+    it(createItHeader("should log `There are no books...` console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayBooks([]);
@@ -72,7 +77,7 @@ describe("cli.js", function() {
       spy.restore();
     });
 
-    it("should log a book to the console", () => {
+    it(createItHeader("should log a book to the console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayBooks(global.eragonObjects);
@@ -87,52 +92,62 @@ describe("cli.js", function() {
     });
   });
 
-  describe("#displayOptions()", function() {
-    it("should log the correct options to the console with one book in the reading list", () => {
-      let spy = sinon.spy(console, "log");
-      global.searchResults = global.eragonObjects;
-      global.proceduralReadingList = [];
-      cli.displayOptions();
+  describe(createDescribeHeader("#displayOptions()"), function() {
+    it(
+      createItHeader(
+        "should log the correct options to the console with one book in the reading list"
+      ),
+      () => {
+        let spy = sinon.spy(console, "log");
+        global.searchResults = global.eragonObjects;
+        global.proceduralReadingList = [];
+        cli.displayOptions();
 
-      const outputs = [
-        "Choose one of the following options: \n",
-        `  ${global.colors.blue("1")} - Add ${global.colors.blue(
-          "Eragon and Eldest Omnibus"
-        )} to the reading list`,
-        "  list - View current reading list",
-        "  search - Search for a new book",
-        "  exit - Exit the program",
-        "\n"
-      ];
+        const outputs = [
+          "Choose one of the following options: \n",
+          `  ${global.colors.blue("1")} - Add ${global.colors.blue(
+            "Eragon and Eldest Omnibus"
+          )} to the reading list`,
+          "  list - View current reading list",
+          "  search - Search for a new book",
+          "  exit - Exit the program",
+          "\n"
+        ];
 
-      assertOutputs(outputs, spy);
-      spy.restore();
-    });
+        assertOutputs(outputs, spy);
+        spy.restore();
+      }
+    );
 
-    it("should log the correct options to the console when a book is already in the reading list", () => {
-      let spy = sinon.spy(console, "log");
-      global.searchResults = global.eragonObjects;
-      global.proceduralReadingList = global.eragonObjects;
-      cli.displayOptions();
+    it(
+      createItHeader(
+        "should log the correct options to the console when a book is already in the reading list"
+      ),
+      () => {
+        let spy = sinon.spy(console, "log");
+        global.searchResults = global.eragonObjects;
+        global.proceduralReadingList = global.eragonObjects;
+        cli.displayOptions();
 
-      const outputs = [
-        "Choose one of the following options: \n",
-        global.colors.green(
-          "  \u2713 - Add Eragon and Eldest Omnibus to the reading list"
-        ),
-        "  list - View current reading list",
-        "  search - Search for a new book",
-        "  exit - Exit the program",
-        "\n"
-      ];
+        const outputs = [
+          "Choose one of the following options: \n",
+          global.colors.green(
+            "  \u2713 - Add Eragon and Eldest Omnibus to the reading list"
+          ),
+          "  list - View current reading list",
+          "  search - Search for a new book",
+          "  exit - Exit the program",
+          "\n"
+        ];
 
-      assertOutputs(outputs, spy);
-      spy.restore();
-    });
+        assertOutputs(outputs, spy);
+        spy.restore();
+      }
+    );
   });
 
-  describe("#displayList()", function() {
-    it("should log the reading list to the console", () => {
+  describe(createDescribeHeader("#displayList()"), function() {
+    it(createItHeader("should log the reading list to the console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayList();
@@ -149,27 +164,32 @@ describe("cli.js", function() {
     });
   });
 
-  describe("#displayListOptions()", function() {
-    it("should log the reading list options to the console with one book in the reading list", () => {
-      let spy = sinon.spy(console, "log");
-      global.proceduralReadingList = [global.eragonObjects];
-      cli.displayListOptions();
+  describe(createDescribeHeader("#displayListOptions()"), function() {
+    it(
+      createItHeader(
+        "should log the reading list options to the console with one book in the reading list"
+      ),
+      () => {
+        let spy = sinon.spy(console, "log");
+        global.proceduralReadingList = [global.eragonObjects];
+        cli.displayListOptions();
 
-      const outputs = [
-        "Choose one of the following options: \n",
-        "  back - Return to previous search",
-        "  search - Search for a new book",
-        "  exit - Exit the program",
-        "\n"
-      ];
+        const outputs = [
+          "Choose one of the following options: \n",
+          "  back - Return to previous search",
+          "  search - Search for a new book",
+          "  exit - Exit the program",
+          "\n"
+        ];
 
-      assertOutputs(outputs, spy);
-      spy.restore();
-    });
+        assertOutputs(outputs, spy);
+        spy.restore();
+      }
+    );
   });
 
-  describe("#exit()", function() {
-    it("should log the exit message to the console", () => {
+  describe(createDescribeHeader("#exit()"), function() {
+    it(createItHeader("should log the exit message to the console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.exit();
