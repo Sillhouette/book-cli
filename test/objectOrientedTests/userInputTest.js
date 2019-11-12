@@ -36,7 +36,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
       });
       it(
         createItHeader(
-          "displays a reading list and menu options when passed 'list'"
+          "renders a reading list and menu options when passed 'list'"
         ),
         function() {
           let stub3 = sinon
@@ -65,7 +65,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
 
       it(
         createItHeader(
-          "displays the correct options when 'list' is passed in with no books in the list"
+          "renders the correct options when 'list' is passed in with no books in the list"
         ),
         function() {
           let stub3 = sinon

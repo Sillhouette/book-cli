@@ -36,9 +36,7 @@ describe(createDescribeHeader("Object-Oriented bookFetch.js"), function() {
 
   describe(createDescribeHeader("#fetchResults(err, queryObj)"), function() {
     it(
-      createItHeader(
-        "sends a fetch request to 'https://www.googleapis.com/books/v1/volumes?maxResults=5&q=eragon'"
-      ),
+      createItHeader("sends a fetch request to the Google Books API"),
       async () => {
         bookFetch = new BookFetch();
         cli = new Cli();

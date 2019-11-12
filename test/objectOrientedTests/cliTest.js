@@ -41,32 +41,29 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(
-      createItHeader("logs the search results list and option to the console"),
-      () => {
-        let spy = sinon.spy(console, "log");
-        global.searchResults = new List(eragonBook);
+    it(createItHeader("renders the list of search results and options"), () => {
+      let spy = sinon.spy(console, "log");
+      global.searchResults = new List(eragonBook);
 
-        cli.displaySearchResults();
+      cli.displaySearchResults();
 
-        let outputs = [
-          "The current search results are: \n",
-          global.colors.blue("1. Eragon and Eldest Omnibus"),
-          "   Author(s): Christopher Paolini",
-          "   Publisher: Random House\n",
-          "Choose one of the following options: \n",
-          `  ${global.colors.blue("1")} - Add ${global.colors.blue(
-            "Eragon and Eldest Omnibus"
-          )} to the reading list`,
-          "  list - View current reading list",
-          "  search - Search for a new book",
-          "  exit - Exit the program"
-        ];
+      let outputs = [
+        "The current search results are: \n",
+        global.colors.blue("1. Eragon and Eldest Omnibus"),
+        "   Author(s): Christopher Paolini",
+        "   Publisher: Random House\n",
+        "Choose one of the following options: \n",
+        `  ${global.colors.blue("1")} - Add ${global.colors.blue(
+          "Eragon and Eldest Omnibus"
+        )} to the reading list`,
+        "  list - View current reading list",
+        "  search - Search for a new book",
+        "  exit - Exit the program"
+      ];
 
-        assertOutputs(outputs, spy);
-        spy.restore();
-      }
-    );
+      assertOutputs(outputs, spy);
+      spy.restore();
+    });
   });
 
   describe(createDescribeHeader("#displayBooks(books)"), function() {
@@ -78,7 +75,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("logs the list of books to console"), () => {
+    it(createItHeader("renders the list of books"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayBooks([eragonBook]);
@@ -103,7 +100,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("logs the correct menu options to console"), () => {
+    it(createItHeader("renders the correct menu options"), () => {
       let spy = sinon.spy(console, "log");
       global.searchResults = new List(eragonBook);
 
@@ -159,7 +156,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("logs the correct menu options to console"), () => {
+    it(createItHeader("renders the correct menu options"), () => {
       let spy = sinon.spy(console, "log");
       global.readingList = new List(eragonBook);
 

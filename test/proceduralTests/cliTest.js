@@ -2,7 +2,7 @@ const cli = require("../../procedural/cli");
 
 describe(createDescribeHeader("Procedural cli.js"), function() {
   describe(createDescribeHeader("#initialize()"), function() {
-    it(createItHeader("logs the welcome message to console"), () => {
+    it(createItHeader("renders the welcome message"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.initialize();
@@ -19,7 +19,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
   });
 
   describe(createDescribeHeader("#displaySearchResults()"), function() {
-    it(createItHeader("logs the search results to console"), () => {
+    it(createItHeader("renders the search results"), () => {
       let spy = sinon.spy(console, "log");
 
       global.searchResults = eragonObjects;
@@ -40,7 +40,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
 
     it(
       createItHeader(
-        "logs the search results and a message to the console when passed a message"
+        "renders the search results and a message when passed a message"
       ),
       () => {
         let spy = sinon.spy(console, "log");
@@ -68,7 +68,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
 
   describe(createDescribeHeader("#displayBooks()"), function() {
     it(
-      createItHeader("logs `There are no books...` when passed no books"),
+      createItHeader("renders `There are no books...` when passed no books"),
       () => {
         let spy = sinon.spy(console, "log");
 
@@ -80,28 +80,25 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
       }
     );
 
-    it(
-      createItHeader("logs books to the console when passed an array of books"),
-      () => {
-        let spy = sinon.spy(console, "log");
+    it(createItHeader("renders books when passed an array of books"), () => {
+      let spy = sinon.spy(console, "log");
 
-        cli.displayBooks(global.eragonObjects);
+      cli.displayBooks(global.eragonObjects);
 
-        const outputs = [
-          global.colors.blue("1. Eragon and Eldest Omnibus"),
-          "   Author(s): Christopher Paolini",
-          "   Publisher: Random House\n"
-        ];
-        assertOutputs(outputs, spy);
-        spy.restore();
-      }
-    );
+      const outputs = [
+        global.colors.blue("1. Eragon and Eldest Omnibus"),
+        "   Author(s): Christopher Paolini",
+        "   Publisher: Random House\n"
+      ];
+      assertOutputs(outputs, spy);
+      spy.restore();
+    });
   });
 
   describe(createDescribeHeader("#displayOptions()"), function() {
     it(
       createItHeader(
-        "logs the correct options to the console with one book in the reading list"
+        "renders the correct options with one book in the reading list"
       ),
       () => {
         let spy = sinon.spy(console, "log");
@@ -127,7 +124,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
 
     it(
       createItHeader(
-        "logs the correct options to the console with a book that is already in the reading list"
+        "renders the correct options when called with a book that's already in the reading list"
       ),
       () => {
         let spy = sinon.spy(console, "log");
@@ -153,7 +150,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
   });
 
   describe(createDescribeHeader("#displayList()"), function() {
-    it(createItHeader("logs the reading list to the console"), () => {
+    it(createItHeader("renders the reading list"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayList();
@@ -171,7 +168,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
   });
 
   describe(createDescribeHeader("#displayListOptions()"), function() {
-    it(createItHeader("logs the reading list options to the console"), () => {
+    it(createItHeader("renders the reading list options"), () => {
       let spy = sinon.spy(console, "log");
       global.proceduralReadingList = [global.eragonObjects];
       cli.displayListOptions();
@@ -190,7 +187,7 @@ describe(createDescribeHeader("Procedural cli.js"), function() {
   });
 
   describe(createDescribeHeader("#exit()"), function() {
-    it(createItHeader("logs the exit message to the console"), () => {
+    it(createItHeader("renders the exit message"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.exit();

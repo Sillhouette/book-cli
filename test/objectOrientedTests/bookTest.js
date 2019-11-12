@@ -19,7 +19,7 @@ describe(createDescribeHeader("Object-Oriented book.js"), function() {
   });
 
   describe(createDescribeHeader("#display(bookNumber)"), function() {
-    it(createItHeader("properly displays a book"), function() {
+    it(createItHeader("properly renders a book"), function() {
       let book = new Book({
         title: "Eragon and Eldest Omnibus",
         authors: "Christopher Paolini",

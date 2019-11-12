@@ -10,7 +10,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
     function() {
       it(
         createItHeader(
-          "displays the readingList and options when passed 'list'"
+          "renders the readingList and options when passed 'list'"
         ),
         function() {
           let stub3 = sinon
