@@ -5,7 +5,9 @@ describe(createDescribeHeader("Procedural listHandler.js"), function() {
     createDescribeHeader("#generateSearchResults(booksData)"),
     function() {
       it(
-        createItHeader("Generates object with correct book information"),
+        createItHeader(
+          "generates array of book objects when an api result is passed in"
+        ),
         () => {
           expect(
             listHandler.generateSearchResults(global.eragonFetchResult)
@@ -16,11 +18,14 @@ describe(createDescribeHeader("Procedural listHandler.js"), function() {
   );
 
   describe(createDescribeHeader("#collectBookTitles(books)"), function() {
-    it(createItHeader("Generates array with correct book titles"), () => {
-      expect(listHandler.collectBookTitles(global.eragonObjects)).to.eql(
-        global.eragonTitles
-      );
-    });
+    it(
+      createItHeader("senerates an array of book titles from a list of books"),
+      () => {
+        expect(listHandler.collectBookTitles(global.eragonObjects)).to.eql(
+          global.eragonTitles
+        );
+      }
+    );
   });
 
   describe(
@@ -28,7 +33,7 @@ describe(createDescribeHeader("Procedural listHandler.js"), function() {
     function() {
       it(
         createItHeader(
-          "Adds book at index of search result array to the reading list"
+          "adds book at the given index of searchResults array to the readingList array"
         ),
         () => {
           let stub = sinon

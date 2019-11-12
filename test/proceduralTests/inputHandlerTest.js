@@ -10,7 +10,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
     function() {
       it(
         createItHeader(
-          "should display readingList and options when passed 'list'"
+          "displays the readingList and options when passed 'list'"
         ),
         function() {
           let stub3 = sinon
@@ -39,7 +39,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
       );
 
       it(
-        createItHeader("should initiate a new search when passed 'search'"),
+        createItHeader("initiates a new search when passed 'search'"),
         function() {
           let stub = sinon
             .stub(inputHandler, "initiateSearchPrompt")
@@ -56,7 +56,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
 
       it(
         createItHeader(
-          "should call addBookToList(book) when passed an integer"
+          "calls addBookToList(book) when passed an integer witin the indices of the searchResults array"
         ),
         function() {
           let stub2 = sinon
@@ -79,7 +79,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
       //Testing for invalid input
       it(
         createItHeader(
-          "should call initiateOptionsPrompt when passed invalid selections"
+          "prompts for a new selection when passed invalid selections"
         ),
         function() {
           let stub2 = sinon
@@ -96,21 +96,21 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
       //Testing for invalid input
       it(
         createItHeader(
-          "should call initiateOptionsPrompt when passed invalid selections"
+          "prompts for new input when passed a number outside of the indices of the searchResults list"
         ),
         function() {
           let stub2 = sinon
             .stub(inputHandler, "initiateOptionsPrompt")
             .callsFake(() => true);
 
-          inputHandler.handleOptionSelection("", { input: "gadsgasfgEAGS" });
+          inputHandler.handleOptionSelection("", { input: "15" });
 
           assert(stub2.called);
           stub2.restore();
         }
       );
 
-      it(createItHeader("should exit the program when passed 'exit'"), () => {
+      it(createItHeader("exits the program when passed 'exit'"), () => {
         let spy = sinon.spy(console, "log");
 
         inputHandler.handleOptionSelection("", { input: "exit" });
@@ -125,7 +125,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
     createDescribeHeader("#handleListOptionSelection(err, selectionObj)"),
     function() {
       it(
-        createItHeader("should initiate a new search when passed 'search'"),
+        createItHeader("initiates a new search when passed 'search'"),
         function() {
           let stub = sinon
             .stub(inputHandler, "initiateSearchPrompt")
@@ -137,9 +137,10 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
         }
       );
 
+      // Test using invalid input
       it(
         createItHeader(
-          "should call initiateListOptionsPrompt when passed invalid selections"
+          "calls asks for valid input when passed invalid selections"
         ),
         function() {
           let stub3 = sinon
@@ -156,7 +157,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
       //Testing for invalid input
       it(
         createItHeader(
-          "should call initiateListOptionsPrompt when passed invalid selections"
+          "prompts the user for valid input when passed input outside the indices of the bookList array"
         ),
         function() {
           let stub3 = sinon
@@ -164,7 +165,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
             .callsFake(() => true);
 
           inputHandler.handleListOptionSelection("", {
-            input: "asregaewgasdefvaewgv"
+            input: "14"
           });
 
           assert(stub3.called);
@@ -172,7 +173,7 @@ describe(createDescribeHeader("Procedural inputHandler.js"), function() {
         }
       );
 
-      it(createItHeader("should exit the program when passed 'exit'"), () => {
+      it(createItHeader("exits the program when passed 'exit'"), () => {
         let spy = sinon.spy(console, "log");
 
         inputHandler.handleListOptionSelection("", { input: "exit" });
