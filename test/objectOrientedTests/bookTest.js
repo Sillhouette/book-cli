@@ -1,9 +1,9 @@
 const Book = require("../../object-oriented/book").Book;
 
 describe(createDescribeHeader("Object-Oriented book.js"), function() {
-  describe(createDescribeHeader("Book constructor"), function() {
+  describe(createDescribeHeader("new Book()"), function() {
     it(
-      createItHeader("should create a new Book with proper settings"),
+      createItHeader("creates a Book object with proper settings"),
       function() {
         let book = new Book({
           title: "Eragon and Eldest Omnibus",
@@ -18,8 +18,8 @@ describe(createDescribeHeader("Object-Oriented book.js"), function() {
     );
   });
 
-  describe(createDescribeHeader("Book #display(number)"), function() {
-    it(createItHeader("should properly display a book"), function() {
+  describe(createDescribeHeader("#display(bookNumber)"), function() {
+    it(createItHeader("properly displays a book"), function() {
       let book = new Book({
         title: "Eragon and Eldest Omnibus",
         authors: "Christopher Paolini",

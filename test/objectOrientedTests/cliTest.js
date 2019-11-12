@@ -3,9 +3,9 @@ const Book = require("../../object-oriented/book").Book;
 const List = require("../../object-oriented/list").List;
 
 describe(createDescribeHeader("Object-Oriented cli.js"), function() {
-  describe(createDescribeHeader("CLI constructor"), function() {
+  describe(createDescribeHeader("new Cli()"), function() {
     it(
-      createItHeader("should create a new CLI with proper default settings"),
+      createItHeader("creates a new CLI object with proper default settings"),
       function() {
         let cli = new Cli();
         expect(cli).to.be.an.instanceof(Cli);
@@ -13,13 +13,13 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
     );
   });
 
-  describe(createDescribeHeader("CLI #initialize"), function() {
+  describe(createDescribeHeader("#initialize()"), function() {
     let cli;
     before(() => {
       cli = new Cli();
     });
     it(
-      createItHeader("should initiate a new search when initialized"),
+      createItHeader("initiates a new search upon initialization"),
       function() {
         let stub = sinon
           .stub(cli.userInput, "initiateSearchPrompt")
@@ -41,29 +41,32 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("should log the correct values to console"), () => {
-      let spy = sinon.spy(console, "log");
-      global.searchResults = new List(eragonBook);
+    it(
+      createItHeader("logs the search results list and option to the console"),
+      () => {
+        let spy = sinon.spy(console, "log");
+        global.searchResults = new List(eragonBook);
 
-      cli.displaySearchResults();
+        cli.displaySearchResults();
 
-      let outputs = [
-        "The current search results are: \n",
-        global.colors.blue("1. Eragon and Eldest Omnibus"),
-        "   Author(s): Christopher Paolini",
-        "   Publisher: Random House\n",
-        "Choose one of the following options: \n",
-        `  ${global.colors.blue("1")} - Add ${global.colors.blue(
-          "Eragon and Eldest Omnibus"
-        )} to the reading list`,
-        "  list - View current reading list",
-        "  search - Search for a new book",
-        "  exit - Exit the program"
-      ];
+        let outputs = [
+          "The current search results are: \n",
+          global.colors.blue("1. Eragon and Eldest Omnibus"),
+          "   Author(s): Christopher Paolini",
+          "   Publisher: Random House\n",
+          "Choose one of the following options: \n",
+          `  ${global.colors.blue("1")} - Add ${global.colors.blue(
+            "Eragon and Eldest Omnibus"
+          )} to the reading list`,
+          "  list - View current reading list",
+          "  search - Search for a new book",
+          "  exit - Exit the program"
+        ];
 
-      assertOutputs(outputs, spy);
-      spy.restore();
-    });
+        assertOutputs(outputs, spy);
+        spy.restore();
+      }
+    );
   });
 
   describe(createDescribeHeader("#displayBooks(books)"), function() {
@@ -75,7 +78,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("should log the correct values to console"), () => {
+    it(createItHeader("logs the list of books to console"), () => {
       let spy = sinon.spy(console, "log");
 
       cli.displayBooks([eragonBook]);
@@ -100,7 +103,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("should log the correct value to console"), () => {
+    it(createItHeader("logs the correct menu options to console"), () => {
       let spy = sinon.spy(console, "log");
       global.searchResults = new List(eragonBook);
 
@@ -122,7 +125,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
     });
     it(
       createItHeader(
-        "should log the correct options to the console when a book is already in the reading list"
+        "adds a checkmark to any books already in the reading list and displays them green"
       ),
       () => {
         let spy = sinon.spy(console, "log");
@@ -156,7 +159,7 @@ describe(createDescribeHeader("Object-Oriented cli.js"), function() {
         publisher: "Random House"
       });
     });
-    it(createItHeader("should log the correct value to console"), () => {
+    it(createItHeader("logs the correct menu options to console"), () => {
       let spy = sinon.spy(console, "log");
       global.readingList = new List(eragonBook);
 

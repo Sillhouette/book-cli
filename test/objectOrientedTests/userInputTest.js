@@ -12,11 +12,9 @@ const Cli = require("../../object-oriented/cli").Cli;
 **/
 
 describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
-  describe(createDescribeHeader("UserInput constructor"), function() {
+  describe(createDescribeHeader("new UserInput()"), function() {
     it(
-      createItHeader(
-        "should create a new UserInput object with correct config"
-      ),
+      createItHeader("creates a new UserInput object with the correct config"),
       function() {
         let userInput = new UserInput();
         expect(userInput).to.be.an.instanceof(UserInput);
@@ -38,7 +36,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
       });
       it(
         createItHeader(
-          "should display reading list and options when passed 'list'"
+          "displays a reading list and menu options when passed 'list'"
         ),
         function() {
           let stub3 = sinon
@@ -67,7 +65,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
 
       it(
         createItHeader(
-          "should display no reading list when passed 'list' with no list in existence"
+          "displays the correct options when 'list' is passed in with no books in the list"
         ),
         function() {
           let stub3 = sinon
@@ -93,7 +91,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
       );
 
       it(
-        createItHeader("should initiate a new search when passed 'search'"),
+        createItHeader("initiates a new search when passed 'search'"),
         function() {
           let stub = sinon
             .stub(userInput, "initiateSearchPrompt")
@@ -108,7 +106,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
 
       it(
         createItHeader(
-          "should call addBookToList(book) when passed an integer"
+          "calls addBookToList(book) when passed an integer within the indices of the searchResults"
         ),
         function() {
           let stub2 = sinon
@@ -130,9 +128,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
       );
 
       it(
-        createItHeader(
-          "should call initiateOptionsPrompt when passed invalid selections"
-        ),
+        createItHeader("prompts for correct input when passed invalid input"),
         function() {
           let stub2 = sinon
             .stub(userInput, "initiateOptionsPrompt")
@@ -145,7 +141,7 @@ describe(createDescribeHeader("Object-Oriented userInput.js"), function() {
         }
       );
 
-      it(createItHeader("should exit the program when passed 'exit'"), () => {
+      it(createItHeader("exits the program when passed 'exit'"), () => {
         let spy = sinon.spy(global.cli, "exit");
 
         userInput.handleOptionSelection("", { input: "exit" });

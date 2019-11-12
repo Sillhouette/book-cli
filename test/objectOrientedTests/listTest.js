@@ -2,12 +2,12 @@ const Book = require("../../object-oriented/book").Book;
 const List = require("../../object-oriented/list").List;
 
 describe(createDescribeHeader("Object-Oriented list.js"), function() {
-  describe(createDescribeHeader("List constructor"), function() {
+  describe(createDescribeHeader("new List()"), function() {
     beforeEach(() => {
       eragonBook = new Book(global.eragonObjects[0]);
     });
     it(
-      createItHeader("should create a new List from a single book"),
+      createItHeader("creates a new List object from a single book"),
       function() {
         let list = new List(eragonBook);
         expect(list).to.be.an.instanceof(List);
@@ -15,14 +15,14 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
       }
     );
 
-    it(createItHeader("should create a new List with no args"), function() {
+    it(createItHeader("creates an empty List with no arguments"), function() {
       let list = new List();
       expect(list).to.be.an.instanceof(List);
       expect(list.books).to.be.empty;
     });
 
     it(
-      createItHeader("should create a new List from a book config"),
+      createItHeader("creates a new List from a Google Books api result"),
       function() {
         let list = new List(global.eragonFetchResult);
         expect(list).to.be.an.instanceof(List);
@@ -32,12 +32,15 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
   });
 
   describe(createDescribeHeader("#collectBookTitles()"), function() {
-    it(createItHeader("should generate an array of book titles"), function() {
-      let eragonBook = new Book(global.eragonObjects[0]);
-      let list = new List(eragonBook);
+    it(
+      createItHeader("generates an array of book titles from the list"),
+      function() {
+        let eragonBook = new Book(global.eragonObjects[0]);
+        let list = new List(eragonBook);
 
-      expect(list.collectBookTitles()).to.eql(["Eragon and Eldest Omnibus"]);
-    });
+        expect(list.collectBookTitles()).to.eql(["Eragon and Eldest Omnibus"]);
+      }
+    );
   });
 
   describe(createDescribeHeader("#listHasBook(index)"), function() {
@@ -47,7 +50,7 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
     });
     it(
       createItHeader(
-        "returns true if readingList contains the book in searchResults"
+        "returns true if readingList contains the book at the given index in searchResults"
       ),
       function() {
         let eragonBook = new Book(global.eragonObjects[0]);
@@ -60,7 +63,7 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
 
     it(
       createItHeader(
-        "returns false if readingList does not contain the book in searchResults"
+        "returns false if readingList doesn't contain the book at the given index in searchResults"
       ),
       function() {
         let eragonBook = new Book(global.eragonObjects[0]);
@@ -77,7 +80,7 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
       global.searchResults = undefined;
       global.readingList = undefined;
     });
-    it(createItHeader("sucessfully adds book to empty list"), function() {
+    it(createItHeader("Adds a book to empty list"), function() {
       let eragonBook = new Book(global.eragonObjects[0]);
       global.readingList = new List();
       global.searchResults = new List(eragonBook);
@@ -91,7 +94,7 @@ describe(createDescribeHeader("Object-Oriented list.js"), function() {
     });
 
     it(
-      createItHeader("fails to add book if it's already in the list"),
+      createItHeader("fails to add a book if it's already in the list"),
       function() {
         let eragonBook = new Book(global.eragonObjects[0]);
         global.readingList = new List(eragonBook);
