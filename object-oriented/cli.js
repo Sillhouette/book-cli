@@ -99,5 +99,6 @@ exports.Cli = class Cli {
 
 // Uncomment these lines if you want to use `node ./object-oriented/cli.js` to run this version
 // Don't forget to re-comment them if you want the version selector to run properly
+// const Cli = exports.Cli;
 // global.cli = new Cli();
 // global.cli.initialize();
